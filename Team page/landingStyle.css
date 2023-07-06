@@ -34,8 +34,8 @@ html {
 }
 
 :root {
-    --primaryColor: #89A7B1;
-    --secondaryColor: #CBDAD5FF;
+    --primaryColor: #485665;
+    --secondaryColor: #5a6c7e;
     --tertiaryColor: #9095A0FF;
 }
 
@@ -184,6 +184,7 @@ html {
 .ImgEdit .ImgFondo {
     position: absolute;
     z-index: 1;
+    width: auto;
     height: 220px;
     transform: translateY(50px);
 }
