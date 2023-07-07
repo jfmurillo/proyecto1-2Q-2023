@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Registro</title>
+    <link rel="stylesheet" href="registro-usuario-final.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/52cdc0a8a5.js" crossorigin="anonymous"></script>
+  </head>
+  <body style="background-color: #8c92ac;">
+    <header>
+      <nav>
+        <div class="navegacion-derecha">
+          <a class="navegacion-derecha" href="/">Inicio</a>
+        </div>
+      </nav>
+    </header>
+    <main>
+      <section class="fondo-registro">
+        <div class="contenedor-titulo">
+          <h1 class="titulo">Registro</h1>
+          <form>
+            <div class="formulario letra-pequena  ">
+              <label for="foto">Foto </label>
+              <input required type="file" name="foto" id="foto" />
+  
+              <label for="cv">Curriculum/CV</label>
+              <input required type="file" name="cv" id="cv" />
+            </div>
+            
+              <label for="nombre">Nombre:</label>
+              <input type="text" id="nombre" name="nombre" placeholder="John" required>
+            
+              <label for="apellido">Apellido:</label>
+              <input type="text" id="apellido" name="apellido" placeholder="Doe" required>
+            
+              <label for="email">Email:</label>
+              <input type="email" id="email" name="email" placeholder="ejemplo@patito.com" required>
+            
+              <label for="contrasena">Contraseña:</label>
+              <input type="password" id="contrasena" name="contrasena" required>
+            
+              <label for="confirmar_contrasena">Confirmar Contraseña:</label>
+              <input type="password" id="confirmar_contrasena" name="confirmar_contrasena" required>
+            
+              <label for="genero">Género:</label>
+              <select id="genero" required>
+              <option value="" disabled selected hidden>
+                Seleccione una opción
+              </option>
+              <option value="masculino">Masculino</option>
+              <option value="femenino">Femenino</option>
+              <option value="otro">Prefiero no especificar</option>
+            </select><br><br>
+            
+            <div class="border-div">
+              <label class="labels-general" for="experiencia">Experiencia Laboral</label><br>
+              <label for="nombre_empresa">Nombre de la Empresa:</label>
+              <input type="text" id="nombre_empresa" name="nombre_empresa" required><br>
+              <label for="descripcion_puesto">Descripción del Puesto:</label>
+              <textarea id="descripcion_puesto" name="descripcion_puesto" rows="4" cols="50" required></textarea><br>
+              <i alt="anadir-icono" class="fa-solid fa-plus anadir-iconos"></i>
+            </div>
+              
+              <div class="border-div">
+              <label class="labels-general" for="experiencia">Estudios</label><br>
+              <label for="nombre_empresa">Institución:</label>
+              <input type="text" id="institucion" name="nombre_institucion" required><br>
+              <label for="nombre-carrera">Nombre de carrera:</label>
+              <input id="nombre-carrera" name="nombre-carrera" required></input><br><br>
+              <i alt="anadir-icono" class="fa-solid fa-plus anadir-iconos"></i>
+            </div>
+
+            <div class="separador" style="padding-top: 2px;">
+              <button class="boton1" type="submit">Cancelar</button>
+              <button class="boton1" type="onclick">Crear Cuenta</button>
+            </div><br><br>
+
+          </form>
+        </div>
+      </section>
+      <section>
+        <div class="contenedor-titulo">
+          <h5 class="center-div-button">¿Ya tienes una cuenta?</h5>
+          <div class="separador">
+            <button class="boton2" type="submit">Iniciar sesión</button>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer class="footer">
+      <div class="general">
+        <div>
+          <span>Contáctenos</span>
+          <ul class="info-footer">
+            <li>+506 8355-2567</li>
+            <li>CareerWarriors@gmail.com</li>
+            <li>Sabana Sur, calle 58</li>
+          </ul>
+        </div> 
+        <div style="padding-top: 3pc;";">
+          <span style="font-size: 10px;">Siguenos en nuestras redes sociales</span>
+            <div class="iconos-redes">
+              <i class="fa-brands fa-facebook-f"></i>
+              <i class="fa-brands fa-linkedin-in"></i>
+              <i class="fa-brands fa-instagram"></i>
+              <i class="fa-brands fa-whatsapp"></i>
+              <i class="fa-brands fa-twitter"></i>
+            </div>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
