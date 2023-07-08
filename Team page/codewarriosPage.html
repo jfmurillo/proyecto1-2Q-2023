@@ -8,10 +8,17 @@
     </head>
     <body>
         <nav class="navLanding">
+            <button class="buttonMenu">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                    viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                </svg>
+            </button>
             <div class="LogoTeam">
                 <img class="LogoImg" src="assets/Logo White.png"
                     alt="Logo del equipo de desarrollo Blanco">
-                <p>CodeWarriors</p>
+                <p class="TeamName">CodeWarriors</p>
             </div>
 
             <ul class="ElementBox_Nav">
@@ -21,6 +28,23 @@
                 <li><a href="#equipo">Equipo</a></li>
             </ul>
         </nav>
+        <div class="blackScreen"></div>
+        <nav class="secondMenu">
+            <button class="CloseMenu">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                    viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round"
+                        stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+            <ul>
+                <li><a class="menuSection" href="#inicio">Inicio</a></li>
+                <li><a class="menuSection" href="#sobreNosotros">Sobre Nosotros</a></li>
+                <li><a class="menuSection" href="#misionVision">Mision y Vision</a></li>
+                <li><a class="menuSection" href="#equipo">Equipo</a></li>
+            </ul>
+        </nav>
+
         <header class="TeamBox" id="inicio">
             <div class="TitleTeam">
                 <h1>CodeWarrios</h1>
@@ -220,4 +244,5 @@
             </div>
         </footer>
     </body>
+    <script src="LandingFunction.js"></script>
 </html>
