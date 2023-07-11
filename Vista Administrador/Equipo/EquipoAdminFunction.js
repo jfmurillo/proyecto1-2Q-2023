@@ -101,54 +101,22 @@ function toggleModal(modalId, button) {
   }
 }
 
-function Setup_Validations() {
-  $("#AddEmployedForm").validate({
-    errorPlacement: app.ui.ErrorPlacement,
-    rules: {
-      MensajeInvitacion: { required: true },
-      RolInvitacion: { required: true },
-      EmailInvitacion: { required: true, email: true },
-    },
-    messages: {
-      MensajeInvitacion: { required: "Debe de indicar el Mensaje de la invitacion" },
-      RolInvitacion: { required: "Debe de indicar el rol de la invitacion" },
-      EmailInvitacion: { required: "Debe de indicar el email de la invitacion", email: "Debe de proporcionar un email valido" },
-    }
-  });
-
-  $("#ModifyEmployedForm").validate({
-    errorPlacement: app.ui.ErrorPlacement,
-    rules: {
-      NombreEmployed: { required: true },
-      RolEmployed: { required: true },
-      CorreoEmployed: { required: true, email: true },
-    },
-    messages: {
-      NombreEmployed: { required: "Debe de indicar el nombre" },
-      RolEmployed: { required: "Debe de indicar el rol" },
-      CorreoEmployed: { required: "Debe de indicar el email", email: "Debe de proporcionar un email valido" },
-    }
-  });
-};
-
 
 document.getElementById("SendEmployed").addEventListener("click", function (event) {
   event.preventDefault()
-  if (app.ui.IsValid("#AddEmployedForm", false)) {
-    toggleModal("InviteModal")
-  }
+  toggleModal("InviteModal")
+
 
 });
 
 document.getElementById("ModifyEmployed").addEventListener("click", function (event) {
   event.preventDefault()
-  if (app.ui.IsValid("#ModifyEmployedForm", false)) {
-    toggleModal("modalModifi")
-  }
+
+  toggleModal("modalModifi")
 
 });
 
-Setup_Validations();
+
 
 
 

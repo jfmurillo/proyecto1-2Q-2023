@@ -195,83 +195,21 @@ function toggleModal(modalId, button) {
   }
 }
 
-function Setup_Validations() {
-  $("#AddEmpleoForm").validate({
-    errorPlacement: app.ui.ErrorPlacement,
-    rules: {
-      NombreEmpleoAdd: { required: true },
-      RangoEmpleoAdd: { required: true },
-      RequisitosEmpleoAdd: { required: true },
-      AtributosEmpleoAdd: { required: true },
-      TipoEmpleoAdd: { required: true },
-    },
-    messages: {
-      NombreEmpleoAdd: { required: "Debe indicar el nombre del puesto" },
-      RangoEmpleoAdd: { required: "Debe indicar el rango salarial del puesto" },
-      RequisitosEmpleoAdd: { required: "Debe indicar los requisitos mínimos del puesto" },
-      AtributosEmpleoAdd: { required: "Debe indicar los atributos deseables del puesto" },
-      TipoEmpleoAdd: { required: "Debe indicar el tipo de puesto" },
-    }
-  });
-
-  $("#ModifyEmpleoForm").validate({
-    errorPlacement: app.ui.ErrorPlacement,
-    rules: {
-      NombreEmpleo: { required: true },
-      RangoEmpleo: { required: true },
-      RequisitosEmpleo: { required: true },
-      AtributosEmpleo: { required: true },
-      TipoEmpleo: { required: true },
-    },
-    messages: {
-      NombreEmpleo: { required: "Debe indicar el nombre del puesto" },
-      RangoEmpleo: { required: "Debe indicar el rango salarial del puesto" },
-      RequisitosEmpleo: { required: "Debe indicar los requisitos mínimos del puesto" },
-      AtributosEmpleo: { required: "Debe indicar los atributos deseables del puesto" },
-      TipoEmpleo: { required: "Debe indicar el tipo de puesto" },
-    }
-  });
-
-  $("#InvitarAplicanteForm").validate({
-    errorPlacement: app.ui.ErrorPlacement,
-    rules: {
-      InviteAplicCorreo: { required: true, email: true },
-      InviteAplicMensaje: { required: true },
-    },
-    messages: {
-      InviteAplicCorreo: { required: "Debe indicar el correo a invitar", email: "Debe indicar un correo valido" },
-      InviteAplicMensaje: { required: "Debe indicar el mensaje de la invitacion" },
-    }
-  });
-};
-
-
-Setup_Validations();
-
-
-
-
 
 document.getElementById("UpdatePuesto").addEventListener("click", function (event) {
   event.preventDefault()
-  if (app.ui.IsValid("#ModifyEmpleoForm", false)) {
-    toggleModal("ModifyEmpleoModal")
-  }
+  toggleModal("ModifyEmpleoModal")
+
 
 });
 
 document.getElementById("CreatePuesto").addEventListener("click", function (event) {
   event.preventDefault()
-  if (app.ui.IsValid("#AddEmpleoForm", false)) {
-    toggleModal("EmpleoModal")
-  }
+  toggleModal("EmpleoModal")
 
 });
 
 document.getElementById("SendInviteAplic").addEventListener("click", function (event) {
   event.preventDefault()
-  if (app.ui.IsValid("#InvitarAplicanteForm", false)) {
-    toggleModal("AddAplicanteModal")
-  }
-
+  toggleModal("AddAplicanteModal")
 });
