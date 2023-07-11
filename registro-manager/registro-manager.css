@@ -27,7 +27,8 @@ td {
 }
 
 html {
-  font-family: 'Inter', sans-serif;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
 }
 
 body {
@@ -42,10 +43,22 @@ nav {
   justify-content: space-between;
   padding: 15px;
   text-transform: uppercase;
-  margin-right: 16px;
+  background-color: #1e3231;
+  font-weight: 900;
 }
 
-.fondo-registro-manager {
+.nav-home{
+  color: #f5f5f5;
+  text-decoration: none;
+}
+
+.icon {
+  color: #f5f5f5;
+  width: 25px;
+  height: auto;
+}
+
+.fondo-registro {
   background-color: #fff;
   border-radius: 10px;
   box-shadow: 0 0 10px #445669;
@@ -55,8 +68,7 @@ nav {
 }
 
 .titulo {
-  font-size: 1.5rem;
-  font-weight: 700;
+  font-weight: 400;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -74,7 +86,6 @@ nav {
 
 .contenedor-titulo h1 {
   font-size: 2.5rem;
-  font-weight: 700;
   margin-bottom: 10px;
   padding: 25px;
 }
@@ -122,43 +133,66 @@ nav {
   align-items: center;
 }
 
-.general {
+.footer-container {
   display: flex;
   justify-content: space-between;
-  padding-left: 300px;
-  padding-right: 300px;
+  align-items: flex-start;
+  padding: 50px;
+  background: #1e3231; 
+  color: #f5f5f5; 
 }
 
-.lista-footer {
+.contact-section {
+  width: 50%;
+  margin-left: 70px; 
+}
+
+.social-media-section {
+  width: 50%;
   display: flex;
-  justify-content: space-between;
-  padding-left: 300px;
-  padding-right: 300px;
+  flex-direction: column;
+  align-items: center;
+  text-align: right;
 }
 
-.footer {
-  background-color: #5a6c7e;
-  color: #1e3231;
-  padding: 5px 5px;
-  border-radius: 5px;
-  border: none;
-  font-size: 1rem;
-  font-weight: 700;
-  text-transform: uppercase;
-  font-size: 12px;
-  background-color: #5a6c7e;
-  height: 300px;
-  font-weight: bold;
+.social-media-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: right;
 }
 
 .info-footer {
-  content: '\25CF';
-  font-size: 10px;
-  padding-bottom: 500px;
+  list-style: none; 
+  padding-left: 0;
+  margin-top: 10px; 
 }
 
-.iconos-redes {
+.info-footer li {
+  position: relative;
+  margin-left: 30px; 
+  padding-left: 10px; 
+}
+
+.info-footer li::before {
+  content: ""; 
+  position: absolute;
+  left: -20px; 
+  top: 50%;
+  transform: translateY(-50%);
+  width: 8px; 
+  height: 8px;
+  background-color: #ffffff; 
+  border-radius: 50%; 
+}
+.social-icons {
   display: flex;
-  justify-content: space-evenly;
-  cursor: pointer;
+  justify-content: flex-end;
+  gap: 10px; 
+  margin-top: 20px;
+}
+
+.social-icons i {
+  font-size: 20px;
+  color: #f5f5f5; 
 }

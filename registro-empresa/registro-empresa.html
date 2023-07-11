@@ -4,7 +4,9 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Registro</title>
+    <title>Registro de Empresa</title>
+    <link rel="icon" href="/proyecto1-2Q-2023/Team page/assets/Logo Black.png"
+      type="image/png" />
     <link rel="stylesheet" href="registro-empresa.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -18,19 +20,26 @@
       src="https://kit.fontawesome.com/52cdc0a8a5.js"
       crossorigin="anonymous"></script>
   </head>
-  <body style="background-color: #8c92ac">
+  <body>
     <header>
       <nav>
         <div class="navegacion-derecha">
-          <a class="navegacion-derecha" href="/">Inicio</a>
+          <a class="nav-home" href="/">Inicio</a>
         </div>
+        <img class="icon"
+          src="/proyecto1-2Q-2023/Team page/assets/Logo White.png"
+          alt="team-logo">
       </nav>
     </header>
     <main>
       <section class="fondo-registro">
         <div class="contenedor-titulo">
-          <h1 class="titulo">Registre su empresa</h1>
+          <h1 class="titulo">Registro Empresa</h1>
           <form>
+            <div class="formulario letra-peq  ">
+              <label for="foto">Logo de la Empresa</label>
+              <input required type="file" name="foto" id="foto" />
+            </div>
 
             <div>
               <label for="logo_empresa">Logo de la Empresa:</label>
@@ -74,17 +83,17 @@
                 required />
             </div><br />
 
-            <div class="separador" style="padding-top: 2px">
+            <div class="separador" style="padding-top: 25px;">
               <button class="boton1" type="submit">Cancelar</button>
               <button class="boton1" type="onclick">Crear Cuenta</button>
             </div>
-            <br /><br />
           </form>
         </div>
       </section>
+
       <section>
         <div class="contenedor-titulo">
-          <h5 class="center-div-button">¿Ya tienes una cuenta?</h5>
+          <h5 class="center-div">¿Ya tienes una cuenta?</h5>
           <div class="separador">
             <button class="boton2" type="submit">Iniciar sesión</button>
           </div>
