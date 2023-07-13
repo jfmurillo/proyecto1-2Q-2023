@@ -705,3 +705,7 @@ label.error {
     background-color: #dedede;
     color: white
 }
+
+.d-flex {
+    display: flex;
+}
