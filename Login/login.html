@@ -24,7 +24,7 @@
     <header>
       <nav>
         <div class="navegacion-derecha">
-          <a class="nav-home" href="/">Inicio</a>
+          <a class="nav-home" href="../Vista Principal/Inicio/Inicio.html">Inicio</a>
         </div>
         <img class="icon"
           src="/proyecto1-2Q-2023/Team page/assets/Logo White.png"
@@ -35,11 +35,10 @@
       <section class="fondo-registro">
         <div class="contenedor-titulo">
           <h1 class="titulo">Login</h1>
-
             <div class="login-container">
-              <input type="email" placeholder="Correo electrónico">
-              <input type="password" placeholder="Contraseña">
-              <button>Iniciar sesión</button>
+              <input type="email" placeholder="Correo electrónico" required>
+              <input type="password" placeholder="Contraseña" required>
+              <button id="login-button">Iniciar sesión</button>
               <p>¿Olvidaste tu contraseña? <a href="../RecuperarContrasena/recuperarContra.html">Recuperar contraseña</a></p>
             </div>
           </form>
@@ -68,5 +67,6 @@
         </div>
       </div>
     </footer>
+    <script src="login.js"></script>
   </body>
 </html>
