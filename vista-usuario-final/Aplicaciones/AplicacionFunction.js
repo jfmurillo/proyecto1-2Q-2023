@@ -63,7 +63,16 @@ function RenderApplications(ListApplications) {
     Puesto.appendChild(EmpresaApplication);
     Puesto.appendChild(DescripcionApplication);
 
+    // Create Apply Button
+    let ApplyButton = document.createElement("button");
+    ApplyButton.classList.add("apply-btn");
+    ApplyButton.textContent = "Aplicar Puesto";
+    ApplyButton.addEventListener("click", function() {
+      window.alert("Se ha aplicado al puesto");
+    });
+
     container.appendChild(Puesto)
+    container.appendChild(ApplyButton)  // Append Apply Button to the container
 
     mainbox.appendChild(container)
   }
@@ -71,6 +80,20 @@ function RenderApplications(ListApplications) {
 }
 
 RenderApplications(ListPuestos)
+
+// Escuchamos el evento click en los botones de Aplicar Puesto
+const applyButtons = document.querySelectorAll(".apply-btn");
+applyButtons.forEach(button => {
+  button.addEventListener("click", event => {
+    const id = event.target.parentElement.getAttribute("data-id");
+    applyForJob(id);
+  });
+});
+
+function applyForJob(id) {
+  // Aquí puedes escribir la lógica para que el usuario aplique a un empleo
+  console.log(`El usuario está aplicando para el empleo con id ${id}`);
+}
 
 
 
