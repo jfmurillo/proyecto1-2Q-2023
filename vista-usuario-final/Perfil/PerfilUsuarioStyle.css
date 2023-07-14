@@ -1,0 +1,125 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: Arial, sans-serif;
+  }
+  
+  main {
+    padding: 20px;
+  }
+  
+  .profile-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .avatar-section {
+    display: flex;
+    align-items: center;
+  }
+  
+  .avatar img {
+    height: 100px;
+    border-radius: 50%;
+    margin-right: 20px;
+  }
+  
+  .edit-avatar-btn {
+    background-color: #4caf50;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+  
+  .user-info-section {
+    text-align: center;
+  }
+  
+  .edit-profile-btn {
+    background-color: #4caf50;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+  
+  h2 {
+    margin-bottom: 10px;
+  }
+  
+  .experience-section,
+  .education-section,
+  .resume-section {
+    margin-bottom: 20px;
+  }
+  
+  .experience-block,
+  .education-block {
+    border: 1px solid #ccc;
+    padding: 10px;
+  }
+  
+  .experience-item,
+  .education-item {
+    margin-bottom: 10px;
+  }
+  
+  .experience-item input,
+  .education-item input,
+  .experience-item textarea,
+  .education-item textarea {
+    width: 100%;
+    padding: 5px;
+    margin-bottom: 5px;
+  }
+  
+  .delete-experience-btn,
+  .delete-education-btn {
+    background-color: #f44336;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+  
+  .add-experience-btn,
+  .add-education-btn {
+    background-color: #4caf50;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    margin-bottom: 10px;
+  }
+  
+  .resume-section input[type="file"] {
+    margin-top: 10px;
+  }
+  
+  aside {
+    margin-top: 20px;
+  }
+  
+  .form-section {
+    margin-bottom: 20px;
+  }
+  
+  .submit-experience-btn,
+  .submit-education-btn,
+  .cancel-experience-btn,
+  .cancel-education-btn {
+    background-color: #4caf50;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    margin-right: 10px;
+  }
+  

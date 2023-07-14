@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Perfil de Usuario</title>
+  <link rel="stylesheet" href="PerfilUsuarioStyle.css">
+  <link rel="stylesheet" href="../assets/style.css">
+  <script src="https://kit.fontawesome.com/52cdc0a8a5.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <header>
+    <nav class="HeadNav">
+      <div class="CompanyLogo">
+        <a href="../Perfil/PerfilUsuario.html"><img src="../assets/imagenDefault.png"
+            alt="Logo de la empresa logeada"></a>
+      </div>
+      <ul class="ElementBox_Nav">
+        <li><a href="../Inicio/InicioUsuario.html">Inicio</a></li>
+        <li><a href="../Aplicaciones/AplicacionUsuario.html">Aplicaciones</a></li>
+        <li><a href="../Perfil/PerfilUsuario.html">Perfil</a></li>
+      </ul>
+
+      <div class="search">
+        <label class="search-btn" for="Buscador">
+          <i class="fas fa-search"></i>
+        </label>
+        <input class="search-txt" name="Buscador" id="Buscador" type="text" name
+          placeholder="Buscar">
+      </div>
+      <div id="searchResult"></div>
+      <div class="UserZone">
+        <div class="Notifications">
+          <i class="fa-solid fa-bell"></i>
+        </div>
+        <div class="UserLogo">
+          <a href="../Perfil/PerfilUsuario.html"><img src="../assets/avatar.png"
+              alt="Avatar del usuario"></a>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="profile-section">
+      <div class="avatar-section">
+        <div class="avatar">
+          <img src="../assets/avatar.png" alt="Avatar del usuario">
+        </div>
+        <button class="edit-avatar-btn">Editar</button>
+      </div>
+      <div class="user-info-section">
+        <h2>Nombre del reclutador</h2>
+        <p>Información de la empresa</p>
+        <button class="edit-profile-btn">Editar perfil</button>
+      </div>
+    </section>
+
+    <section class="experience-section">
+      <h2>Experiencia de trabajo</h2>
+      <div class="experience-block">
+        <div class="experience-item">
+          <input type="text" placeholder="Título del puesto">
+          <input type="text" placeholder="Empresa">
+          <textarea placeholder="Descripción"></textarea>
+          <button class="delete-experience-btn">Eliminar</button>
+        </div>
+        <button class="add-experience-btn">Agregar Experiencia</button>
+      </div>
+    </section>
+
+    <section class="education-section">
+      <h2>Educación</h2>
+      <div class="education-block">
+        <div class="education-item">
+          <input type="text" placeholder="Grado">
+          <input type="text" placeholder="Institución">
+          <textarea placeholder="Descripción"></textarea>
+          <button class="delete-education-btn">Eliminar</button>
+        </div>
+        <button class="add-education-btn">Agregar Educación</button>
+      </div>
+    </section>
+
+    <section class="resume-section">
+      <h2>Subir currículum</h2>
+      <input type="file">
+    </section>
+
+    <aside>
+      <div class="form-section">
+        <h2>Formulario Experiencia</h2>
+        <input type="text" placeholder="Título del puesto">
+        <input type="text" placeholder="Empresa">
+        <textarea placeholder="Descripción"></textarea>
+        <button class="submit-experience-btn">Guardar</button>
+        <button class="cancel-experience-btn">Cancelar</button>
+      </div>
+
+      <div class="form-section">
+        <h2>Formulario Educación</h2>
+        <input type="text" placeholder="Grado">
+        <input type="text" placeholder="Institución">
+        <textarea placeholder="Descripción"></textarea>
+        <button class="submit-education-btn">Guardar</button>
+        <button class="cancel-education-btn">Cancelar</button>
+      </div>
+    </aside>
+  </main>
+
+  <footer>
+    <div class="footer-container">
+      <div class="contact-section">
+        <span>Contáctenos</span>
+        <ul class="info-footer">
+          <li>+506 8355-2567</li>
+          <li>CareerWarriors@gmail.com</li>
+          <li>Sabana Sur, calle 58</li>
+        </ul>
+      </div>
+      <div class="social-media-section">
+        <span>Siguenos en nuestras redes sociales</span>
+        <div class="social-icons">
+          <i class="fa-brands fa-facebook-f"></i>
+          <i class="fa-brands fa-linkedin-in"></i>
+          <i class="fa-brands fa-instagram"></i>
+          <i class="fa-brands fa-whatsapp"></i>
+          <i class="fa-brands fa-twitter"></i>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="PerfilUsuarioFunction.js"></script>
+</body>
+
+</html>
