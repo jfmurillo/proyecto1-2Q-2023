@@ -1,4 +1,5 @@
 var app = app || {};
+let listErrors = []
 let ListPuestos = [
   {
     Fecha: "7/7/2023",
@@ -196,20 +197,60 @@ function toggleModal(modalId, button) {
 }
 
 
-document.getElementById("UpdatePuesto").addEventListener("click", function (event) {
+document.getElementById("AddEmpleoForm").addEventListener("submit", function (event) {
   event.preventDefault()
-  toggleModal("ModifyEmpleoModal")
-
-
-});
-
-document.getElementById("CreatePuesto").addEventListener("click", function (event) {
-  event.preventDefault()
+  app.ui.cleanDOM()
   toggleModal("EmpleoModal")
-
 });
 
-document.getElementById("SendInviteAplic").addEventListener("click", function (event) {
+document.getElementById("AddEmpleoForm").addEventListener('invalid', function (event) {
+  event.preventDefault();
+  const invalidElement = event.target;
+  OrderErrors(invalidElement)
+}, true);
+
+
+
+document.getElementById("InvitarAplicanteForm").addEventListener("submit", function (event) {
   event.preventDefault()
+  app.ui.cleanDOM()
   toggleModal("AddAplicanteModal")
 });
+
+document.getElementById("InvitarAplicanteForm").addEventListener('invalid', function (event) {
+  event.preventDefault();
+  const invalidElement = event.target;
+  OrderErrors(invalidElement)
+}, true);
+
+
+
+document.getElementById("ModifyEmpleoForm").addEventListener("submit", function (event) {
+  event.preventDefault()
+  app.ui.cleanDOM()
+  toggleModal("ModifyEmpleoModal")
+});
+
+document.getElementById("ModifyEmpleoForm").addEventListener('invalid', function (event) {
+  event.preventDefault();
+  const invalidElement = event.target;
+  OrderErrors(invalidElement)
+}, true);
+
+function OrderErrors(ElementHtml) {
+
+  if (listErrors.length > 0) {
+    if (!(listErrors.includes(ElementHtml))) {
+      listErrors.push(ElementHtml)
+    }
+    app.ui.AlertError();
+    app.ui.AddError(listErrors);
+  } else {
+    listErrors.push(ElementHtml)
+    app.ui.AlertError();
+    app.ui.AddError(listErrors);
+  }
+
+  listErrors = [];
+};
+

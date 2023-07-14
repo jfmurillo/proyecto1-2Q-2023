@@ -1,5 +1,5 @@
 var app = app || {};
-
+let listErrors = []
 let datos = [
   {
     Rol: "Manager",
@@ -102,19 +102,47 @@ function toggleModal(modalId, button) {
 }
 
 
-document.getElementById("SendEmployed").addEventListener("click", function (event) {
+document.getElementById("AddEmployedForm").addEventListener("submit", function (event) {
   event.preventDefault()
   toggleModal("InviteModal")
-
-
 });
 
-document.getElementById("ModifyEmployed").addEventListener("click", function (event) {
+document.getElementById("AddEmployedForm").addEventListener("invalid", function (event) {
+  event.preventDefault();
+  const invalidElement = event.target;
+  OrderErrors(invalidElement)
+}, true);
+
+
+document.getElementById("ModifyEmployedForm").addEventListener("submit", function (event) {
   event.preventDefault()
-
+  app.ui.cleanDOM()
   toggleModal("modalModifi")
-
 });
+
+document.getElementById("ModifyEmployedForm").addEventListener('invalid', function (event) {
+  event.preventDefault();
+  const invalidElement = event.target;
+  OrderErrors(invalidElement)
+}, true);
+
+function OrderErrors(ElementHtml) {
+
+  if (listErrors.length > 0) {
+    if (!(listErrors.includes(ElementHtml))) {
+      listErrors.push(ElementHtml)
+    }
+    app.ui.AlertError();
+    app.ui.AddError(listErrors);
+  } else {
+    listErrors.push(ElementHtml)
+    app.ui.AlertError();
+    app.ui.AddError(listErrors);
+  }
+
+  listErrors = [];
+};
+
 
 
 

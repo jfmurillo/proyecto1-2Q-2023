@@ -39,7 +39,8 @@
                     <i class="fa-solid fa-bell"></i>
                 </div>
                 <ul class="ElementBox_Nav">
-                    <li><a href="../../Vista Principal/Inicio/Inicio.html">Cerrar sesión</a></li>
+                    <li><a href="../../Vista Principal/Inicio/Inicio.html">Cerrar
+                            sesión</a></li>
                 </ul>
                 <div class="UserLogo">
                     <img src="../assets/avatar.png" alt="Avatar del usuario">
@@ -68,12 +69,14 @@
                                     <label class="FormLabel" for="NombreEmpleo">Nombre
                                         del puesto</label>
                                     <input class="InputText" type="text"
+                                        required
                                         name="NombreEmpleo" id="NombreEmpleo">
                                 </div>
                                 <div class="FormText columna-3">
                                     <label class="FormLabel" for="RangoEmpleo">Ragon
                                         Salarial</label>
                                     <input class="InputText" type="text"
+                                        required
                                         name="RangoEmpleo" id="RangoEmpleo">
                                 </div>
                                 <div class="FormText columna-3">
@@ -81,6 +84,7 @@
                                         for="RequisitosEmpleo">Requisitos
                                         mínimos</label>
                                     <input class="InputText" type="text"
+                                        required
                                         name="RequisitosEmpleo"
                                         id="RequisitosEmpleo">
                                 </div>
@@ -89,6 +93,7 @@
                                         for="AtributosEmpleo">Atributos
                                         deseables</label>
                                     <input class="InputText" type="text"
+                                        required
                                         name="AtributosEmpleo"
                                         id="AtributosEmpleo">
                                 </div>
@@ -102,15 +107,16 @@
                                         <option value="2">Publico</option>
                                     </select>
                                 </div>
-                            </form>
-                            <div class="FooterModal">
-                                <div class="Botonera">
-                                    <button class="modal-Back ButtonDesign">Regresar</button>
-                                    <button class="modal-Back ButtonDesign">Eliminar</button>
-                                    <button class="ButtonDesign"
-                                        id="UpdatePuesto">Modificar puesto</button>
+                                <div class="FooterModal">
+                                    <div class="Botonera">
+                                        <button class="modal-Back ButtonDesign">Regresar</button>
+                                        <button class="modal-Back ButtonDesign">Eliminar</button>
+                                        <button class="ButtonDesign"
+                                            type="submit"
+                                            id="UpdatePuesto">Modificar puesto</button>
+                                    </div>
                                 </div>
-                            </div>
+                            </form>
                         </div>
                     </div>
 
@@ -149,7 +155,7 @@
                                                 <label class="FormLabel"
                                                     for="InviteAplicCorreo">Correo</label>
                                                 <input class="InputText"
-                                                    type="text"
+                                                    type="email" required
                                                     name="InviteAplicCorreo"
                                                     id="InviteAplicCorreo">
                                             </div>
@@ -157,19 +163,22 @@
                                                 <label class="FormLabel"
                                                     for="InviteAplicMensaje">Mensaje</label>
                                                 <textarea class="InputText"
+                                                    required
                                                     type="text"
                                                     name="InviteAplicMensaje"
                                                     id="InviteAplicMensaje"></textarea>
                                             </div>
-                                        </form>
-                                        <div class="FooterModal">
-                                            <div class="Botonera">
-                                                <button
-                                                    class="modal-Back ButtonDesign">Regresar</button>
-                                                <button class="ButtonDesign"
-                                                    id="SendInviteAplic">Enviar</button>
+                                            <div class="FooterModal">
+                                                <div class="Botonera">
+                                                    <button
+                                                        class="modal-Back ButtonDesign">Regresar</button>
+                                                    <button class="ButtonDesign"
+                                                        type="submit"
+                                                        id="SendInviteAplic">Enviar</button>
+                                                </div>
                                             </div>
-                                        </div>
+                                        </form>
+
                                     </div>
                                 </div>
                             </div>
@@ -197,20 +206,20 @@
                             <div class="FormText columna-3">
                                 <label class="FormLabel" for="NombreEmpleoAdd">Nombre
                                     del puesto</label>
-                                <input class="InputText" type="text"
+                                <input class="InputText" type="text" required
                                     name="NombreEmpleoAdd" id="NombreEmpleoAdd">
                             </div>
                             <div class="FormText columna-3">
                                 <label class="FormLabel" for="RangoEmpleoAdd">Ragon
                                     Salarial</label>
-                                <input class="InputText" type="text"
+                                <input class="InputText" type="text" required
                                     name="RangoEmpleoAdd" id="RangoEmpleoAdd">
                             </div>
                             <div class="FormText columna-3">
                                 <label class="FormLabel"
                                     for="RequisitosEmpleoAdd">Requisitos
                                     mínimos</label>
-                                <input class="InputText" type="text"
+                                <input class="InputText" type="text" required
                                     name="RequisitosEmpleoAdd"
                                     id="RequisitosEmpleoAdd">
                             </div>
@@ -218,7 +227,7 @@
                                 <label class="FormLabel"
                                     for="AtributosEmpleoAdd">Atributos
                                     deseables</label>
-                                <input class="InputText" type="text"
+                                <input class="InputText" type="text" required
                                     name="AtributosEmpleoAdd"
                                     id="AtributosEmpleoAdd">
                             </div>
@@ -231,14 +240,16 @@
                                     <option value="2">Publico</option>
                                 </select>
                             </div>
-                        </form>
-                        <div class="FooterModal">
-                            <div class="Botonera">
-                                <button class="modal-Back ButtonDesign">Regresar</button>
-                                <button class="ButtonDesign" id="CreatePuesto">Crear
-                                    puesto</button>
+                            <div class="FooterModal">
+                                <div class="Botonera">
+                                    <button class="modal-Back ButtonDesign">Regresar</button>
+                                    <button class="ButtonDesign" type="submit"
+                                        id="CreatePuesto">Crear
+                                        puesto</button>
+                                </div>
                             </div>
-                        </div>
+                        </form>
+
                     </div>
                 </div>
             </section>
