@@ -3,11 +3,10 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Career Warriors</title>
-        <link rel="stylesheet" href="InicioStyle.css">
-        <link rel="stylesheet" href="../assets/style.css">
-        <script src="https://kit.fontawesome.com/52cdc0a8a5.js"
-            crossorigin="anonymous"></script>
+        <title>Document</title>
+        <link rel="stylesheet" href="reportesUsuariostyle.css">
+        <link rel="stylesheet" href="/proyecto1-2Q-2023/vista-usuario-final/assets/style.css">
+        <script src="https://kit.fontawesome.com/52cdc0a8a5.js" crossorigin="anonymous"></script>
     </head>
     <body>
         <header>
@@ -40,18 +39,16 @@
                 </div>
               </div>
             </nav>
-          </header>        
+          </header>      
         <main>
-            <header class="CompanyInfo">
-                <h1 class="CompanyTitle">¡Aplique a un puesto!</h1>
-                <img src="../assets/imagenDefault.png"
-                    alt="Logo de la empresa logeada">
-            </header>
-            <section>
-                <div class="PublicacionTrabajos">
-                    <h2 class="TitlePublicaciones">Ofertas de trabajo disponibles</h2>
-                    <div id="Publicaciones">
-                    </div>
+            <section class="ReportesBox">
+                <div class="FormSelect columna-3" style="margin-left: 20px;">
+                    <label class="FormLabel" for="TipReporte">Tipo de reporte</label>
+                    <select class="InputSelect" name="TipReporte" style="padding: 15px;" id="TipReporte">
+                        <option value="0">Reporte de puestos aplicados</option>
+                    </select>
+                </div>
+                <div id="Reportes">
                 </div>
             </section>
         </main>
@@ -78,6 +75,6 @@
             </div>
         </footer>
     </body>
-    <script src="InicioFunction.js"></script>
-    <script src="../assets/core.js"></script>
+    <script src="reportesUsuariofunction.js"></script>
+    <script src="/proyecto1-2Q-2023/vista-usuario-final/assets/core.js"></script>
 </html>

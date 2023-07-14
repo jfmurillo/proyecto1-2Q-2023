@@ -8,11 +8,8 @@ let ListPuestos = [
     Atributos: "Atributos 1",
     Tipo: 0,
     Imagen: "../assets/imagenDefault.png",
-    Descripcion: "Descripcion",
-    Postulantes: [
-      { Nombre: "Sebastian", Estado: "Enviado" },
-      { Nombre: "Douglas", Estado: "En revision" }
-    ],
+    Empresa: "Nombre de la empresa",
+    Descripcion: "Descripcion"
   }, {
     Fecha: "7/7/2023",
     Titulo: "Nombre del empleo 2",
@@ -21,10 +18,8 @@ let ListPuestos = [
     Atributos: "Atributos 2",
     Tipo: 1,
     Imagen: "../assets/imagenDefault.png",
-    Descripcion: "Descripcion",
-    Postulantes: [
-      { Nombre: "Eliot", Estado: "En revision" }
-    ],
+    Empresa: "Nombre de la empresa",
+    Descripcion: "Descripcion"
   }, {
     Fecha: "7/7/2023",
     Titulo: "Nombre del empleo 3",
@@ -33,8 +28,8 @@ let ListPuestos = [
     Atributos: "Atributos 3",
     Tipo: 0,
     Imagen: "../assets/imagenDefault.png",
-    Descripcion: "Descripcion",
-    Postulantes: []
+    Empresa: "Nombre de la empresa",
+    Descripcion: "Descripcion"
   }
 ]
 
@@ -53,16 +48,19 @@ function RenderApplications(ListApplications) {
     let FechaApplication = document.createElement("small");
     let TituloApplication = document.createElement("h3");
     let ImagenApplication = document.createElement("img");
+    let EmpresaApplication = document.createElement("p");
     let DescripcionApplication = document.createElement("p");
 
     FechaApplication.textContent = application.Fecha;
     TituloApplication.textContent = application.Titulo;
+    EmpresaApplication.textContent = application.Empresa;
     DescripcionApplication.textContent = application.Descripcion;
     ImagenApplication.src = application.Imagen;
 
     Puesto.appendChild(FechaApplication);
     Puesto.appendChild(TituloApplication);
     Puesto.appendChild(ImagenApplication);
+    Puesto.appendChild(EmpresaApplication);
     Puesto.appendChild(DescripcionApplication);
 
     container.appendChild(Puesto)
@@ -136,22 +134,7 @@ function toggleModal(modalId, button) {
         document.getElementById("TipoInfo").innerText = "Publico"
       }
 
-      let tabla = document.getElementById("AplicationTable");
-      tabla.innerHTML = "<thead><th>Usuario</th><th>Estado</th></thead>";
-      for (let i = 0; i < empleo.Postulantes.length; i++) {
-        let fila = document.createElement("tr");
-
-
-        let celdaUsuario = document.createElement("td");
-        celdaUsuario.textContent = empleo.Postulantes[i].Nombre;
-        fila.appendChild(celdaUsuario);
-
-        let celdaEstado = document.createElement("td");
-        celdaEstado.textContent = empleo.Postulantes[i].Estado;
-        fila.appendChild(celdaEstado);
-
-        tabla.appendChild(fila);
-      }
+      
     }
 
   }
@@ -176,18 +159,8 @@ function toggleModal(modalId, button) {
       document.getElementById("AtributosEmpleoAdd").value = ""
       document.getElementById("TipoEmpleoAdd").selectedIndex = 0
     }
-
-    if (modalId == "AddAplicanteModal") {
-      document.getElementById("InviteAplicMensaje").value = ""
-      document.getElementById("InviteAplicCorreo").value = ""
-    }
     document.body.style.overflow = "hidden";
     modal.style.display = "flex";
     modal.classList.add("modal-show");
   }
-}
-
-document.getElementById("SendInviteAplic").addEventListener("click", function (event) {
-  event.preventDefault()
-  toggleModal("AddAplicanteModal")
-});
+};

@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <link rel="stylesheet" href="AplicacionUsuarioStyle.css" />
+    <link rel="stylesheet" href="AplicacionStyle.css" />
     <link rel="stylesheet" href="../assets/style.css" />
     <script
       src="https://kit.fontawesome.com/52cdc0a8a5.js"
@@ -14,48 +14,37 @@
 
   <body>
     <header>
-        <nav class="HeadNav">
-            <div class="CompanyLogo">
-              <a href="../Perfil/PerfilUsuario.html"
-                ><img
-                  src="../assets/imagenDefault.png"
-                  alt="Logo de la empresa logeada"
-              /></a>
-            </div>
-            <ul class="ElementBox_Nav">
-              <li><a href="../Inicio/InicioUsuario.html">Inicio</a></li>
-              <li>
-                <a href="../Aplicaciones/AplicacionUsuario.html">Aplicaciones</a>
-              </li>
-              <li><a href="../Perfil/PerfilUsuario.html">Perfil</a></li>
-            </ul>
-      
-            <div class="search">
-              <label class="search-btn" for="Buscador">
-                <i class="fas fa-search"></i>
-              </label>
-              <input
-                class="search-txt"
-                name="Buscador"
-                id="Buscador"
-                type="text"
-                name
-                placeholder="Buscar"
-              />
-            </div>
-            <div id="searchResult"></div>
-            <div class="UserZone">
-              <div class="Notifications">
-                <i class="fa-solid fa-bell"></i>
-              </div>
-              <div class="UserLogo">
-                <a href="../Perfil/PerfilUsuario.html">
-                  <img src="../assets/avatar.png" alt="Avatar del usuario"
-                /></a>
-              </div>
-            </div>
-          </nav>
+      <nav class="HeadNav">
+        <div class="CompanyLogo">
+          <a href="../Perfil/PerfilUsuario.html"><img src="../assets/imagenDefault.png"
+              alt="Logo de la empresa logeada"></a>
+        </div>
+        <ul class="ElementBox_Nav">
+          <li><a href="../Inicio/InicioUsuario.html">Inicio</a></li>
+          <li><a href="../Aplicaciones/AplicacionUsuario.html">Aplicaciones</a></li>
+          <li><a href="../reportes/reportesUsuario.html">Reportes</a></li>
+        </ul>
+  
+        <div class="search">
+          <label class="search-btn" for="Buscador">
+            <i class="fas fa-search"></i>
+          </label>
+          <input class="search-txt" name="Buscador" id="Buscador" type="text" name
+            placeholder="Buscar">
+        </div>
+        <div id="searchResult"></div>
+        <div class="UserZone">
+          <div class="Notifications">
+            <i class="fa-solid fa-bell"></i>
+          </div>
+          <div class="UserLogo">
+            <a href="../Perfil/PerfilUsuario.html"><img src="../assets/avatar.png"
+                alt="Avatar del usuario"></a>
+          </div>
+        </div>
+      </nav>
     </header>
+  
     
     <main>
       <section >
@@ -75,59 +64,7 @@
               <p id="AtributosInfo"></p>
               <p id="TipoInfo"></p>
               <div class="aplicantesBox">
-                <h3>Aplicantes</h3>
-                <table id="AplicationTable">
-                  <thead>
-                    <th>Usuario</th>
-                    <th>Estado</th>
-                  </thead>
-                </table>
-                <h4>Invitar usuario</h4>
-                <button class="AddButton" data-modal-target="AddAplicanteModal">
-                  <i class="fa-solid fa-plus"></i>
-                </button>
-                <div class="modal" id="AddAplicanteModal">
-                  <div class="modal-content">
-                    <div class="TitleModal">
-                      <span class="modal-close">&times;</span>
-                      <h2 id="TitlePostulacion">Invitar a usuario a puesto</h2>
-                    </div>
-                    <form id="InvitarAplicanteForm">
-                      <div class="FormText">
-                        <label class="FormLabel" for="InviteAplicCorreo"
-                          >Correo</label
-                        >
-                        <input
-                          class="InputText"
-                          type="text"
-                          name="InviteAplicCorreo"
-                          id="InviteAplicCorreo"
-                        />
-                      </div>
-                      <div class="FormText">
-                        <label class="FormLabel" for="InviteAplicMensaje"
-                          >Mensaje</label
-                        >
-                        <textarea
-                          class="InputText"
-                          type="text"
-                          name="InviteAplicMensaje"
-                          id="InviteAplicMensaje"
-                        ></textarea>
-                      </div>
-                    </form>
-                    <div class="FooterModal">
-                      <div class="Botonera">
-                        <button class="modal-Back ButtonDesign">
-                          Regresar
-                        </button>
-                        <button class="ButtonDesign" id="SendInviteAplic">
-                          Enviar
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+               
               </div>
             </div>
           </div>
@@ -159,5 +96,5 @@
     </footer>
   </body>
   <script src="../assets/core.js"></script>
-  <script src="AplicacionUsuarioFunction.js"></script>
+  <script src="AplicacionFunction.js"></script>
 </html>
