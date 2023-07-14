@@ -500,6 +500,7 @@ label.error {
 .FooterModal {
     display: flex;
     justify-content: flex-end;
+    width: 100%;
 }
 
 .ButtonDesign {

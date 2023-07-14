@@ -77,14 +77,14 @@ function cleanDomErrors() {
         Inputs[i].classList.remove('error');
     }
 
-    let errores = document.querySelectorAll("label.error");
-    errores.forEach(function (elemento) {
-        elemento.remove();
-    });
+    let Labels = document.querySelectorAll("label.error");
+    for (let i = 0; i < Labels.length; i++) {
+        Labels[i].classList.remove('error');
+    }
 }
 
 
-function generatedError(Message) {
+function ShowError() {
     cleanAlertErrors()
 
     var dangerDiv = document.createElement("div");
@@ -116,7 +116,8 @@ function generatedError(Message) {
 
     var messageText = document.createElement("div");
     messageText.className = "MessageError";
-    messageText.innerHTML = Message;
+    messageText.setAttribute("id", "MessageErrorBox")
+
 
 
     var closeButton = document.createElement("button");
@@ -165,8 +166,30 @@ var app = app || {};
 app.ui = (function () {
 
     return {
-        AlertError: function (Message) {
-            generatedError(Message)
+        AlertError: function () {
+            let alerterror = document.getElementById("MessageErrorBox");
+            if (alerterror == null) {
+                ShowError()
+            }
+        },
+        AddError: function (ListErros) {
+            const errorbox = document.getElementById("MessageErrorBox");
+            errorbox.innerHTML = "";
+            cleanDomErrors();
+            for (let elementError of ListErros) {
+                elementError.classList.add("error");
+                const label = elementError.labels[0]
+                label.classList.add("error");
+                const labelText = label.textContent;
+                let Message = labelText + ": " + elementError.validationMessage
+
+                let ElementText = document.createElement("p");
+                ElementText.innerText = Message;
+                errorbox.appendChild(ElementText)
+            }
+            ListErros = [];
+
+
         },
         cleanAlert: function () {
             cleanAlertErrors()
