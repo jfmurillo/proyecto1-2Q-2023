@@ -4,12 +4,14 @@ let Reportes = [
         Titulo: "Nombre del puesto 1",
         Empresa: "Nombre de la empresa",
         Descripcion: "Descripcion del puesto",
+        Estado: "Estado del puesto",
         tipo: 0
     }, {
         Fecha: "7/7/2023",
         Titulo: "Nombre del puesto 2",
         Empresa: "Nombre de la empresa",
         Descripcion: "Descripcion del puesto",
+        Estado: "Estado del puesto",
         tipo: 0
     },
     {
@@ -17,6 +19,7 @@ let Reportes = [
         Titulo: "Nombre del puesto 3",
         Empresa: "Nombre de la empresa",
         Descripcion: "Descripcion del puesto",
+        Estado: "Estado del puesto",
         tipo: 0
     },
 ]
@@ -34,16 +37,19 @@ function RenderReportes(Reportes, tipo) {
                 let TituloReporte = document.createElement("h4");
                 let EmpresaReporte = document.createElement("p");
                 let DescripcionReporte = document.createElement("p");
+                let EstadoReporte = document.createElement("p");
 
                 FechaReporte.textContent = reporte.Fecha;
                 TituloReporte.textContent = reporte.Titulo;
                 EmpresaReporte.textContent = reporte.Empresa;
                 DescripcionReporte.textContent = reporte.Descripcion;
+                EstadoReporte.textContent = reporte.Estado;
 
                 container.appendChild(FechaReporte);
                 container.appendChild(TituloReporte);
                 container.appendChild(EmpresaReporte);
                 container.appendChild(DescripcionReporte);
+                container.appendChild(EstadoReporte);
 
                 mainbox.appendChild(container)
             }
