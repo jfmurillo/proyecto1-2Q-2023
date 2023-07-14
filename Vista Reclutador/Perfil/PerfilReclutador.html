@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <link rel="stylesheet" href="PerfilReclutadorStyle.css">
+        <link rel="stylesheet" href="../assets/style.css">
+        <script src="https://kit.fontawesome.com/52cdc0a8a5.js"
+            crossorigin="anonymous"></script>
+    </head>
+
+    <body>
+        <nav class="HeadNav">
+            <div class="CompanyLogo">
+                <a href="../Perfil/PerfilReclutador.html">
+                <img src="../assets/imagenDefault.png"
+                    alt="Logo de la empresa logeada"></a>
+            </div>
+            <ul class="ElementBox_Nav">
+                <li><a href="../Inicio/InicioReclutador.html">Inicio</a></li>
+                <li><a href="../Aplicaciones/AplicacionReclutador.html">Aplicaciones</a></li>
+                <li><a href="../Perfil/PerfilReclutador.html">Perfil</a></li>
+            </ul>
+
+            <div class="search">
+                <label class="search-btn" for="Buscador">
+                    <i class="fas fa-search"></i>
+                </label>
+                <input class="search-txt" name="Buscador" id="Buscador"
+                    type="text" name placeholder="Buscar">
+            </div>
+            <div id="searchResult">
+            </div>
+            <div class="UserZone">
+                <div class="Notifications">
+                    <i class="fa-solid fa-bell"></i>
+                </div>
+                <div class="UserLogo">
+                    <a href="../Perfil/PerfilReclutador.html">
+                    <img src="../assets/avatar.png"
+                        alt="Avatar del usuario"></a>
+                </div>
+            </div>
+        </nav>
+        <main id="PerfilMain">
+            <section class="TitlePerfil">
+                <h2>Nombre de la empresa</h2>
+                <img src="../assets/imagenDefault.png" alt="Logo de la empresa">
+            </section>
+
+            <section class="InfoPerfil">
+                <strong>empresa@gmail.com</strong>
+                <p>Informacion de la empresa</p>
+                <button class="ButtonDesign" style="margin-bottom: 20px;"
+                    data-modal-target="ModifyPerfilModal">Editar
+                    perfil</button>
+            </section>
+        </main>
+        <footer>
+            <div class="footer-container">
+                <div class="contact-section">
+                    <span>Contáctenos</span>
+                    <ul class="info-footer">
+                        <li>+506 8355-2567</li>
+                        <li>CareerWarriors@gmail.com</li>
+                        <li>Sabana Sur, calle 58</li>
+                    </ul>
+                </div>
+                <div class="social-media-section">
+                    <span>Siguenos en nuestras redes sociales</span>
+                    <div class="social-icons">
+                        <i class="fa-brands fa-facebook-f"></i>
+                        <i class="fa-brands fa-linkedin-in"></i>
+                        <i class="fa-brands fa-instagram"></i>
+                        <i class="fa-brands fa-whatsapp"></i>
+                        <i class="fa-brands fa-twitter"></i>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <div class="modal" id="ModifyPerfilModal">
+            <div class="modal-content">
+                <div class="TitleModal">
+                    <span class="modal-close">&times;</span>
+                    <h2>Modificar informacion de la empresa</h2>
+                </div>
+                <form id="ModifyPerfilForm" class="FlexForm">
+                    <div class="FormText columna-3">
+                        <label class="FormLabel" for="NombreEmpresa">Nombre de
+                            la empresa</label>
+                        <input class="InputText" type="email"
+                            placeholder="Nombre"
+                            name="NombreEmpresa" id="NombreEmpresa">
+                    </div>
+                    <div class="FormText columna-3">
+                        <label class="FormLabel" for="EmailEmpresa">Correo</label>
+                        <input class="InputText" type="email"
+                            placeholder="Correo electronico"
+                            name="EmailEmpresa" id="EmailEmpresa">
+                    </div>
+                    <div class="FormText columna-3">
+                        <label class="FormLabel" for="InfoEmpresa">Información
+                            de la empresa</label>
+                        <input class="InputText" type="email"
+                            placeholder="Información"
+                            name="InfoEmpresa" id="InfoEmpresa">
+                    </div>
+                    <div class="FormText columna-3">
+                        <label class="FormLabel" for="ContraseñaEmpresa">Contraseña</label>
+                        <input class="InputText" type="text"
+                            name="ContraseñaEmpresa"
+                            id="ContraseñaEmpresa"></input>
+                    </div>
+                    <div class="FormSelect" style="width: 40%;">
+                        <label class="FormLabel" for="EstadoEmpresa">Estado</label>
+                        <select class="InputSelect" name="EstadoEmpresa"
+                            id="EstadoEmpresa">
+                            <option value="1">Activa</option>
+                            <option value="2">Desactiva</option>
+                        </select>
+
+                    </div>
+                </form>
+                <div class="FooterModal">
+                    <div class="Botonera">
+                        <button class="modal-Back ButtonDesign">Cancelar</button>
+                        <button class="ButtonDesign"
+                        id="UpdatePerfil">Modificar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+    <script src="../assets/core.js"></script>
+    <script src="PerfilReclutadorFunction.js"></script>
+
+</html>
