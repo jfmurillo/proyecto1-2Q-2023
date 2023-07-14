@@ -43,3 +43,8 @@
     flex-direction: column;
     align-items: center;
 }
+
+.margen-main {
+    margin: 50px; 
+}
+

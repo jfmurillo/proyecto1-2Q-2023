@@ -46,12 +46,12 @@
         </nav>
         <main id="PerfilMain">
             <section class="TitlePerfil">
-                <h2>Nombre de la empresa</h2>
+                <h2>Nombre del reclutador</h2>
                 <img src="../assets/imagenDefault.png" alt="Logo de la empresa">
             </section>
 
-            <section class="InfoPerfil">
-                <strong>empresa@gmail.com</strong>
+            <section class="InfoPerfil" class="margen-main">
+                <strong>reclutador@gmail.com</strong>
                 <p>Informacion de la empresa</p>
                 <button class="ButtonDesign" style="margin-bottom: 20px;"
                     data-modal-target="ModifyPerfilModal">Editar
@@ -80,58 +80,6 @@
                 </div>
             </div>
         </footer>
-        <div class="modal" id="ModifyPerfilModal">
-            <div class="modal-content">
-                <div class="TitleModal">
-                    <span class="modal-close">&times;</span>
-                    <h2>Modificar informacion de la empresa</h2>
-                </div>
-                <form id="ModifyPerfilForm" class="FlexForm">
-                    <div class="FormText columna-3">
-                        <label class="FormLabel" for="NombreEmpresa">Nombre de
-                            la empresa</label>
-                        <input class="InputText" type="email"
-                            placeholder="Nombre"
-                            name="NombreEmpresa" id="NombreEmpresa">
-                    </div>
-                    <div class="FormText columna-3">
-                        <label class="FormLabel" for="EmailEmpresa">Correo</label>
-                        <input class="InputText" type="email"
-                            placeholder="Correo electronico"
-                            name="EmailEmpresa" id="EmailEmpresa">
-                    </div>
-                    <div class="FormText columna-3">
-                        <label class="FormLabel" for="InfoEmpresa">Información
-                            de la empresa</label>
-                        <input class="InputText" type="email"
-                            placeholder="Información"
-                            name="InfoEmpresa" id="InfoEmpresa">
-                    </div>
-                    <div class="FormText columna-3">
-                        <label class="FormLabel" for="ContraseñaEmpresa">Contraseña</label>
-                        <input class="InputText" type="text"
-                            name="ContraseñaEmpresa"
-                            id="ContraseñaEmpresa"></input>
-                    </div>
-                    <div class="FormSelect" style="width: 40%;">
-                        <label class="FormLabel" for="EstadoEmpresa">Estado</label>
-                        <select class="InputSelect" name="EstadoEmpresa"
-                            id="EstadoEmpresa">
-                            <option value="1">Activa</option>
-                            <option value="2">Desactiva</option>
-                        </select>
-
-                    </div>
-                </form>
-                <div class="FooterModal">
-                    <div class="Botonera">
-                        <button class="modal-Back ButtonDesign">Cancelar</button>
-                        <button class="ButtonDesign"
-                        id="UpdatePerfil">Modificar</button>
-                    </div>
-                </div>
-            </div>
-        </div>
     </body>
     <script src="../assets/core.js"></script>
     <script src="PerfilReclutadorFunction.js"></script>
