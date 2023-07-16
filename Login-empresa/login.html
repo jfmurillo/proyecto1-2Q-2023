@@ -36,8 +36,11 @@
         <div class="contenedor-titulo">
           <h1 class="titulo">Login</h1>
             <div class="login-container">
-              <input id="email" type="email" placeholder="Correo electrónico">
-              <input id="password" type="password" placeholder="Contraseña">
+              <label style="display: flex;" for="email">Email:</label>
+              <input id="email" type="email" placeholder="Correo electrónico" required>
+
+              <label style="display: flex;" for="password">Contraseña:</label>
+              <input id="password" type="password" placeholder="Contraseña" required><br><br>
               <button id="login-button">Iniciar sesión</button>
               <p>¿Olvidaste tu contraseña? <a href="../RecuperarContrasena/recuperarContra.html">Recuperar contraseña</a></p>
             </div>
