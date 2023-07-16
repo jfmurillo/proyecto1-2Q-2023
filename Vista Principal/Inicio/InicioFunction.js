@@ -10,7 +10,7 @@ let ListPuestos = [
         Titulo: "Nombre del empleo",
         Imagen: "../assets/imagenDefault.png",
         Empresa: "Nombre de la empresa",
-        Descripcion: "Descripcion"
+        Descripcion: "Descripción"
     }
 ]
 

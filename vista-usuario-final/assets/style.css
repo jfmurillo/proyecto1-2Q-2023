@@ -61,7 +61,8 @@ img {
 }
 
 nav.HeadNav {
-    margin: 0; /* Reinicia el margen en el elemento <nav> */
+    margin: 0;
+    /* Reinicia el margen en el elemento <nav> */
 }
 
 .CompanyLogo img {
@@ -86,6 +87,7 @@ nav.HeadNav {
 
 .ElementBox_Nav {
     display: flex;
+    list-style-type: none;
 }
 
 .ElementBox_Nav a {

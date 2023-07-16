@@ -82,6 +82,7 @@ img {
 
 .ElementBox_Nav {
     display: flex;
+    list-style-type: none;
 }
 
 .ElementBox_Nav a {

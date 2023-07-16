@@ -4,13 +4,13 @@ let ListPuestos = [
         Titulo: "Nombre del empleo",
         Imagen: "../assets/imagenDefault.png",
         Empresa: "Nombre de la empresa",
-        Descripcion: "Descripcion"
+        Descripcion: "Descripción"
     }, {
         Fecha: "7/7/2023",
         Titulo: "Nombre del empleo",
         Imagen: "../assets/imagenDefault.png",
         Empresa: "Nombre de la empresa",
-        Descripcion: "Descripcion"
+        Descripcion: "Descripción"
     }
 ]
 

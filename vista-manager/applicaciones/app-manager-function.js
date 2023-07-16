@@ -8,10 +8,10 @@ let ListPuestos = [
     Atributos: "Atributos 1",
     Tipo: 0,
     Imagen: "/proyecto1-2Q-2023/vista-manager/assets/imagenDefault.png",
-    Descripcion: "Descripcion",
+    Descripcion: "Descripción",
     Postulantes: [
       { Nombre: "Sebastian", Estado: "Enviado" },
-      { Nombre: "Douglas", Estado: "En revision" }
+      { Nombre: "Douglas", Estado: "En revisión" }
     ],
   }, {
     Fecha: "7/7/2023",
@@ -21,9 +21,9 @@ let ListPuestos = [
     Atributos: "Atributos 2",
     Tipo: 1,
     Imagen: "/proyecto1-2Q-2023/vista-manager/assets/imagenDefault.png",
-    Descripcion: "Descripcion",
+    Descripcion: "Descripción",
     Postulantes: [
-      { Nombre: "Eliot", Estado: "En revision" }
+      { Nombre: "Eliot", Estado: "En revisión" }
     ],
   }, {
     Fecha: "7/7/2023",
@@ -33,7 +33,7 @@ let ListPuestos = [
     Atributos: "Atributos 3",
     Tipo: 0,
     Imagen: "/proyecto1-2Q-2023/vista-manager/assets/imagenDefault.png",
-    Descripcion: "Descripcion",
+    Descripcion: "Descripción",
     Postulantes: []
   }
 ]

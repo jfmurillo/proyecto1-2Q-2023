@@ -2,7 +2,7 @@ let Reportes = [
     {
         Fecha: "7/7/2023",
         Titulo: "Nombre del puesto 1",
-        Descripcion: "Descripcion del puesto",
+        Descripcion: "Descripción del puesto",
         Usuario1: "Usuario 1",
         Usuario2: "Usuario 2",
         Usuario3: "Usuario 3",
@@ -10,7 +10,7 @@ let Reportes = [
     }, {
         Fecha: "7/7/2023",
         Titulo: "Nombre del puesto 1",
-        Descripcion: "Descripcion del puesto",
+        Descripcion: "Descripción del puesto",
         Usuario1: "Usuario 1",
         Usuario2: "Usuario 2",
         Usuario3: "Usuario 3",
@@ -20,7 +20,7 @@ let Reportes = [
     {
         Fecha: "7/7/2023",
         Titulo: "Nombre del puesto 1",
-        Descripcion: "Descripcion del puesto",
+        Descripcion: "Descripción del puesto",
         Usuario1: "Usuario 1",
         Usuario2: "Usuario 2",
         tipo: 0

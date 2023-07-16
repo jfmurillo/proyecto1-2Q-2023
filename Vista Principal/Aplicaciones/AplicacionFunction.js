@@ -9,7 +9,7 @@ let ListPuestos = [
     Tipo: 0,
     Imagen: "../assets/imagenDefault.png",
     Empresa: "Nombre de la empresa",
-    Descripcion: "Descripcion"
+    Descripcion: "Descripción"
   }, {
     Fecha: "7/7/2023",
     Titulo: "Nombre del empleo 2",
@@ -19,7 +19,7 @@ let ListPuestos = [
     Tipo: 1,
     Imagen: "../assets/imagenDefault.png",
     Empresa: "Nombre de la empresa",
-    Descripcion: "Descripcion"
+    Descripcion: "Descripción"
   }, {
     Fecha: "7/7/2023",
     Titulo: "Nombre del empleo 3",
@@ -29,7 +29,7 @@ let ListPuestos = [
     Tipo: 0,
     Imagen: "../assets/imagenDefault.png",
     Empresa: "Nombre de la empresa",
-    Descripcion: "Descripcion"
+    Descripcion: "Descripción"
   }
 ]
 

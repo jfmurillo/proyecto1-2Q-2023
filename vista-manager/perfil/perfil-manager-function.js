@@ -3,7 +3,7 @@ let PerfilActual =
 {
   Titulo: "Nombre de la empresa",
   Logo: "/proyecto1-2Q-2023/vista-manager/assets/imagenDefault.png",
-  Informacion: "Informacion de la empresa",
+  Informacion: "Información de la empresa",
   Correo: "empresa@gmail.com",
   Imagen: "/proyecto1-2Q-2023/vista-manager/assets/imagenDefault.png",
   Estado: 1

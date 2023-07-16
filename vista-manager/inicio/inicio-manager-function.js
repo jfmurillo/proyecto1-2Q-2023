@@ -3,12 +3,12 @@ let ListPuestos = [
         Fecha: "7/7/2023",
         Titulo: "Nombre del empleo",
         Imagen: "/proyecto1-2Q-2023/vista-manager/assets/imagenDefault.png",
-        Descripcion: "Descripcion"
+        Descripcion: "Descripción"
     }, {
         Fecha: "7/7/2023",
         Titulo: "Nombre del empleo",
         Imagen: "/proyecto1-2Q-2023/vista-manager/assets/imagenDefault.png",
-        Descripcion: "Descripcion"
+        Descripcion: "Descripción"
     }
 ]
 

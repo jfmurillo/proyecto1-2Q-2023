@@ -9,7 +9,7 @@ let ListPuestos = [
     Atributos: "Atributos 1",
     Tipo: 0,
     Imagen: "../assets/imagenDefault.png",
-    Descripcion: "Descripcion",
+    Descripcion: "Descripción",
     Postulantes: [
       { Nombre: "Sebastian", Estado: "Enviado" },
       { Nombre: "Douglas", Estado: "En revision" }
@@ -22,7 +22,7 @@ let ListPuestos = [
     Atributos: "Atributos 2",
     Tipo: 1,
     Imagen: "../assets/imagenDefault.png",
-    Descripcion: "Descripcion",
+    Descripcion: "Descripción",
     Postulantes: [
       { Nombre: "Eliot", Estado: "En revision" }
     ],
@@ -34,7 +34,7 @@ let ListPuestos = [
     Atributos: "Atributos 3",
     Tipo: 0,
     Imagen: "../assets/imagenDefault.png",
-    Descripcion: "Descripcion",
+    Descripcion: "Descripción",
     Postulantes: []
   }
 ]

@@ -3,14 +3,14 @@ let Reportes = [
         Fecha: "7/7/2023",
         Titulo: "Nombre del puesto 1",
         Empresa: "Nombre de la empresa",
-        Descripcion: "Descripcion del puesto",
+        Descripcion: "Descripción del puesto",
         Estado: "Estado del puesto",
         tipo: 0
     }, {
         Fecha: "7/7/2023",
         Titulo: "Nombre del puesto 2",
         Empresa: "Nombre de la empresa",
-        Descripcion: "Descripcion del puesto",
+        Descripcion: "Descripción del puesto",
         Estado: "Estado del puesto",
         tipo: 0
     },
@@ -18,7 +18,7 @@ let Reportes = [
         Fecha: "7/7/2023",
         Titulo: "Nombre del puesto 3",
         Empresa: "Nombre de la empresa",
-        Descripcion: "Descripcion del puesto",
+        Descripcion: "Descripción del puesto",
         Estado: "Estado del puesto",
         tipo: 0
     },
