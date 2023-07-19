@@ -1,5 +1,9 @@
 var app = app || {};
 let listErrors = []
+
+app.ui.AlertErrorShow("message")
+
+
 let ListPuestos = [
   {
     Fecha: "7/7/2023",
