@@ -5,13 +5,20 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Registro de Manager</title>
-    <link rel="icon" href="/proyecto1-2Q-2023/Team page/assets/Logo Black.png" type="image/png"/>
+    <link rel="icon" href="/proyecto1-2Q-2023/Team page/assets/Logo Black.png"
+      type="image/png" />
     <link rel="stylesheet" href="registro-manager.css" />
+    <link rel="stylesheet" href="../Vista Administrador/assets/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet">
-    <script src="https://kit.fontawesome.com/52cdc0a8a5.js" crossorigin="anonymous"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300&display=swap"
+      rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap"
+      rel="stylesheet">
+    <script src="https://kit.fontawesome.com/52cdc0a8a5.js"
+      crossorigin="anonymous"></script>
   </head>
   <body>
     <header>
@@ -19,59 +26,64 @@
         <div class="navegacion-derecha">
           <a class="nav-home" href="../Vista Principal/Inicio/Inicio.html">Inicio</a>
         </div>
-        <img class="icon" src="/proyecto1-2Q-2023/Team page/assets/Logo White.png" alt="team-logo">
+        <img class="icons"
+          src="../Team page/assets/Logo White.png"
+          alt="team-logo">
       </nav>
     </header>
     <main>
       <section class="fondo-registro">
         <div class="contenedor-titulo">
           <h1 class="titulo">Registro Manager</h1>
-            <form>
-              <div class="formulario">
-                <label for="cedula">Foto</label>
-                <input required type="file" name="foto" id="foto" />
-              </div>
+          <form id="formulario">
+            <div class="formulario">
+              <label for="cedula">Foto</label>
+              <input required type="file" name="foto" id="foto" />
+            </div>
 
-              <div class="formulario">
-                <label for="nombre">Nombre:</label>
-                <input type="text" name="nombre" id="nombre" placeholder="John"  required/>
-              </div>
+            <div class="formulario">
+              <label for="nombre">Nombre:</label>
+              <input type="text" name="nombre" id="nombre" placeholder="John"
+                required />
+            </div>
 
-              <div class="formulario">
-                <label for="apellido">Apellido:</label>
-                <input type="text" name="apellido" id="apellido" placeholder="Doe" required/>
-              </div>
+            <div class="formulario">
+              <label for="apellido">Apellido:</label>
+              <input type="text" name="apellido" id="apellido" placeholder="Doe"
+                required />
+            </div>
 
-              <div class="formulario">
-                <label for="email">Email:</label>
-                <input type="email" name="email"  id="email"  placeholder="correo.ejemplo@patito.com" required/>
-              </div>
+            <div class="formulario">
+              <label for="email">Email:</label>
+              <input type="email" name="email" id="email"
+                placeholder="correo.ejemplo@patito.com" required />
+            </div>
 
-              <div class="formulario">
-                <label for="password">Contraseña:</label>
-                <input type="password" name="password" id="password" required/>
-              </div>
+            <div class="formulario">
+              <label for="password">Contraseña:</label>
+              <input type="password" name="password" id="password" required />
+            </div>
 
-              <div class="formulario">
-                <label for="password2">Repetir contraseña:</label>
-                <input type="password" name="password2" id="password2" required/>
-              </div>
+            <div class="formulario">
+              <label for="password2">Repetir contraseña:</label>
+              <input type="password" name="password2" id="password2" required />
+            </div>
 
-              <label for="genero">Genero:</label>
-              <select id="genero" required>
-                <option value="" disabled selected hidden>
-                  Seleccione una opcion
-                </option>
-                <option value="masculino">Masculino</option>
-                <option value="femenino">Femenino</option>
-                <option value="otro">Prefiero no especificar</option>
-              </select>
+            <label for="genero">Género:</label>
+            <select id="genero" required>
+              <option value disabled selected hidden>
+                Seleccione una opcion
+              </option>
+              <option value="masculino">Masculino</option>
+              <option value="femenino">Femenino</option>
+              <option value="otro">Prefiero no especificar</option>
+            </select>
 
-              <div class="separador" style="padding-top: 25px;">
-                <button class="boton1" type="submit">Cancelar</button>
-                <button class="boton1" type="onclick">Crear Cuenta</button>
-              </div>
-            </form>
+            <div class="separador" style="padding-top: 25px;">
+              <button class="boton1" type="submit">Cancelar</button>
+              <button class="boton1" id="CrearButton">Crear Cuenta</button>
+            </div>
+          </form>
         </div>
       </section>
 
@@ -79,32 +91,34 @@
         <div class="contenedor-titulo">
           <h5 class="center-div">¿Ya tienes una cuenta?</h5>
           <div class="separador">
-            <button class="boton2" type="submit">Iniciar sesión</button>
+            <button class="boton2" type="submit" href="/proyecto1-2Q-2023/Login/login.html">Iniciar sesión</button>
           </div>
         </div>
       </section>
     </main>
     <footer>
       <div class="footer-container">
-          <div class="contact-section">
-              <span >Contáctenos</span>
-              <ul class="info-footer">
-                <li>Número: +506 8355-2567</li>
-                <li>Email: CareerWarriors@gmail.com</li>
-                <li>Dirección: Sabana Sur, calle 58</li>
-              </ul>
+        <div class="contact-section">
+          <span>Contáctenos</span>
+          <ul class="info-footer">
+            <li>Número: +506 8355-2567</li>
+            <li>Email: CareerWarriors@gmail.com</li>
+            <li>Dirección: Sabana Sur, calle 58</li>
+          </ul>
+        </div>
+        <div class="social-media-section">
+          <span>Síguenos en nuestras redes sociales</span>
+          <div class="social-icons">
+            <i class="fa-brands fa-facebook-f"></i>
+            <i class="fa-brands fa-linkedin-in"></i>
+            <i class="fa-brands fa-instagram"></i>
+            <i class="fa-brands fa-whatsapp"></i>
+            <i class="fa-brands fa-twitter"></i>
           </div>
-          <div class="social-media-section">
-              <span>Síguenos en nuestras redes sociales</span>
-              <div class="social-icons">
-                  <i class="fa-brands fa-facebook-f"></i>
-                  <i class="fa-brands fa-linkedin-in"></i>
-                  <i class="fa-brands fa-instagram"></i>
-                  <i class="fa-brands fa-whatsapp"></i>
-                  <i class="fa-brands fa-twitter"></i>
-              </div>
-          </div>
+        </div>
       </div>
-  </footer>
+    </footer>
+    <script src="core.js"></script>
+    <script src="registro-manager-validacion.js"></script>
   </body>
 </html>
