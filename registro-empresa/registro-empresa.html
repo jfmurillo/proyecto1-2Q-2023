@@ -8,17 +8,12 @@
     <link rel="icon" href="/proyecto1-2Q-2023/Team page/assets/Logo Black.png"
       type="image/png" />
     <link rel="stylesheet" href="registro-empresa.css" />
+    <link rel="stylesheet" href="/proyecto1-2Q-2023/Vista Administrador/assets/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300&display=swap"
-      rel="stylesheet" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap"
-      rel="stylesheet" />
-    <script
-      src="https://kit.fontawesome.com/52cdc0a8a5.js"
-      crossorigin="anonymous"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet" />
+    <script src="https://kit.fontawesome.com/52cdc0a8a5.js" crossorigin="anonymous"></script>
   </head>
   <body>
     <header>
@@ -26,16 +21,14 @@
         <div class="navegacion-derecha">
           <a class="nav-home" href="../Vista Principal/Inicio/Inicio.html">Inicio</a>
         </div>
-        <img class="icon"
-          src="/proyecto1-2Q-2023/Team page/assets/Logo White.png"
-          alt="team-logo">
+        <img class="icons" src="/proyecto1-2Q-2023/Team page/assets/Logo White.png" alt="team-logo">
       </nav>
     </header>
     <main>
       <section class="fondo-registro">
         <div class="contenedor-titulo">
           <h1 class="titulo">Registro Empresa</h1>
-          <form>
+          <form id="formulario">
             <div class="formulario letra-peq  ">
               <label for="foto">Logo de la Empresa</label>
               <input required type="file" name="foto" id="foto" />
@@ -43,20 +36,12 @@
 
             <div class="formulario">
               <label for="nombre_empresa">Nombre de la Empresa:</label>
-              <input
-                type="text"
-                id="nombre_empresa"
-                name="nombre_empresa"
-                required />
+              <input type="text" id="nombre_empresa" name="nombre_empresa" required />
             </div>
 
             <div class="formulario">
               <label for="email">Email:</label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                required />
+              <input type="email" id="email" name="email" required />
             </div><br />
 
             <div class="formulario">
@@ -71,16 +56,12 @@
 
             <div class="formulario">
               <label for="confirmar_contrasena">Confirmar Contraseña:</label>
-              <input
-                type="password"
-                id="confirmar_contrasena"
-                name="confirmar_contrasena"
-                required />
+              <input type="password" id="confirmar_contrasena" name="confirmar_contrasena" required />
             </div><br />
 
             <div class="separador" style="padding-top: 25px;">
               <button class="boton1" type="submit">Cancelar</button>
-              <button class="boton1" type="onclick">Crear Cuenta</button>
+              <button class="boton1" id="CrearButton">Crear Cuenta</button>
             </div>
           </form>
         </div>
@@ -117,6 +98,7 @@
         </div>
       </div>
     </footer>
+    <script src="/proyecto1-2Q-2023/core/core.js"></script>
     <script src="registro-empresa-validacion.js"></script>
   </body>
 </html>

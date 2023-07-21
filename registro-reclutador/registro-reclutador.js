@@ -7,11 +7,7 @@ function validarFormulario() {
     app.ui.AlertErrorShow("Por favor, seleccione un logo para la empresa.");
     return false;
   }
-  if (formulario.nombre_empresa.value === "" || formulario.nombre_empresa.value === null) {
-    app.ui.AlertErrorShow("Por favor, complete la información de la empresa.");
-    return false;
-  }
-  if (formulario.info_empresa.value === "" || formulario.info_empresa.value === null) {
+  if (formulario.nombre.value === "" || formulario.nombre.value === null || formulario.apellido.value === "" || formulario.apellido.value === null) {
     app.ui.AlertErrorShow("Por favor, complete la información de la empresa.");
     return false;
   }
@@ -19,11 +15,11 @@ function validarFormulario() {
     app.ui.AlertErrorShow("Por favor, ingrese su dirección de correo electrónico.");
     return false;
   }
-  if (formulario.contrasena.value === "" || formulario.contrasena.value === null) {
+  if (formulario.password.value === "" || formulario.password.value === null) {
     app.ui.AlertErrorShow("Por favor, ingrese una contraseña.");
     return false;
   }
-  if (formulario.confirmar_contrasena.value === "" || formulario.confirmar_contrasena.value === null) {
+  if (formulario.password2.value === "" || formulario.password2.value === null) {
     app.ui.AlertErrorShow("Por favor, confirme su contraseña.");
     return false;
   }
@@ -32,4 +28,4 @@ function validarFormulario() {
 
 document.getElementById("CrearButton").addEventListener("click", function () {
   validarFormulario();
-});
+})

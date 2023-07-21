@@ -7,6 +7,7 @@
     <title>Registro de Reclutador</title>
     <link rel="icon" href="/proyecto1-2Q-2023/Team page/assets/Logo Black.png" type="image/png"/>
     <link rel="stylesheet" href="registro-reclutador.css" />
+    <link rel="stylesheet" href="/proyecto1-2Q-2023/Vista Administrador/assets/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300&display=swap" rel="stylesheet">
@@ -19,16 +20,16 @@
         <div class="navegacion-derecha">
           <a class="nav-home" href="/">Inicio</a>
         </div>
-        <img class="icon" src="/proyecto1-2Q-2023/Team page/assets/Logo White.png" alt="team-logo">
+        <img class="icons" src="/proyecto1-2Q-2023/Team page/assets/Logo White.png" alt="team-logo">
       </nav>
-    </header>
+    </header> 
     <main>
       <section class="fondo-registro">
         <div class="contenedor-titulo">
           <h1 class="titulo">Registro reclutador</h1>
-            <form>
+            <form id="formulario">
               <div class="formulario">
-                <label for="cedula">Foto</label>
+                <label for="foto">Foto</label>
                 <input required type="file" name="foto" id="foto" />
               </div>
 
@@ -57,10 +58,10 @@
                 <input type="password" name="password2" id="password2" required/>
               </div>
 
-              <label for="genero">Genero:</label>
+              <label for="genero">Género:</label>
               <select id="genero" required>
                 <option value="" disabled selected hidden>
-                  Seleccione una opcion
+                  Seleccione una opción
                 </option>
                 <option value="masculino">Masculino</option>
                 <option value="femenino">Femenino</option>
@@ -69,7 +70,7 @@
 
               <div class="separador" style="padding-top: 25px;">
                 <button class="boton1" type="submit">Cancelar</button>
-                <button class="boton1" type="onclick">Crear Cuenta</button>
+                <button class="boton1" id="CrearButton">Crear Cuenta</button>
               </div>
             </form>
         </div>
@@ -79,7 +80,7 @@
         <div class="contenedor-titulo">
           <h5 class="center-div">¿Ya tienes una cuenta?</h5>
           <div class="separador">
-            <button class="boton2" type="submit">Iniciar sesión</button>
+            <button href="/proyecto1-2Q-2023/Login-reclutador/login.html" class="boton2" type="submit">Iniciar sesión</button>
           </div>
         </div>
       </section>
@@ -106,5 +107,7 @@
           </div>
       </div>
   </footer>
+  <script src="/proyecto1-2Q-2023/core/core.js"></script>
+  <script src="registro-reclutador.js"></script>
   </body>
 </html>
