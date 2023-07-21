@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Registro</title>
     <link rel="stylesheet" href="registro-usuario-final.css" />
+    <link rel="stylesheet" href="/proyecto1-2Q-2023/Vista Administrador/assets/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300&display=swap" rel="stylesheet">
@@ -18,14 +19,14 @@
         <div class="navegacion-derecha">
           <a class="nav-home" href="../Vista Principal/Inicio/Inicio.html">Inicio</a>
         </div>
-        <img class="icon" src="/proyecto1-2Q-2023/Team page/assets/Logo White.png" alt="team-logo">
+        <img class="icons" src="/proyecto1-2Q-2023/Team page/assets/Logo White.png" alt="team-logo">
       </nav>
     </header>
     <main>
       <section class="fondo-registro">
         <div class="contenedor-titulo">
           <h1 class="titulo">Registro</h1>
-          <form>
+          <form id="formulario">
             <div class="formulario letra-pequena  ">
               <label for="foto">Foto </label>
               <input required type="file" name="foto" id="foto" />
@@ -77,9 +78,9 @@
               <i alt="anadir-icono" class="fa-solid fa-plus anadir-iconos"></i>
             </div>
 
-            <div class="separador" style="padding-top: 2px;">
+            <div class="separador">
               <button class="boton1" type="submit">Cancelar</button>
-              <button class="boton1" type="onclick">Crear Cuenta</button>
+              <button class="boton1" id="CrearButton">Crear Cuenta</button>
             </div><br><br>
 
           </form>
@@ -116,5 +117,7 @@
           </div>
       </div>
   </footer>
+  <script src="/proyecto1-2Q-2023/core/core.js"></script>
+  <script src="registro-usuario-final.js"></script>
   </body>
 </html>
