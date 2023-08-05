@@ -1,50 +1,62 @@
+
+let ListPuestos = []
+
+window.onload = async function () {
+  if (!localStorage.getItem('iduser')) {
+    window.location.href = '../../Login/login.html';
+  }
+  loadpuestos()
+    .then(list => RenderApplications(list))
+
+};
+
 var app = app || {};
 let listErrors = []
 
-app.ui.AlertErrorShow("message")
 
+async function loadpuestos() {
 
-let ListPuestos = [
-  {
-    Fecha: "7/7/2023",
-    Titulo: "Nombre del empleo 1",
-    Rango: "Rango 1",
-    Requisitos: "Requesitos 1",
-    Atributos: "Atributos 1",
-    Tipo: 0,
-    Imagen: "../assets/imagenDefault.png",
-    Descripcion: "Descripcion",
-    Postulantes: [
-      { Nombre: "Sebastian", Estado: "Enviado" },
-      { Nombre: "Douglas", Estado: "En revision" }
-    ],
-  }, {
-    Fecha: "7/7/2023",
-    Titulo: "Nombre del empleo 2",
-    Rango: "Rango 2",
-    Requisitos: "Requesitos 2",
-    Atributos: "Atributos 2",
-    Tipo: 1,
-    Imagen: "../assets/imagenDefault.png",
-    Descripcion: "Descripcion",
-    Postulantes: [
-      { Nombre: "Eliot", Estado: "En revision" }
-    ],
-  }, {
-    Fecha: "7/7/2023",
-    Titulo: "Nombre del empleo 3",
-    Rango: "Rango 3",
-    Requisitos: "Requesitos 3",
-    Atributos: "Atributos 3",
-    Tipo: 0,
-    Imagen: "../assets/imagenDefault.png",
-    Descripcion: "Descripcion",
-    Postulantes: []
-  }
-]
+  let list = []
+  const RepuestaPuestos = await fetch("http://localhost:5000/puesto/" + localStorage.getItem('idempresa'));
+  const Puestos = await RepuestaPuestos.json();
+  console.log(Puestos)
+  Puestos.forEach(function (puesto) {
+    let puestoOrder = {
+      Titulo: puesto.nombrePuesto,
+      Rango: puesto.RangoSalarialPuesto,
+      Requisitos: puesto.RequisitosPuesto,
+      Atributos: puesto.AtributosPuesto,
+      Tipo: puesto.TipoPuesto,
+      Imagen: "../assets/imagenDefault.png",
+      Descripcion: puesto.DescripcionPuesto,
+      Postulantes: puesto.AplicantesPuesto,
+    };
 
+    const fecha = new Date(puesto.updatedAt);
+
+    const dia = fecha.getDate().toString().padStart(2, '0'); // Agregar ceros a la izquierda si es necesario
+    const mes = (fecha.getMonth() + 1).toString().padStart(2, '0'); // Los meses en JavaScript son indexados desde 0, por lo que sumamos 1
+    const anio = fecha.getFullYear();
+
+    puestoOrder.Fecha = `${dia}/${mes}/${anio}`;
+
+    list.push(puestoOrder)
+  });
+
+  return list
+}
 function RenderApplications(ListApplications) {
+  ListPuestos = ListApplications
   let mainbox = document.getElementById("Aplicaciones")
+  mainbox.innerHTML = "";
+
+  document.getElementById("BotonAddmodal").innerHTML = " ";
+  document.getElementById("BotonAddmodal").innerHTML = "<div class='Botonera'><button class='modal-Back ButtonDesign' type='reset'>Regresar</ ><button class='ButtonDesign' type='submit'id='CreatePuesto'>Crear puesto</button></div >";
+  document.getElementById("AddEmployed").innerHTML = " ";
+  document.getElementById("AddEmployed").innerHTML = "<button class='AddButton' data-modal-target='EmpleoModal'><i class='fa-solid fa-plus'></i></button>";
+  document.getElementById("AplicationButton").innerHTML = " ";
+  document.getElementById("AplicationButton").innerHTML = '<button class="AddButton" data-modal-target="AddAplicanteModal"><i class="fa-solid fa-plus"></i></button>';
+
 
   for (let application of ListApplications) {
     let container = document.createElement("div");
@@ -82,32 +94,32 @@ function RenderApplications(ListApplications) {
 
     mainbox.appendChild(container)
   }
+  const modalTriggerButtons = document.querySelectorAll("[data-modal-target]");
+  const modals = document.querySelectorAll(".modal");
+  const modalCloseButtons = document.querySelectorAll(".modal-close");
+  const ButtonBack = document.querySelectorAll(".modal-Back");
 
+  modalTriggerButtons.forEach(elem => {
+
+    elem.addEventListener("click", event => toggleModal(event.currentTarget.getAttribute("data-modal-target"), event.target));
+
+  });
+  modalCloseButtons.forEach(elem => {
+    elem.addEventListener("click", event => toggleModal(event.currentTarget.closest(".modal").id));
+  });
+
+  ButtonBack.forEach(elem => {
+    elem.addEventListener("click", event => toggleModal(event.currentTarget.closest(".modal").id));
+
+  });
+  modals.forEach(elem => {
+    elem.addEventListener("click", event => {
+      if (event.currentTarget === event.target) toggleModal(event.currentTarget.id);
+    });
+  });
 }
 
-RenderApplications(ListPuestos)
 
-
-
-const modalTriggerButtons = document.querySelectorAll("[data-modal-target]");
-const modals = document.querySelectorAll(".modal");
-const modalCloseButtons = document.querySelectorAll(".modal-close");
-const ButtonBack = document.querySelectorAll(".modal-Back");
-modalTriggerButtons.forEach(elem => {
-  elem.addEventListener("click", event => toggleModal(event.currentTarget.getAttribute("data-modal-target"), event.target));
-});
-modalCloseButtons.forEach(elem => {
-  elem.addEventListener("click", event => toggleModal(event.currentTarget.closest(".modal").id));
-});
-
-ButtonBack.forEach(elem => {
-  elem.addEventListener("click", event => toggleModal(event.currentTarget.closest(".modal").id));
-});
-modals.forEach(elem => {
-  elem.addEventListener("click", event => {
-    if (event.currentTarget === event.target) toggleModal(event.currentTarget.id);
-  });
-});
 
 
 function toggleModal(modalId, button) {
@@ -201,9 +213,48 @@ function toggleModal(modalId, button) {
 }
 
 
-document.getElementById("AddEmpleoForm").addEventListener("submit", function (event) {
+document.getElementById("AddEmpleoForm").addEventListener("submit", async function (event) {
   event.preventDefault()
   app.ui.cleanDOM()
+
+  let puesto = {
+    nombre: document.getElementById("NombreEmpleoAdd").value,
+    Rango: document.getElementById("RangoEmpleoAdd").value,
+    Requisitos: document.getElementById("RequisitosEmpleoAdd").value,
+    Atributos: document.getElementById("AtributosEmpleoAdd").value,
+    Tipo: document.getElementById("TipoEmpleoAdd").selectedIndex,
+    Descripcion: " ",
+    Aplicantes: [],
+    Empresa: localStorage.getItem('idempresa')
+  }
+
+  try {
+    const PuestoCreado = await fetch("http://localhost:5000/puesto", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(puesto),
+    });
+
+    if (PuestoCreado.ok) {
+      // La solicitud POST se completó con éxito (código de respuesta 200-299)
+      const puesto = await PuestoCreado.json();
+
+
+      RenderApplications(loadpuestos())
+
+      alert("Puesto creado exitosamente");
+    } else {
+      // La solicitud POST no se completó correctamente (código de respuesta fuera de rango 200-299)
+      console.error("Error al crear el puesto");
+      alert("Error al crear el puesto");
+    }
+  } catch (error) {
+    console.error(error);
+    alert("Error al crear el puesto");
+  }
+
   toggleModal("EmpleoModal")
 });
 
@@ -257,4 +308,5 @@ function OrderErrors(ElementHtml) {
 
   listErrors = [];
 };
+
 

@@ -35,7 +35,7 @@
       <section class="fondo-registro">
         <div class="contenedor-titulo">
           <h1 class="titulo">Registro Empresa</h1>
-          <form>
+          <form id="RegistroEmpresa">
             <div class="formulario letra-peq  ">
               <label for="foto">Logo de la Empresa</label>
               <input required type="file" name="foto" id="foto" />
@@ -47,6 +47,15 @@
                 type="text"
                 id="nombre_empresa"
                 name="nombre_empresa"
+                required />
+            </div><br />
+
+            <div>
+              <label for="nombre_admin">Nombre del administrador:</label>
+              <input
+                type="text"
+                id="nombre_admin"
+                name="nombre_admin"
                 required />
             </div><br />
 
@@ -79,8 +88,8 @@
             </div><br />
 
             <div class="separador" style="padding-top: 25px;">
-              <button class="boton1" type="submit">Cancelar</button>
-              <button class="boton1" type="onclick">Crear Cuenta</button>
+              <button class="boton1">Cancelar</button>
+              <button class="boton1" type="submit">Crear Cuenta</button>
             </div>
           </form>
         </div>

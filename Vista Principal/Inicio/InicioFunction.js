@@ -1,3 +1,7 @@
+window.onload = function () {
+    localStorage.clear();
+};
+
 let ListPuestos = [
     {
         Fecha: "7/7/2023",

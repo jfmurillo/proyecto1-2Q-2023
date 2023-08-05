@@ -109,8 +109,10 @@
                                 </div>
                                 <div class="FooterModal">
                                     <div class="Botonera">
-                                        <button class="modal-Back ButtonDesign">Regresar</button>
-                                        <button class="modal-Back ButtonDesign">Eliminar</button>
+                                        <button class="modal-Back ButtonDesign"
+                                            type="reset">Regresar</button>
+                                        <button class="modal-Back ButtonDesign"
+                                            type="reset">Eliminar</button>
                                         <button class="ButtonDesign"
                                             type="submit"
                                             id="UpdatePuesto">Modificar puesto</button>
@@ -140,9 +142,11 @@
                                     </thead>
                                 </table>
                                 <h4>Invitar usuario</h4>
-                                <button class="AddButton"
-                                    data-modal-target="AddAplicanteModal"><i
-                                        class="fa-solid fa-plus"></i></button>
+                                <div id="AplicationButton">
+                                    <button class="AddButton"
+                                        data-modal-target="AddAplicanteModal"><i
+                                            class="fa-solid fa-plus"></i></button>
+                                </div>
                                 <div class="modal" id="AddAplicanteModal">
                                     <div class="modal-content">
                                         <div class="TitleModal">
@@ -171,7 +175,8 @@
                                             <div class="FooterModal">
                                                 <div class="Botonera">
                                                     <button
-                                                        class="modal-Back ButtonDesign">Regresar</button>
+                                                        class="modal-Back ButtonDesign"
+                                                        type="reset">Regresar</button>
                                                     <button class="ButtonDesign"
                                                         type="submit"
                                                         id="SendInviteAplic">Enviar</button>
@@ -189,9 +194,11 @@
             </section>
             <section class="AddAplication">
                 <h2>Agregar empleo</h2>
-                <button id="AddEmployed" class="AddButton"
-                    data-modal-target="EmpleoModal"><i
-                        class="fa-solid fa-plus"></i></button>
+                <div id="AddEmployed">
+                    <button class="AddButton" data-modal-target="EmpleoModal"><i
+                            class="fa-solid fa-plus"></i></button>
+                </div>
+
                 <div class="modal" id="EmpleoModal">
                     <div class="modal-content">
                         <div class="TitleModal">
@@ -240,7 +247,7 @@
                                     <option value="2">Publico</option>
                                 </select>
                             </div>
-                            <div class="FooterModal">
+                            <div class="FooterModal" id="BotonAddmodal">
                                 <div class="Botonera">
                                     <button class="modal-Back ButtonDesign">Regresar</button>
                                     <button class="ButtonDesign" type="submit"
