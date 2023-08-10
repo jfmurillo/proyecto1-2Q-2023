@@ -187,7 +187,7 @@ function toggleModal(modalId, button) {
     }
 
     if (modalId == "AddAplicanteModal") {
-      document.getElementById("InviteAplicMensaje").value = ""
+      // document.getElementById("InviteAplicMensaje").value = ""
       document.getElementById("InviteAplicCorreo").value = ""
     }
     document.body.style.overflow = "hidden";
