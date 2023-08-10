@@ -31,8 +31,8 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
-const username = 'salvarados';
-const password = 'sebastian2023';
+const username = 'jmurillocr3';
+const password = 'Murillo2023';
 
 
 const connectionURI = `mongodb+srv://${username}:${password}@cluster0.h03de4d.mongodb.net/CodeWarrior?retryWrites=true&w=majority`;
@@ -352,6 +352,97 @@ app.post("/LogAuth", async function (req, res) {
     }
 });
 
+const nodemailer = require("nodemailer");
+const correoOrigen = "jmurillocr@ucenfotec.ac.cr";
+
+app.post('/invitarUsuario', async (req, res) => {
+    const { email, rol } = req.body;
+    const empresa_id = '64cf31f3cd2666263257c47a';
+
+    try {
+        console.log("Enviando correo a: ", email)
+        console.log(email, rol);
+      //crear usuario
+      const usuario = await Users.create({
+        email,
+        rol,
+        empresa_id,
+      });
+    } catch (error) {
+        console.error(error);
+    }
+});
+
+app.post("/userInvite", async function (req, res) {
+
+  console.log("Atendiendo Post /users con: ", req.body)
+
+  if (!req.body || req.body == {}) {
+      console.log("No hay body en la peticion")
+      res.status(400).send("No hay body en la peticion")
+  }
+
+  console.log("Creando al usuario: ", req.body)
+
+  const user = new Users({
+      nombre: req.body.nombre,
+      email: req.body.email,
+      role: req.body.rol,
+      password: req.body.password,
+      Empresa: req.body.Empresa
+  })
+
+  try {
+      console.log("Guardando al usuario: ", req.body)
+      const usuarioGuardado = await user.save()
+      console.log("Usuario guardado: ", usuarioGuardado)
+      res.status(201).send(usuarioGuardado)
+  }
+  catch (error) {
+      console.log("error creando al usuario: ", error)
+      res.status(500).send("Error creando al usuario: ", error)
+  }
+});
+
+
+
+
+
+const smtpOptions = {
+    host: "smtp.gmail.com",
+    port: 465,
+    secure: true,
+    auth: {
+      user: correoOrigen,
+      pass: "ihjplcxbxuabhelz",
+    },
+  };
+  
+  async function sendEmail(datosCorreo) {
+    console.log("Enviando correo", datosCorreo);
+    const transporter = nodemailer.createTransport({ ...smtpOptions });
+    const { correo, password } = datosCorreo;
+  
+    try {
+      await transporter.sendMail({
+        from: correoOrigen,
+        subject: "CodeWarriors: Welcome! 🚀 - Invite received ",
+        to: correo,
+        html: `
+          <h1>Bienvenido a CodeWarrios</h1>
+          <p>Nos complace informarte que has sido seleccionado/a para participar en la siguiente etapa del proceso de selección. 
+          Estamos impresionados/as por tu perfil y creemos que podrías hacer una contribución valiosa a nuestro equipo.</p>
+          <p> </p>
+          <p>Estimado usuario, su información de inicio de sesión es:</p>
+          <p>ID Empresa: <strong>${empresa_id}}</strong></p>
+        `,
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  }
+  
+  module.exports = sendEmail;
 
 const port = 5000;
 app.listen(port, () => {

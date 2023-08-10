@@ -4,6 +4,7 @@ let datos = [
 ];
 let idUserSelect;
 window.onload = async function () {
+  document.getElementById("SendEmployed").addEventListener("submit", invitarUsuario);
   if (!localStorage.getItem('iduser')) {
     window.location.href = '../../Login/login.html';
   }
@@ -93,11 +94,6 @@ function renderTeam() {
 }
 
 
-
-
-
-
-
 function toggleModal(modalId, button) {
 
   if (modalId == "modalModifi") {
@@ -128,7 +124,6 @@ function toggleModal(modalId, button) {
     app.ui.cleanDOM();
     if (modalId == "InviteModal") {
       document.getElementById("EmailInvitacion").value = "";
-      document.getElementById("MensajeInvitacion").value = "";
       document.getElementById("RolInvitacion").selectedIndex = 0;
 
     }
@@ -213,9 +208,24 @@ function OrderErrors(ElementHtml) {
   listErrors = [];
 };
 
+async function invitarUsuario () {
+  try{
+    const emailInv = document.getElementById('EmailInvitacion').value
+    const rolInv = document.getElementById('RolInvitacion').value
 
+    const valoresHtml = await fetch('http://localhost:5000/invitarUsuario', {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        email: emailInv,
+        rol: rolInv,
+        }),
+    });
+    const valores = await valoresHtml.json();
 
-
-
-
-
+  } catch (error) {
+    console.error(error);
+  };
+ };
