@@ -1,6 +1,6 @@
 
 let ListPuestos = []
-
+let idEmpleoSelect;
 window.onload = async function () {
   if (!localStorage.getItem('iduser')) {
     window.location.href = '../../Login/login.html';
@@ -8,6 +8,8 @@ window.onload = async function () {
   loadpuestos()
     .then(list => RenderApplications(list))
 
+  document.getElementById("LogoEmpresa").setAttribute("src", "../../NodeServer/" + localStorage.getItem("CompanyLogo"))
+  document.getElementById("AvatarUser").setAttribute("src", "../../NodeServer/" + localStorage.getItem("Avatar"))
 };
 
 var app = app || {};
@@ -22,6 +24,7 @@ async function loadpuestos() {
   console.log(Puestos)
   Puestos.forEach(function (puesto) {
     let puestoOrder = {
+      id: puesto._id,
       Titulo: puesto.nombrePuesto,
       Rango: puesto.RangoSalarialPuesto,
       Requisitos: puesto.RequisitosPuesto,
@@ -45,6 +48,7 @@ async function loadpuestos() {
 
   return list
 }
+
 function RenderApplications(ListApplications) {
   ListPuestos = ListApplications
   let mainbox = document.getElementById("Aplicaciones")
@@ -137,6 +141,8 @@ function toggleModal(modalId, button) {
       document.getElementById("RequisitosEmpleo").value = empleo.Requisitos
       document.getElementById("AtributosEmpleo").value = empleo.Atributos
       document.getElementById("TipoEmpleo").selectedIndex = empleo.Tipo
+
+      idEmpleoSelect = empleo.id
     }
 
   }
@@ -238,11 +244,9 @@ document.getElementById("AddEmpleoForm").addEventListener("submit", async functi
     });
 
     if (PuestoCreado.ok) {
-      // La solicitud POST se completó con éxito (código de respuesta 200-299)
-      const puesto = await PuestoCreado.json();
 
-
-      RenderApplications(loadpuestos())
+      loadpuestos()
+        .then(list => RenderApplications(list))
 
       alert("Puesto creado exitosamente");
     } else {
@@ -264,15 +268,15 @@ document.getElementById("AddEmpleoForm").addEventListener('invalid', function (e
   OrderErrors(invalidElement)
 }, true);
 
+let formapli = document.getElementById("InvitarAplicanteForm");
 
-
-document.getElementById("InvitarAplicanteForm").addEventListener("submit", function (event) {
+formapli.addEventListener("submit", function (event) {
   event.preventDefault()
   app.ui.cleanDOM()
   toggleModal("AddAplicanteModal")
 });
 
-document.getElementById("InvitarAplicanteForm").addEventListener('invalid', function (event) {
+formapli.addEventListener('invalid', function (event) {
   event.preventDefault();
   const invalidElement = event.target;
   OrderErrors(invalidElement)
@@ -280,9 +284,45 @@ document.getElementById("InvitarAplicanteForm").addEventListener('invalid', func
 
 
 
-document.getElementById("ModifyEmpleoForm").addEventListener("submit", function (event) {
+document.getElementById("ModifyEmpleoForm").addEventListener("submit", async function (event) {
   event.preventDefault()
   app.ui.cleanDOM()
+
+
+  let formModify = document.getElementById("ModifyEmpleoForm")
+
+  let puesto = {
+    id: idEmpleoSelect,
+    nombre: formModify.NombreEmpleo.value,
+    Rango: formModify.RangoEmpleo.value,
+    Requisitos: formModify.RequisitosEmpleo.value,
+    Atributos: formModify.AtributosEmpleo.value,
+    Tipo: formModify.TipoEmpleo.value,
+    Descripcion: formModify.DescripEmpleo.value,
+    Aplicantes: {}
+  }
+
+
+  try {
+    const UpdatePuesto = await fetch("http://localhost:5000/puesto/update", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(puesto),
+    });
+
+    if (UpdatePuesto.ok) {
+      alert("Puesto actualizado");
+    } else {
+      console.error("Error al actualizar un puesto");
+      alert("Error al actualizar un puesto");
+    }
+  } catch (error) {
+    console.error(error);
+    alert("Error al actualizar un puesto");
+  }
+
   toggleModal("ModifyEmpleoModal")
 });
 

@@ -31,11 +31,13 @@ document.getElementById('login-button').addEventListener('click', async function
         const Logeo = await LogAuth.json();
         localStorage.setItem('iduser', Logeo._id);
         localStorage.setItem('idempresa', Logeo.Empresa);
+        localStorage.setItem('Avatar', Logeo.avatar);
         if (Logeo.Empresa) {
           const respuestaEmpresa = await fetch("http://localhost:5000/empresas/" + Logeo.Empresa);
           if (respuestaEmpresa.ok) {
             const empresa = await respuestaEmpresa.json();
             localStorage.setItem('CompanyName', empresa.nombreEmpresa);
+            localStorage.setItem('CompanyLogo', empresa.ImgEmpresa);
           }
           else {
             throw new Error("Error en la empresa");

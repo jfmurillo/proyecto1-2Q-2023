@@ -1,66 +1,101 @@
 var app = app || {};
-let listErrors = []
+
 let datos = [
-  {
-    Rol: "Manager",
-    CodRol: 1,
-    Usuario: "Sebastian",
-    Correo: "sebas.alba1236@gmail.com",
-    id: 1
-  },
-  {
-    Rol: "Reclutador",
-    CodRol: 0,
-    Usuario: "Eliot",
-    Correo: "eliot.rojas221@gmail.com",
-    id: 2
-  }
 ];
+let idUserSelect;
+window.onload = async function () {
+  if (!localStorage.getItem('iduser')) {
+    window.location.href = '../../Login/login.html';
+  }
 
-let tabla = document.getElementById("TeamTable");
+  const EquipoRequest = await fetch("http://localhost:5000/users/empresa/" + localStorage.getItem('idempresa'));
+  const Equipo = await EquipoRequest.json();
+  console.log(Equipo)
 
-for (let i = 0; i < datos.length; i++) {
-  let fila = document.createElement("tr");
+  let cont = 1
+  Equipo.forEach(function (colaborador) {
+    let colaboradorOrder = {
+      Rol: colaborador.role,
+      CodRol: 1,
+      Usuario: colaborador.nombre,
+      Correo: colaborador.email,
+      id: colaborador._id
+    };
 
-  let celdaRol = document.createElement("td");
-  celdaRol.textContent = datos[i].Rol;
-  fila.appendChild(celdaRol);
+    if (colaborador.role == "admin") {
+      colaboradorOrder.CodRol = 2
+    }
+    else if (colaborador.role == "reclutador") {
+      colaboradorOrder.CodRol = 0
+    }
+    else if (colaborador.role == "manager") {
+      colaboradorOrder.CodRol = 1
+    }
 
-  let celdaUsuario = document.createElement("td");
-  celdaUsuario.textContent = datos[i].Usuario;
-  fila.appendChild(celdaUsuario);
+    datos.push(colaboradorOrder)
+    cont++
 
-  let celdaAction = document.createElement("td");
-  celdaAction.innerHTML = '<button class="EditButton" data-id="' + datos[i].id + '" data-modal-target="modalModifi"></button>'
-  fila.appendChild(celdaAction)
+  });
+  renderTeam()
+  document.getElementById("LogoEmpresa").setAttribute("src", "../../NodeServer/" + localStorage.getItem("CompanyLogo"))
+  document.getElementById("AvatarUser").setAttribute("src", "../../NodeServer/" + localStorage.getItem("Avatar"))
+};
 
-  tabla.appendChild(fila);
+let listErrors = []
+
+function renderTeam() {
+
+  let tabla = document.getElementById("TeamTable");
+
+  for (let i = 0; i < datos.length; i++) {
+    let fila = document.createElement("tr");
+
+    let celdaRol = document.createElement("td");
+    celdaRol.textContent = datos[i].Rol;
+    fila.appendChild(celdaRol);
+
+    let celdaUsuario = document.createElement("td");
+    celdaUsuario.textContent = datos[i].Usuario;
+    fila.appendChild(celdaUsuario);
+
+    let celdaAction = document.createElement("td");
+    if (!(celdaRol.textContent == "admin")) {
+      celdaAction.innerHTML = '<button class="EditButton" data-id="' + datos[i].id + '" data-modal-target="modalModifi"></button>'
+    }
+    fila.appendChild(celdaAction)
+
+    tabla.appendChild(fila);
+
+
+  }
+
+
+
+  const modalTriggerButtons = document.querySelectorAll("[data-modal-target]");
+  const modals = document.querySelectorAll(".modal");
+  const modalCloseButtons = document.querySelectorAll(".modal-close");
+  const ButtonBack = document.querySelectorAll(".modal-Back");
+  modalTriggerButtons.forEach(elem => {
+    elem.addEventListener("click", event => toggleModal(event.currentTarget.getAttribute("data-modal-target"), event.target));
+  });
+  modalCloseButtons.forEach(elem => {
+    elem.addEventListener("click", event => toggleModal(event.currentTarget.closest(".modal").id));
+  });
+
+  ButtonBack.forEach(elem => {
+    elem.addEventListener("click", event => toggleModal(event.currentTarget.closest(".modal").id));
+  });
+  modals.forEach(elem => {
+    elem.addEventListener("click", event => {
+      if (event.currentTarget === event.target) toggleModal(event.currentTarget.id);
+    });
+  });
 }
 
 
 
 
 
-
-const modalTriggerButtons = document.querySelectorAll("[data-modal-target]");
-const modals = document.querySelectorAll(".modal");
-const modalCloseButtons = document.querySelectorAll(".modal-close");
-const ButtonBack = document.querySelectorAll(".modal-Back");
-modalTriggerButtons.forEach(elem => {
-  elem.addEventListener("click", event => toggleModal(event.currentTarget.getAttribute("data-modal-target"), event.target));
-});
-modalCloseButtons.forEach(elem => {
-  elem.addEventListener("click", event => toggleModal(event.currentTarget.closest(".modal").id));
-});
-
-ButtonBack.forEach(elem => {
-  elem.addEventListener("click", event => toggleModal(event.currentTarget.closest(".modal").id));
-});
-modals.forEach(elem => {
-  elem.addEventListener("click", event => {
-    if (event.currentTarget === event.target) toggleModal(event.currentTarget.id);
-  });
-});
 
 
 function toggleModal(modalId, button) {
@@ -73,6 +108,7 @@ function toggleModal(modalId, button) {
       document.getElementById("NombreEmployed").value = Member.Usuario
       document.getElementById("CorreoEmployed").value = Member.Correo
       document.getElementById("RolEmployed").selectedIndex = Member.CodRol;
+      idUserSelect = Member.id
     }
 
   }
@@ -94,6 +130,7 @@ function toggleModal(modalId, button) {
       document.getElementById("EmailInvitacion").value = "";
       document.getElementById("MensajeInvitacion").value = "";
       document.getElementById("RolInvitacion").selectedIndex = 0;
+
     }
     document.body.style.overflow = "hidden";
     modal.style.display = "flex";
@@ -114,9 +151,42 @@ document.getElementById("AddEmployedForm").addEventListener("invalid", function 
 }, true);
 
 
-document.getElementById("ModifyEmployedForm").addEventListener("submit", function (event) {
+document.getElementById("ModifyEmployedForm").addEventListener("submit", async function (event) {
   event.preventDefault()
   app.ui.cleanDOM()
+
+  let formModify = document.getElementById("ModifyEmployedForm")
+
+  let usuario = {
+    id: idUserSelect,
+    nombre: formModify.NombreEmployed.value,
+    email: formModify.CorreoEmployed.value,
+    role: formModify.RolEmployed.value == 1 ? "reclutador" : "manager"
+  }
+
+
+  try {
+    const UpdateUser = await fetch("http://localhost:5000/users/update", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(usuario),
+    });
+
+    if (UpdateUser.ok) {
+      alert("Usuario actualizado");
+    } else {
+      // La solicitud POST no se completó correctamente (código de respuesta fuera de rango 200-299)
+      console.error("Error al actualizar un puesto");
+      alert("Error al actualizar un puesto");
+    }
+  } catch (error) {
+    console.error(error);
+    alert("Error al actualizar un puesto");
+  }
+
+
   toggleModal("modalModifi")
 });
 

@@ -1,13 +1,48 @@
 var app = app || {};
-let PerfilActual =
-{
-  Titulo: "Nombre de la empresa",
-  Logo: "../assets/imagenDefault.png",
-  Informacion: "Informacion de la empresa",
-  Correo: "empresa@gmail.com",
-  Imagen: "../assets/imagenDefault.png",
-  Estado: 1
-}
+let PerfilActual;
+
+
+window.onload = async function () {
+  if (!localStorage.getItem('iduser')) {
+    window.location.href = '../../Login/login.html';
+  }
+  const RepuestaEmpresa = await fetch("http://localhost:5000/empresas/" + localStorage.getItem('idempresa'));
+  const Empresa = await RepuestaEmpresa.json();
+
+  PerfilActual = {
+    Titulo: localStorage.getItem("CompanyName"),
+    Logo: "../../NodeServer/" + localStorage.getItem("CompanyLogo"),
+    Informacion: Empresa.InfoEmpresa,
+    Correo: Empresa.email,
+    Imagen: "../../NodeServer/" + localStorage.getItem("CompanyLogo"),
+    Estado: 0
+  }
+
+  document.getElementById("LogoEmpresa").setAttribute("src", "../../NodeServer/" + localStorage.getItem("CompanyLogo"))
+  document.getElementById("AvatarUser").setAttribute("src", "../../NodeServer/" + localStorage.getItem("Avatar"))
+  RenderPerfil(PerfilActual)
+
+  const modalTriggerButtons = document.querySelectorAll("[data-modal-target]");
+  const modals = document.querySelectorAll(".modal");
+  const modalCloseButtons = document.querySelectorAll(".modal-close");
+  const ButtonBack = document.querySelectorAll(".modal-Back");
+  modalTriggerButtons.forEach(elem => {
+    elem.addEventListener("click", event => toggleModal(event.currentTarget.getAttribute("data-modal-target"), event.target));
+  });
+  modalCloseButtons.forEach(elem => {
+    elem.addEventListener("click", event => toggleModal(event.currentTarget.closest(".modal").id));
+  });
+
+  ButtonBack.forEach(elem => {
+    elem.addEventListener("click", event => toggleModal(event.currentTarget.closest(".modal").id));
+  });
+  modals.forEach(elem => {
+    elem.addEventListener("click", event => {
+      if (event.currentTarget === event.target) toggleModal(event.currentTarget.id);
+    });
+  });
+};
+
 
 
 function RenderPerfil(Perfil) {
@@ -30,31 +65,14 @@ function RenderPerfil(Perfil) {
 
   mainbox.appendChild(TitlePerfil)
   mainbox.appendChild(InfoPerfil)
+
+
 }
 
-RenderPerfil(PerfilActual)
 
 
 
-const modalTriggerButtons = document.querySelectorAll("[data-modal-target]");
-const modals = document.querySelectorAll(".modal");
-const modalCloseButtons = document.querySelectorAll(".modal-close");
-const ButtonBack = document.querySelectorAll(".modal-Back");
-modalTriggerButtons.forEach(elem => {
-  elem.addEventListener("click", event => toggleModal(event.currentTarget.getAttribute("data-modal-target"), event.target));
-});
-modalCloseButtons.forEach(elem => {
-  elem.addEventListener("click", event => toggleModal(event.currentTarget.closest(".modal").id));
-});
 
-ButtonBack.forEach(elem => {
-  elem.addEventListener("click", event => toggleModal(event.currentTarget.closest(".modal").id));
-});
-modals.forEach(elem => {
-  elem.addEventListener("click", event => {
-    if (event.currentTarget === event.target) toggleModal(event.currentTarget.id);
-  });
-});
 
 
 function toggleModal(modalId, button) {

@@ -40,7 +40,10 @@
               <label for="foto">Logo de la Empresa</label>
               <input required type="file" name="foto" id="foto" />
             </div><br />
-
+            <div class="formulario letra-peq  ">
+              <label for="fotoAdmin">Imagen administrador</label>
+              <input required type="file" name="fotoAdmin" id="fotoAdmin" />
+            </div><br />
             <div>
               <label for="nombre_empresa">Nombre de la Empresa:</label>
               <input
@@ -69,63 +72,74 @@
             </div><br />
 
             <div>
-              <label for="info_empresa">Información de la Empresa:</label>
-              <textarea id="info_empresa" name="info_empresa" required></textarea>
-            </div><br />
+              <div>
+                <label for="emailEmpre">Email empresa:</label>
+                <input
+                  type="emailEmpre"
+                  id="emailEmpre"
+                  name="emailEmpre"
+                  required />
+              </div><br />
 
-            <div>
-              <label for="contrasena">Contraseña:</label>
-              <input type="password" id="contrasena" name="contrasena" required />
-            </div><br />
+              <div>
+                <label for="info_empresa">Información de la Empresa:</label>
+                <textarea id="info_empresa" name="info_empresa" required></textarea>
+              </div><br />
 
-            <div>
-              <label for="confirmar_contrasena">Confirmar Contraseña:</label>
-              <input
-                type="password"
-                id="confirmar_contrasena"
-                name="confirmar_contrasena"
-                required />
-            </div><br />
+              <div>
+                <label for="contrasena">Contraseña:</label>
+                <input type="password" id="contrasena" name="contrasena"
+                  required />
+              </div><br />
 
-            <div class="separador" style="padding-top: 25px;">
-              <button class="boton1">Cancelar</button>
-              <button class="boton1" type="submit">Crear Cuenta</button>
+              <div>
+                <label for="confirmar_contrasena">Confirmar Contraseña:</label>
+                <input
+                  type="password"
+                  id="confirmar_contrasena"
+                  name="confirmar_contrasena"
+                  required />
+              </div><br />
+
+              <div class="separador" style="padding-top: 25px;">
+                <button class="boton1">Cancelar</button>
+                <button class="boton1" type="submit">Crear Cuenta</button>
+              </div>
+            </form>
+          </div>
+        </section>
+
+        <section>
+          <div class="contenedor-titulo">
+            <h5 class="center-div">¿Ya tienes una cuenta?</h5>
+            <div class="separador">
+              <button class="boton2" type="submit">Iniciar sesión</button>
             </div>
-          </form>
-        </div>
-      </section>
-
-      <section>
-        <div class="contenedor-titulo">
-          <h5 class="center-div">¿Ya tienes una cuenta?</h5>
-          <div class="separador">
-            <button class="boton2" type="submit">Iniciar sesión</button>
+          </div>
+        </section>
+      </main>
+      <footer>
+        <div class="footer-container">
+          <div class="contact-section">
+            <span>Contáctenos</span>
+            <ul class="info-footer">
+              <li>+506 8355-2567</li>
+              <li>CareerWarriors@gmail.com</li>
+              <li>Sabana Sur, calle 58</li>
+            </ul>
+          </div>
+          <div class="social-media-section">
+            <span>Siguenos en nuestras redes sociales</span>
+            <div class="social-icons">
+              <i class="fa-brands fa-facebook-f"></i>
+              <i class="fa-brands fa-linkedin-in"></i>
+              <i class="fa-brands fa-instagram"></i>
+              <i class="fa-brands fa-whatsapp"></i>
+              <i class="fa-brands fa-twitter"></i>
+            </div>
           </div>
         </div>
-      </section>
-    </main>
-    <footer>
-      <div class="footer-container">
-        <div class="contact-section">
-          <span>Contáctenos</span>
-          <ul class="info-footer">
-            <li>+506 8355-2567</li>
-            <li>CareerWarriors@gmail.com</li>
-            <li>Sabana Sur, calle 58</li>
-          </ul>
-        </div>
-        <div class="social-media-section">
-          <span>Siguenos en nuestras redes sociales</span>
-          <div class="social-icons">
-            <i class="fa-brands fa-facebook-f"></i>
-            <i class="fa-brands fa-linkedin-in"></i>
-            <i class="fa-brands fa-instagram"></i>
-            <i class="fa-brands fa-whatsapp"></i>
-            <i class="fa-brands fa-twitter"></i>
-          </div>
-        </div>
-      </div>
-    </footer>
-    <script src="registro-empresa-validacion.js"></script>
-  </body>
-</html>
+      </footer>
+      <script src="registro-empresa-validacion.js"></script>
+    </body>
+  </html>

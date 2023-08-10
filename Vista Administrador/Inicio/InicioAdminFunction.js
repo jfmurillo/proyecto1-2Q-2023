@@ -35,6 +35,9 @@ window.onload = async function () {
     RenderApplications(ListPuestos)
 
     document.getElementById("CompanyName").innerHTML = localStorage.getItem("CompanyName")
+    document.getElementById("LogoEmpresa").setAttribute("src", "../../NodeServer/" + localStorage.getItem("CompanyLogo"))
+    document.getElementById("PerfilEmpresa").setAttribute("src", "../../NodeServer/" + localStorage.getItem("CompanyLogo"))
+    document.getElementById("AvatarUser").setAttribute("src", "../../NodeServer/" + localStorage.getItem("Avatar"))
 };
 
 
