@@ -349,6 +349,21 @@ app.post("/invitarUsuario", async (req, res) => {
   }
 });
 
+app.post("/invitarPuesto", async (req, res) => {
+  const { email } = req.body;
+  const empresa_id = "64cf31f3cd2666263257c47a";
+
+  try {
+    console.log("Enviando correo de invitacion de puesto a: ", email);
+    console.log(email);
+    await emailPuestoTrabajo({ correo: email, empresa_id: empresa_id });
+    res.status(200).send("Correo enviado");
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Error al enviar el correo");
+  }
+});
+
 const smtpOptions = {
   host: "smtp.gmail.com",
   port: 465,
@@ -388,7 +403,35 @@ async function sendEmail(datosCorreo) {
   }
 }
 
+async function emailPuestoTrabajo(datosCorreo) {
+  console.log("Enviando invitacion de puesto de trabajo", datosCorreo);
+  const transporter = nodemailer.createTransport({ ...smtpOptions });
+  const { correo } = datosCorreo;
+
+  try {
+    await transporter.emailPuestoTrabajo({
+      from: correoOrigen,
+      subject: "CodeWarriors: Welcome! 🚀 ",
+      to: correo,
+      html: `
+          <h1>👨‍💻 Bienvenido a CodeWarrios👨‍💻 </h1>
+          <p>Nos complace informarte que has sido seleccionado/a para participar en la siguiente etapa del proceso de selección. 
+          Estamos impresionados/as por tu perfil y creemos que podrías hacer una contribución valiosa a nuestro equipo.</p>
+          <p>Antes de la entrevista, necesitamos recopilar más información sobre ti a través de un formulario en línea.  </p>
+          <p>Por favor, complete el formulario en el siguiente enlace:</p>
+          <p></p>
+          <p><strong>
+          // link al formulario de registro o de puesto de trabajo
+          </strong></p>
+        `,
+    });
+  } catch (error) {
+    console.error(error);
+  }
+}
+
 module.exports = sendEmail;
+module.exports = emailPuestoTrabajo;
 
 const port = 5000;
 app.listen(port, () => {
