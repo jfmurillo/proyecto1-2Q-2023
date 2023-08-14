@@ -25,13 +25,18 @@
       <section class="fondo-registro">
         <div class="contenedor-titulo">
           <h1 class="titulo">Registro</h1>
-          <form>
-            <div class="formulario letra-pequena  ">
-              <label for="foto">Foto </label>
-              <input required type="file" name="foto" id="foto" />
-  
+          <form id="RegistroUsuarioFinal">
+            
+            <div id="user-photo-container" class="photo-container">
+              <img id="user-photo" src="../Vista Principal/assets/avatar.png" alt="Foto de usuario">
+            </div>
+            <br>
+            <button required type="button" id="foto"> Subir foto </button><br><br>
+            
+
+            <div>
               <label for="cv">Curriculum/CV</label>
-              <input required type="file" name="cv" id="cv" />
+              <input required type="file" name="cv" id="cv" /><br><br>
             </div>
             
               <label for="nombre">Nombre:</label>
@@ -70,16 +75,16 @@
               
               <div class="border-div">
               <label class="labels-general" for="experiencia">Estudios</label><br>
-              <label for="nombre_empresa">Institución:</label>
+              <label for="nombre_institucion">Institución:</label>
               <input type="text" id="institucion" name="nombre_institucion" required><br>
-              <label for="nombre-carrera">Nombre de carrera:</label>
-              <input id="nombre-carrera" name="nombre-carrera" required></input><br><br>
+              <label for="nombre_carrera">Nombre de carrera:</label>
+              <input id="nombre_carrera" name="nombre_carrera" required></input><br><br>
               <i alt="anadir-icono" class="fa-solid fa-plus anadir-iconos"></i>
             </div>
 
             <div class="separador" style="padding-top: 2px;">
-              <button class="boton1" type="submit">Cancelar</button>
-              <button class="boton1" type="onclick">Crear Cuenta</button>
+              <button class="boton1">Cancelar</button>
+              <button class="boton1" type="submit">Crear Cuenta</button>
             </div><br><br>
 
           </form>
@@ -116,5 +121,8 @@
           </div>
       </div>
   </footer>
+  <script src="https://widget.cloudinary.com/v2.0/global/all.js" type="text/javascript"></script>
+  <script src="servicio-imagen.js"></script>
+  <script src="registro-usuario-final-validacion.js"></script>
   </body>
 </html>

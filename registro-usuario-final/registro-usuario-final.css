@@ -253,3 +253,20 @@ label {
   font-size: 20px;
   color: #f5f5f5; 
 }
+
+.photo-container {
+  width: 100px;
+  height: 100px;
+  border: 1px solid #ccc;
+  border-radius: 50%;
+  overflow: hidden;
+  background: url('../Vista Principal/assets/avatar.png') center/cover no-repeat;
+}
+
+#user-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;      /* La imagen cubrirá todo el espacio del contenedor */
+  object-position: center; /* La imagen se centrará en el contenedor */
+  display: none;           /* La imagen estará oculta inicialmente */
+}
