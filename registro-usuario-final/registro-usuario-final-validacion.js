@@ -81,11 +81,7 @@ document.getElementById("RegistroUsuarioFinal").addEventListener("submit", async
     const email = formulario.email.value;
     const password = formulario.contrasena.value;
     const genero = formulario.genero.value;
-    const nombre_empresa = formulario.nombre_empresa.value;
-    const descripcion_puesto = formulario.descripcion_puesto.value;
-    const nombre_institucion = formulario.nombre_institucion.value;
-    const nombre_carrera = formulario.nombre_carrera.value;
-
+    
     let usuario = {
         nombre: nombre,
         email: email,
@@ -93,15 +89,27 @@ document.getElementById("RegistroUsuarioFinal").addEventListener("submit", async
         password: password,
     };
 
-    let experiencia = {
-        nombre_empresa: nombre_empresa,
-        descripcion_puesto: descripcion_puesto,
-    };
+    // Recopilar todas las experiencias laborales
+    const experiencias = [];
+    document.querySelectorAll('.experiencia-container').forEach(container => {
+        const nombreEmpresa = container.querySelector('[name="nombre_empresa"]').value;
+        const descripcionPuesto = container.querySelector('[name="descripcion_puesto"]').value;
+        experiencias.push({
+            nombre_empresa: nombreEmpresa,
+            descripcion_puesto: descripcionPuesto
+        });
+    });
 
-    let estudios = {
-        nombre_institucion: nombre_institucion,
-        nombre_carrera: nombre_carrera,
-    };
+    // Recopilar todos los estudios
+    const estudiosList = [];
+    document.querySelectorAll('.estudios-container').forEach(container => {
+        const nombreInstitucion = container.querySelector('[name="nombre_institucion"]').value;
+        const nombreCarrera = container.querySelector('[name="nombre_carrera"]').value;
+        estudiosList.push({
+            nombre_institucion: nombreInstitucion,
+            nombre_carrera: nombreCarrera
+        });
+    });
 
     let usuarioFinal = {
         foto: foto,
@@ -110,8 +118,8 @@ document.getElementById("RegistroUsuarioFinal").addEventListener("submit", async
         email: email,
         contrasena: password,
         genero: genero,
-        experiencia: [experiencia],
-        estudios: [estudios]
+        experiencia: experiencias,
+        estudios: estudiosList
     };
 
     try {
