@@ -148,3 +148,75 @@ document.getElementById("RegistroUsuarioFinal").addEventListener("submit", async
         alert("Error al crear el usuario final");
       }
 });
+
+
+document.querySelectorAll('.fa-plus.anadir-iconos').forEach(icon => {
+    icon.addEventListener('click', function() {
+        const parentDiv = icon.parentElement;
+
+        if (parentDiv.classList.contains('border-div')) {
+            let newField;
+            let containerClass;
+            if (parentDiv.querySelector('[name="nombre_empresa"]')) {
+                // Para la sección de Experiencia Laboral
+                containerClass = 'experiencia-container';
+                newField = document.createElement('div');
+                newField.classList.add(containerClass);
+                newField.innerHTML = `
+                    <label for="nombre_empresa">Nombre de la Empresa:</label>
+                    <input type="text" name="nombre_empresa" required><br>
+                    <label for="descripcion_puesto">Descripción del Puesto:</label>
+                    <textarea name="descripcion_puesto" rows="4" cols="50" required></textarea><br><br>
+                `;
+            } else {
+                // Para la sección de Estudios
+                containerClass = 'estudios-container';
+                newField = document.createElement('div');
+                newField.classList.add(containerClass);
+                newField.innerHTML = `
+                    <label for="nombre_institucion">Institución:</label>
+                    <input type="text" name="nombre_institucion" required><br>
+                    <label for="nombre_carrera">Nombre de carrera:</label>
+                    <input name="nombre_carrera" required></input><br><br>
+                `;
+            }
+
+            parentDiv.insertBefore(newField, icon);
+        }
+    });
+});
+
+document.querySelectorAll('.fa-minus.quitar-iconos').forEach(icon => {
+    icon.addEventListener('click', function() {
+        console.log("Icono clickeado");
+        const parentDiv = icon.closest('.border-div'); // Closest para obtener el contenedor correcto.
+
+        if (parentDiv) {
+            console.log("Parent div encontrado");
+            let containerClass;
+
+            if (parentDiv.querySelector('.experiencia-container')) {
+                containerClass = 'experiencia-container';
+            } else {
+                containerClass = 'estudios-container';
+            }
+
+            const blocks = parentDiv.querySelectorAll(`.${containerClass}`);
+            console.log(`Bloques encontrados de tipo ${containerClass}: ${blocks.length}`);
+
+            // No eliminar si solo hay un bloque.
+            if (blocks.length > 1) {
+                const lastElement = blocks[blocks.length - 1];
+                if (lastElement) {
+                    lastElement.remove();
+                    console.log("Bloque eliminado");
+                }
+            } else {
+                alert('Debes especificar los datos de al menos un bloque de ' + (containerClass === 'experiencia-container' ? 'Experiencia Laboral' : 'Estudios'));
+            }
+        } else {
+            console.log("Parent div no encontrado");
+        }
+    });
+});
+
