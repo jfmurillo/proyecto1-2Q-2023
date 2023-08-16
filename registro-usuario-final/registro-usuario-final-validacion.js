@@ -76,6 +76,7 @@ document.getElementById("RegistroUsuarioFinal").addEventListener("submit", async
     event.preventDefault();
 
     const foto = document.querySelector("#user-photo").src;
+    const cvUrl = document.querySelector("#cv_url").value; 
     const nombre = formulario.nombre.value;
     const apellido = formulario.apellido.value;
     const email = formulario.email.value;
@@ -113,6 +114,7 @@ document.getElementById("RegistroUsuarioFinal").addEventListener("submit", async
 
     let usuarioFinal = {
         foto: foto,
+        cv: cvUrl,
         nombre: nombre,
         apellido: apellido,
         email: email,

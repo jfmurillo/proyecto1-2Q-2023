@@ -234,6 +234,7 @@ app.post("/registroUserFinal", async function (req, res) {
 
     const newUser = new UsuarioFinal({
         foto: req.body.foto,
+        cv: req.body.cv,
         nombre: req.body.nombre,
         apellido: req.body.apellido,
         email: req.body.email,

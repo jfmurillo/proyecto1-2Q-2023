@@ -32,13 +32,14 @@
             </div>
             <br>
             <button required type="button" id="foto"> Subir foto </button><br><br>
-            
-
+      
             <div>
               <label for="cv">Curriculum/CV</label>
-              <input required type="file" name="cv" id="cv" /><br><br>
+              <button required type="button" id="subir_cv"> Subir CV </button>
+              <span id="nombre_cv" style="font-size: 14px;">Ningún archivo seleccionado</span><br><br>
+              <input type="hidden" id="cv_url" name="cv_url"> <!-- Input oculto para almacenar el enlace del CV -->
             </div>
-            
+          
               <label for="nombre">Nombre:</label>
               <input type="text" id="nombre" name="nombre" placeholder="John" required>
             
@@ -129,6 +130,7 @@
   </footer>
   <script src="https://widget.cloudinary.com/v2.0/global/all.js" type="text/javascript"></script>
   <script src="servicio-imagen.js"></script>
+  <script src="servicio-cv.js"></script>
   <script src="registro-usuario-final-validacion.js"></script>
   </body>
 </html>

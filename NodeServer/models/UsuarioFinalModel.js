@@ -26,9 +26,9 @@ const usuarioFinalSchema = new mongoose.Schema({
     foto:{
         type: String,
     },
-   /* cv:{
+    cv:{
         type: String,
-    },*/
+    },
     nombre:{
         type: String,
         required: true,
