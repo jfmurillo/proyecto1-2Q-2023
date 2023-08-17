@@ -1,14 +1,16 @@
 
-const express = require("express");
-const mongoose = require("mongoose");
-const Users = require("./models/UserModel");
-const Puestos = require("./models/PuestosModel");
-const Empresa = require("./models/EmpresaModel");
-const cors = require("cors");
+const express = require('express');
+const mongoose = require('mongoose');
+const Users = require('./models/UserModel')
+const Puestos = require('./models/PuestosModel')
+const Empresa = require('./models/EmpresaModel')
+const UsuarioFinal = require('./models/UsuarioFinalModel'); //Usuario Final
+const cors = require("cors")
 const reportes = require('./models/Reportes')
 
 const multer = require("multer");
 const path = require("path");
+
 
 const app = express();
 // app.use(bodyParser.json());
@@ -37,6 +39,9 @@ const upload = multer({ storage: storage });
 const username = "jmurillocr3";
 const password = "Murillo2023";
 
+
+const username = 'vmorat';
+const password = 'Mora2023';
 const connectionURI = `mongodb+srv://${username}:${password}@cluster0.h03de4d.mongodb.net/CodeWarrior?retryWrites=true&w=majority`;
 
 mongoose
@@ -484,7 +489,52 @@ app.get("/reporte/:idEmpresa", async function (req, res) {
     }
 });
 
-const port = 5500;
+
+/* USUARIO FINAL */
+app.post("/registroUserFinal", async function (req, res) {
+
+    if (!req.body || req.body == {}) {
+        res.status(400).send("No hay body en la peticion")
+    }
+
+    const newUser = new UsuarioFinal({
+        foto: req.body.foto,
+        cv: req.body.cv,
+        nombre: req.body.nombre,
+        apellido: req.body.apellido,
+        email: req.body.email,
+        contrasena: req.body.contrasena,
+        genero: req.body.genero,
+        experiencia: req.body.experiencia,
+        estudios: req.body.estudios,
+    })
+
+    try {
+        const usuarioGuardado = await newUser.save()
+        res.status(201).send(usuarioGuardado);
+    } catch (error) {
+        if (error.code === 11000) {  
+            res.status(400).send("El email ya existe.");
+        } else {
+            console.log(error);
+            res.status(500).send("Error creando el usuario final.");
+        }
+    }
+});
+
+app.get("/registroUserFinal", async function (req, res) {
+
+    try {
+        const usuarios = await UsuarioFinal.find({});
+        res.status(200).send(usuarios)
+    }
+    catch (error) {
+        res.status(500).send("Error al obtener los usuarios")
+    }
+});
+
+const port = 5000;
+
 app.listen(port, () => {
   console.log(`Servidor proxy en http://localhost:${port}`);
 });
