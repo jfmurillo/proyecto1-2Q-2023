@@ -51,7 +51,7 @@ document.getElementById('login-button').addEventListener('click', async function
         else if (Logeo.role == "manager") {
           window.location.href = '../vista-manager/inicio/inicio-manager.html';
         }
-        else if (Logeo.role == "recruiter") {
+        else if (Logeo.role == "reclutador") {
           window.location.href = '../Vista Reclutador/Inicio/InicioReclutador.html';
         }
         else if (Logeo.role == "finalUser") {

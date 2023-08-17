@@ -159,9 +159,7 @@ document.getElementById("AddEmployedForm").addEventListener(
   true
 );
 
-document
-  .getElementById("ModifyEmployedForm")
-  .addEventListener("submit", async function (event) {
+document.getElementById("ModifyEmployedForm").addEventListener("submit", async function (event) {
     event.preventDefault();
     app.ui.cleanDOM();
 
@@ -174,24 +172,34 @@ document
       role: formModify.RolEmployed.value == 1 ? "reclutador" : "manager",
     };
 
-    try {
-      const UpdateUser = await fetch("http://localhost:5000/users/update", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(usuario),
-      });
-
-      if (UpdateUser.ok) {
-        alert("Usuario actualizado");
-      } else {
-        // La solicitud POST no se completó correctamente (código de respuesta fuera de rango 200-299)
-        console.error("Error al actualizar un puesto");
-        alert("Error al actualizar un puesto");
+    if (UpdateUser.ok) {
+      alert("Usuario actualizado");
+      let reporte = {
+        Tipo: "Usuario actualizado",
+        Descripcion: "Se a actualizado al usuario " + usuario.nombre + "con el correo " + usuario.email,
+        Titulo: "Actualización de usuario",
+        empresa: localStorage.getItem("idempresa")
       }
-    } catch (error) {
-      console.error(error);
+
+      try {
+        const reporteCreado = await fetch("http://localhost:5000/reporte", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(reporte),
+        });
+        if (reporteCreado.ok) {
+          window.location.reload();
+        } else {
+          console.error("Error al crear el reporte");
+        }
+
+      } catch (error) {
+        console.error(error);
+      }
+    } else {
+      console.error("Error al actualizar un puesto");
       alert("Error al actualizar un puesto");
     }
 
