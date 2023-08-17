@@ -13,10 +13,9 @@ app.use(express.json());
 app.use(cors())
 
 
-//const username = 'salvarados';
-//const password = 'sebastian2023';
-const connectionURI = `mongodb+srv://vmorat:Mora12345.@cluster0.utug5tg.mongodb.net/Proyecto?retryWrites=true&w=majority`;
-//const connectionURI = `mongodb+srv://${username}:${password}@cluster0.h03de4d.mongodb.net/CodeWarrior?retryWrites=true&w=majority`;
+const username = 'vmorat';
+const password = 'Mora2023';
+const connectionURI = `mongodb+srv://${username}:${password}@cluster0.h03de4d.mongodb.net/CodeWarrior?retryWrites=true&w=majority`;
 
 mongoose.connect(connectionURI, {
     useNewUrlParser: true,
