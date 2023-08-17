@@ -1,6 +1,6 @@
 
 let ListPuestos = []
-
+let idEmpleoSelect;
 window.onload = async function () {
   if (!localStorage.getItem('iduser')) {
     window.location.href = '../../Login/login.html';
@@ -8,6 +8,8 @@ window.onload = async function () {
   loadpuestos()
     .then(list => RenderApplications(list))
 
+  document.getElementById("LogoEmpresa").setAttribute("src", "../../NodeServer/" + localStorage.getItem("CompanyLogo"))
+  document.getElementById("AvatarUser").setAttribute("src", "../../NodeServer/" + localStorage.getItem("Avatar"))
 };
 
 var app = app || {};
@@ -22,6 +24,7 @@ async function loadpuestos() {
   console.log(Puestos)
   Puestos.forEach(function (puesto) {
     let puestoOrder = {
+      id: puesto._id,
       Titulo: puesto.nombrePuesto,
       Rango: puesto.RangoSalarialPuesto,
       Requisitos: puesto.RequisitosPuesto,
@@ -45,6 +48,7 @@ async function loadpuestos() {
 
   return list
 }
+
 function RenderApplications(ListApplications) {
   ListPuestos = ListApplications
   let mainbox = document.getElementById("Aplicaciones")
@@ -137,6 +141,8 @@ function toggleModal(modalId, button) {
       document.getElementById("RequisitosEmpleo").value = empleo.Requisitos
       document.getElementById("AtributosEmpleo").value = empleo.Atributos
       document.getElementById("TipoEmpleo").selectedIndex = empleo.Tipo
+      document.getElementById("DescripEmpleo").innerText = empleo.Descripcion
+      idEmpleoSelect = empleo.id
     }
 
   }
@@ -154,6 +160,7 @@ function toggleModal(modalId, button) {
       document.getElementById("RangoSalarialInfo").innerText = empleo.Rango
       document.getElementById("RequesitoInfo").innerText = empleo.Requisitos
       document.getElementById("AtributosInfo").innerText = empleo.Atributos
+
       if (empleo.Tipo == 0) {
         document.getElementById("TipoInfo").innerText = "Privado"
       }
@@ -203,7 +210,7 @@ function toggleModal(modalId, button) {
     }
 
     if (modalId == "AddAplicanteModal") {
-      document.getElementById("InviteAplicMensaje").value = ""
+      // document.getElementById("InviteAplicMensaje").value = ""
       document.getElementById("InviteAplicCorreo").value = ""
     }
     document.body.style.overflow = "hidden";
@@ -238,15 +245,33 @@ document.getElementById("AddEmpleoForm").addEventListener("submit", async functi
     });
 
     if (PuestoCreado.ok) {
-      // La solicitud POST se completó con éxito (código de respuesta 200-299)
-      const puesto = await PuestoCreado.json();
-
-
-      RenderApplications(loadpuestos())
-
       alert("Puesto creado exitosamente");
+      const puesto = await PuestoCreado.json();
+      let reporte = {
+        Tipo: "Creacion puesto",
+        Descripcion: "Se a creado el puesto " + puesto.nombrePuesto,
+        Titulo: "Creacion de puesto",
+        empresa: localStorage.getItem("idempresa")
+      }
+
+      try {
+        const reporteCreado = await fetch("http://localhost:5000/reporte", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(reporte),
+        });
+        if (reporteCreado.ok) {
+          window.location.reload();
+        } else {
+          console.error("Error al crear el reporte");
+        }
+
+      } catch (error) {
+        console.error(error);
+      }
     } else {
-      // La solicitud POST no se completó correctamente (código de respuesta fuera de rango 200-299)
       console.error("Error al crear el puesto");
       alert("Error al crear el puesto");
     }
@@ -264,15 +289,15 @@ document.getElementById("AddEmpleoForm").addEventListener('invalid', function (e
   OrderErrors(invalidElement)
 }, true);
 
+let formapli = document.getElementById("InvitarAplicanteForm");
 
-
-document.getElementById("InvitarAplicanteForm").addEventListener("submit", function (event) {
+formapli.addEventListener("submit", function (event) {
   event.preventDefault()
   app.ui.cleanDOM()
   toggleModal("AddAplicanteModal")
 });
 
-document.getElementById("InvitarAplicanteForm").addEventListener('invalid', function (event) {
+formapli.addEventListener('invalid', function (event) {
   event.preventDefault();
   const invalidElement = event.target;
   OrderErrors(invalidElement)
@@ -280,9 +305,72 @@ document.getElementById("InvitarAplicanteForm").addEventListener('invalid', func
 
 
 
-document.getElementById("ModifyEmpleoForm").addEventListener("submit", function (event) {
+document.getElementById("ModifyEmpleoForm").addEventListener("submit", async function (event) {
   event.preventDefault()
   app.ui.cleanDOM()
+
+
+  let formModify = document.getElementById("ModifyEmpleoForm")
+
+  let puesto = {
+    id: idEmpleoSelect,
+    nombre: formModify.NombreEmpleo.value,
+    Rango: formModify.RangoEmpleo.value,
+    Requisitos: formModify.RequisitosEmpleo.value,
+    Atributos: formModify.AtributosEmpleo.value,
+    Tipo: formModify.TipoEmpleo.selectedIndex,
+    Descripcion: formModify.DescripEmpleo.value,
+    Aplicantes: {}
+  }
+
+
+  try {
+    const UpdatePuesto = await fetch("http://localhost:5000/puesto/update", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(puesto),
+    });
+
+    if (UpdatePuesto.ok) {
+      alert("Puesto actualizado");
+
+      let reporte = {
+        Tipo: "Actualizar puesto",
+        Descripcion: "Se a actualizado el puesto " + puesto.nombre,
+        Titulo: "Actualización de puesto",
+        empresa: localStorage.getItem("idempresa")
+      }
+
+      try {
+        const reporteCreado = await fetch("http://localhost:5000/reporte", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(reporte),
+        });
+
+
+        if (reporteCreado.ok) {
+          window.location.reload();
+        } else {
+          console.error("Error al crear el reporte");
+        }
+
+      } catch (error) {
+        console.error(error);
+      }
+    } else {
+      console.error("Error al actualizar un puesto");
+      alert("Error al actualizar un puesto");
+    }
+  } catch (error) {
+    console.error(error);
+    alert("Error al actualizar un puesto");
+  }
+
   toggleModal("ModifyEmpleoModal")
 });
 
@@ -310,3 +398,53 @@ function OrderErrors(ElementHtml) {
 };
 
 
+document.getElementById("deletePuesto").addEventListener("click", async function () {
+  event.preventDefault();
+
+  try {
+    const DeletePuesto = await fetch("http://localhost:5000/puesto/delete/" + idEmpleoSelect, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      }
+    });
+
+    if (DeletePuesto.ok) {
+      alert("Puesto Eliminado");
+      const puesto = await DeletePuesto.json();
+
+      let reporte = {
+        Tipo: "Eliminación puesto",
+        Descripcion: "Se a eliminado el puesto " + puesto.nombrePuesto,
+        Titulo: "Eliminación de puesto",
+        empresa: localStorage.getItem("idempresa")
+      }
+
+      try {
+        const reporteCreado = await fetch("http://localhost:5000/reporte", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(reporte),
+        });
+        if (reporteCreado.ok) {
+          window.location.reload();
+        } else {
+          console.error("Error al crear el reporte");
+        }
+
+      } catch (error) {
+        console.error(error);
+      }
+    } else {
+      console.error("Error al eliminar un puesto");
+      alert("Error al eliminar un puesto");
+    }
+  } catch (error) {
+    console.error(error);
+    alert("Error al eliminar un puesto");
+  }
+
+  toggleModal("ModifyEmpleoModal")
+})

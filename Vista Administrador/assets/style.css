@@ -61,7 +61,7 @@ img {
 
 .CompanyLogo img {
     height: auto;
-    width: 100px;
+    width: 70px;
     object-fit: cover;
     margin-right: 15px;
 }

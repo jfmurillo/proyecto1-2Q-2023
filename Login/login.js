@@ -31,11 +31,13 @@ document.getElementById('login-button').addEventListener('click', async function
         const Logeo = await LogAuth.json();
         localStorage.setItem('iduser', Logeo._id);
         localStorage.setItem('idempresa', Logeo.Empresa);
+        localStorage.setItem('Avatar', Logeo.avatar);
         if (Logeo.Empresa) {
           const respuestaEmpresa = await fetch("http://localhost:5000/empresas/" + Logeo.Empresa);
           if (respuestaEmpresa.ok) {
             const empresa = await respuestaEmpresa.json();
             localStorage.setItem('CompanyName', empresa.nombreEmpresa);
+            localStorage.setItem('CompanyLogo', empresa.ImgEmpresa);
           }
           else {
             throw new Error("Error en la empresa");
@@ -49,7 +51,7 @@ document.getElementById('login-button').addEventListener('click', async function
         else if (Logeo.role == "manager") {
           window.location.href = '../vista-manager/inicio/inicio-manager.html';
         }
-        else if (Logeo.role == "recruiter") {
+        else if (Logeo.role == "reclutador") {
           window.location.href = '../Vista Reclutador/Inicio/InicioReclutador.html';
         }
         else if (Logeo.role == "finalUser") {

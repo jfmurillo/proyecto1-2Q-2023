@@ -21,6 +21,9 @@ const userSchema = new mongoose.Schema({
     },
     Empresa: {
         type: String
+    },
+    avatar: {
+        type: String
     }
 }, { timestamps: true });
 
