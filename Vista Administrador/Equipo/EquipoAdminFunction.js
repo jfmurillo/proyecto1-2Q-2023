@@ -176,6 +176,30 @@ document.getElementById("ModifyEmployedForm").addEventListener("submit", async f
 
     if (UpdateUser.ok) {
       alert("Usuario actualizado");
+      let reporte = {
+        Tipo: "Usuario actualizado",
+        Descripcion: "Se a actualizado al usuario " + usuario.nombre + "con el correo " + usuario.email,
+        Titulo: "Actualización de usuario",
+        empresa: localStorage.getItem("idempresa")
+      }
+
+      try {
+        const reporteCreado = await fetch("http://localhost:5000/reporte", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(reporte),
+        });
+        if (reporteCreado.ok) {
+          window.location.reload();
+        } else {
+          console.error("Error al crear el reporte");
+        }
+
+      } catch (error) {
+        console.error(error);
+      }
     } else {
       // La solicitud POST no se completó correctamente (código de respuesta fuera de rango 200-299)
       console.error("Error al actualizar un puesto");

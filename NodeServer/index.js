@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const Users = require('./models/UserModel')
 const Puestos = require('./models/PuestosModel')
 const Empresa = require('./models/EmpresaModel')
+const reportes = require('./models/Reportes')
 const cors = require("cors")
 const multer = require("multer");
 const path = require("path");
@@ -264,6 +265,17 @@ app.get("/puesto/:id", async function (req, res) {
 });
 
 
+app.post("/puesto/delete/:id", async function (req, res) {
+    const id = req.params.id;
+    try {
+        const puesto = await Puestos.findOneAndDelete({ _id: id });
+        res.status(200).send(puesto)
+    }
+    catch (error) {
+        res.status(500).send("Error al eliminar el puesto " + error)
+    }
+});
+
 app.post("/empresa", async function (req, res) {
     console.log("AAAAAAAAAAAAA")
     if (!req.body || req.body == {}) {
@@ -353,7 +365,43 @@ app.post("/LogAuth", async function (req, res) {
 });
 
 
-const port = 5000;
+app.post("/reporte", async function (req, res) {
+
+
+    if (!req.body || req.body == {}) {
+        res.status(400).send("No hay body en la peticion")
+    }
+    console.log(req.body)
+
+    const reporte = new reportes({
+        Titulo: req.body.Titulo,
+        Descripcion: req.body.Descripcion,
+        Tipo: req.body.Tipo,
+        empresa: req.body.empresa,
+    })
+
+    try {
+        const reporteGuardado = await reporte.save()
+        res.status(201).send(reporteGuardado)
+    }
+    catch (error) {
+        console.log(error)
+        res.status(500).send("Error creando el reporte")
+    }
+});
+
+app.get("/reporte/:idEmpresa", async function (req, res) {
+    const id = req.params.idEmpresa;
+    try {
+        const reportedata = await reportes.find({ empresa: id }).sort({ createdAt: -1 });
+        res.status(200).send(reportedata)
+    }
+    catch (error) {
+        res.status(500).send("Error al obtener los reportes")
+    }
+});
+
+const port = 5500;
 app.listen(port, () => {
     console.log(`Servidor proxy en http://localhost:${port}`);
 });
