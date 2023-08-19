@@ -435,12 +435,12 @@ async function emailPuestoTrabajo(datosCorreo) {
           <p>Nos complace informarte que has sido seleccionado/a para participar en la siguiente etapa del proceso de selección. 
           Estamos impresionados/as por tu perfil y creemos que podrías hacer una contribución valiosa a nuestro equipo.</p>
           <p>Antes de la entrevista, necesitamos recopilar más información sobre ti a través de un formulario en línea.  </p>
-          <p>Por favor, complete el formulario en el siguiente enlace:</p>
           <p>ID de la empresa: ${
             (datosCorreo.empresa_id, datosCorreo.role === "finalUser")
           }</p>
+          <p>Por favor, complete el formulario en el siguiente enlace:</p>
           <p><strong>
-          "http://localhost:5500/proyecto1-2Q-2023/registro-manager/registro-usuario-final.html"
+          http://localhost:5500/proyecto1-2Q-2023/registro-usuario-final/registro-usuario-final.html
           </strong></p>
         `,
     });
@@ -520,6 +520,82 @@ app.post("/registroUserFinal", async function (req, res) {
 app.get("/registroUserFinal", async function (req, res) {
   try {
     const usuarios = await UsuarioFinal.find({});
+    res.status(200).send(usuarios);
+  } catch (error) {
+    res.status(500).send("Error al obtener los usuarios");
+  }
+});
+
+// REGISTRO RECLUTADOR
+app.post("/registroReclutador", async function (req, res) {
+  if (!req.body || req.body == {}) {
+    res.status(400).send("No hay body en la peticion");
+  }
+
+  const newUser = new Reclutador({
+    foto: req.body.foto,
+    nombre: req.body.nombre,
+    apellido: req.body.apellido,
+    email: req.body.email,
+    contrasena: req.body.contrasena,
+    genero: req.body.genero,
+    empresa: req.body.empresa,
+  });
+
+  try {
+    const usuarioGuardado = await newUser.save();
+    res.status(201).send(usuarioGuardado);
+  } catch (error) {
+    if (error.code === 11000) {
+      res.status(400).send("El email ya existe.");
+    } else {
+      console.log(error);
+      res.status(500).send("Error creando el usuario final.");
+    }
+  }
+});
+
+app.get("/registroReclutador", async function (req, res) {
+  try {
+    const usuarios = await Reclutador.find({});
+    res.status(200).send(usuarios);
+  } catch (error) {
+    res.status(500).send("Error al obtener los usuarios");
+  }
+});
+
+// REGISTRO MANAGER
+app.post("/registroManager", async function (req, res) {
+  if (!req.body || req.body == {}) {
+    res.status(400).send("No hay body en la peticion");
+  }
+
+  const newUser = new Manager({
+    foto: req.body.foto,
+    nombre: req.body.nombre,
+    apellido: req.body.apellido,
+    email: req.body.email,
+    contrasena: req.body.contrasena,
+    genero: req.body.genero,
+    empresa: req.body.empresa,
+  });
+
+  try {
+    const usuarioGuardado = await newUser.save();
+    res.status(201).send(usuarioGuardado);
+  } catch (error) {
+    if (error.code === 11000) {
+      res.status(400).send("El email ya existe.");
+    } else {
+      console.log(error);
+      res.status(500).send("Error creando el usuario final.");
+    }
+  }
+});
+
+app.get("/registroManager", async function (req, res) {
+  try {
+    const usuarios = await Manager.find({});
     res.status(200).send(usuarios);
   } catch (error) {
     res.status(500).send("Error al obtener los usuarios");
