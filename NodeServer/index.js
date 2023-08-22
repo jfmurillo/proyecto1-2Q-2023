@@ -3,7 +3,8 @@ const mongoose = require("mongoose");
 const Users = require("./models/UserModel");
 const Puestos = require("./models/PuestosModel");
 const Empresa = require("./models/EmpresaModel");
-const UsuarioFinal = require("./models/UsuarioFinalModel"); //Usuario Final
+const UsuarioFinal = require("./models/UsuarioFinalModel");
+const Reclutador = require("./models/ReclutadorModel");
 const cors = require("cors");
 const reportes = require("./models/Reportes");
 
@@ -364,7 +365,6 @@ app.post("/invitarUsuario/:id_empresa", async (req, res) => {
 
 app.post("/invitarPuesto", async (req, res) => {
   const { email } = req.body;
-  const id_empresa = req.params.id_empresa;
 
   try {
     console.log("Enviando correo de invitacion de puesto a: ", email);
@@ -395,7 +395,7 @@ async function sendEmail(datosCorreo) {
   console.log("Enviando invitacion de equipo", datosCorreo);
   const transporter = nodemailer.createTransport({ ...smtpOptions });
   const { correo, rol } = datosCorreo;
-
+  console.log(rol);
   try {
     await transporter.sendMail({
       from: correoOrigen,
@@ -409,7 +409,7 @@ async function sendEmail(datosCorreo) {
           <p>Por favor, complete el formulario en el siguiente enlace:</p>
           <p>ID de la empresa: ${datosCorreo.empresa_id}</p></p>
           <p><strong>${
-            rol === "reclutador"
+            rol === "1"
               ? "http://localhost:5500/proyecto1-2Q-2023/registro-reclutador/registro-reclutador.html"
               : "http://localhost:5500/proyecto1-2Q-2023/registro-manager/registro-manager.html"
           }</strong></p>
@@ -435,9 +435,7 @@ async function emailPuestoTrabajo(datosCorreo) {
           <p>Nos complace informarte que has sido seleccionado/a para participar en la siguiente etapa del proceso de selección. 
           Estamos impresionados/as por tu perfil y creemos que podrías hacer una contribución valiosa a nuestro equipo.</p>
           <p>Antes de la entrevista, necesitamos recopilar más información sobre ti a través de un formulario en línea.  </p>
-          <p>ID de la empresa: ${
-            (datosCorreo.empresa_id, datosCorreo.role === "finalUser")
-          }</p>
+          <p>ID de la empresa: ${datosCorreo.empresa_id}</p>
           <p>Por favor, complete el formulario en el siguiente enlace:</p>
           <p><strong>
           http://localhost:5500/proyecto1-2Q-2023/registro-usuario-final/registro-usuario-final.html
@@ -527,35 +525,43 @@ app.get("/registroUserFinal", async function (req, res) {
 });
 
 // REGISTRO RECLUTADOR
-app.post("/registroReclutador", async function (req, res) {
+app.post("/registro-reclutador", async function (req, res) {
   if (!req.body || req.body == {}) {
     res.status(400).send("No hay body en la peticion");
   }
 
-  const newUser = new Reclutador({
+  const newRec = new Reclutador({
     foto: req.body.foto,
     nombre: req.body.nombre,
     apellido: req.body.apellido,
     email: req.body.email,
-    contrasena: req.body.contrasena,
+    contrasena: req.body.password,
     genero: req.body.genero,
-    empresa: req.body.empresa,
+  });
+
+  const usuario = new Users({
+    nombre: req.body.nombre,
+    email: req.body.email,
+    role: "reclutador",
+    password: req.body.password,
+    avatar: req.body.foto,
   });
 
   try {
-    const usuarioGuardado = await newUser.save();
-    res.status(201).send(usuarioGuardado);
+    const reclutadorGuardado = await newRec.save();
+    const usuarioGuardado = await usuario.save();
+    res.status(201).send({ reclutadorGuardado, usuarioGuardado });
   } catch (error) {
     if (error.code === 11000) {
       res.status(400).send("El email ya existe.");
     } else {
       console.log(error);
-      res.status(500).send("Error creando el usuario final.");
+      res.status(500).send("Error creando el reclutador.");
     }
   }
 });
 
-app.get("/registroReclutador", async function (req, res) {
+app.get("/registro-reclutador", async function (req, res) {
   try {
     const usuarios = await Reclutador.find({});
     res.status(200).send(usuarios);
@@ -599,6 +605,29 @@ app.get("/registroManager", async function (req, res) {
     res.status(200).send(usuarios);
   } catch (error) {
     res.status(500).send("Error al obtener los usuarios");
+  }
+});
+
+app.post("/registro", async function (request, response) {
+  if (!request.body) {
+    // manejar el error
+    response.status(400).json({
+      error: "No hay body en la petición",
+    });
+  }
+
+  try {
+    const usuario = await Usuario.create({
+      // campos usuario
+    });
+
+    const reclutador = await Reclutador.create({
+      // Campos reclutador
+    });
+
+    response.status(200).json(usuario);
+  } catch (error) {
+    response.status(500).json(error);
   }
 });
 
