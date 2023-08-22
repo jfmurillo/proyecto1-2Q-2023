@@ -9,13 +9,17 @@ window.onload = async function () {
   const RepuestaEmpresa = await fetch("http://localhost:5000/empresas/" + localStorage.getItem('idempresa'));
   const Empresa = await RepuestaEmpresa.json();
 
+  const Repuestausuario = await fetch("http://localhost:5000/users/" + localStorage.getItem('iduser'));
+  const usuario = await Repuestausuario.json();
   PerfilActual = {
     Titulo: localStorage.getItem("CompanyName"),
     Logo: "../../NodeServer/" + localStorage.getItem("CompanyLogo"),
     Informacion: Empresa.InfoEmpresa,
     Correo: Empresa.email,
     Imagen: "../../NodeServer/" + localStorage.getItem("CompanyLogo"),
-    Estado: 0
+    Estado: 0,
+    NombreUsuario: usuario.nombre,
+    EmailUsuario: usuario.email,
   }
 
   document.getElementById("LogoEmpresa").setAttribute("src", "../../NodeServer/" + localStorage.getItem("CompanyLogo"))
@@ -81,6 +85,8 @@ function toggleModal(modalId, button) {
     document.getElementById("EmailEmpresa").value = PerfilActual.Correo
     document.getElementById("InfoEmpresa").value = PerfilActual.Informacion;
     document.getElementById("EstadoEmpresa").selectedIndex = PerfilActual.Estado;
+    document.getElementById("NombreAdmin").value = PerfilActual.NombreUsuario;
+    document.getElementById("Emailadmin").value = PerfilActual.EmailUsuario;
   }
   const modal = document.getElementById(modalId);
 
@@ -101,8 +107,72 @@ function toggleModal(modalId, button) {
   }
 }
 
-document.getElementById("UpdatePerfil").addEventListener("click", function (event) {
+document.getElementById("ModifyPerfilForm").addEventListener("submit", async function (event) {
   event.preventDefault()
+
+
+
+  let formModify = document.getElementById("ModifyPerfilForm")
+
+  let perfilAdmin = {
+    id: localStorage.getItem('idempresa'),
+    iduser: localStorage.getItem('iduser'),
+    nombre: formModify.NombreEmpresa.value,
+    email: formModify.EmailEmpresa.value,
+    info: formModify.InfoEmpresa.value,
+    password: formModify.contraadmin.value,
+    usuario: formModify.NombreAdmin.value,
+    emailuser: formModify.Emailadmin.value,
+  }
+
+
+  try {
+    const Updateempresa = await fetch("http://localhost:5000/empresa/update", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(perfilAdmin),
+    });
+
+    if (Updateempresa.ok) {
+      alert("empresa actualizada");
+
+      let reporte = {
+        Tipo: "Actualizar perfil",
+        Descripcion: "Se a actualizado el perfil de empresa " + perfilAdmin.nombre,
+        Titulo: "Actualización de perfil",
+        empresa: localStorage.getItem("idempresa")
+      }
+
+      try {
+        const reporteCreado = await fetch("http://localhost:5000/reporte", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(reporte),
+        });
+
+
+        if (reporteCreado.ok) {
+          window.location.reload();
+        } else {
+          console.error("Error al crear el reporte");
+        }
+
+      } catch (error) {
+        console.error(error);
+      }
+    } else {
+      alert("Error al actualizar el perfil");
+    }
+  } catch (error) {
+    console.error(error);
+    alert("Error al actualizar el perfil");
+  }
+
+
   toggleModal("ModifyPerfilModal")
 
 });

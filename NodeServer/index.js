@@ -304,6 +304,39 @@ app.get("/empresa", async function (req, res) {
     }
 });
 
+app.post("/empresa/update", async function (req, res) {
+    try {
+        const empresa = await Empresa.updateOne(
+            { _id: req.body.id },
+            {
+                $set: {
+                    nombreEmpresa: req.body.nombre,
+                    email: req.body.email,
+                    InfoEmpresa: req.body.info,
+                },
+            }
+        );
+
+
+        const empresapassword = await Users.updateOne(
+            { _id: req.body.iduser },
+            {
+                $set: {
+                    password: req.body.password,
+                    email: req.body.emailuser,
+                    nombre: req.body.usuario,
+                },
+            }
+        );
+
+        console.log(empresapassword)
+        res.status(200).send(empresa);
+    } catch (error) {
+        console.log("Error al actualizar la empresa");
+        res.status(500).send("Error al actualizar la empresa");
+    }
+});
+
 app.get("/empresas/:id", async function (req, res) {
     const id = req.params.id;
     try {
@@ -313,6 +346,8 @@ app.get("/empresas/:id", async function (req, res) {
         res.status(500).send("Error al obtener la empresa");
     }
 });
+
+
 
 app.get("/empresas/email/:email", async function (req, res) {
     const email = req.params.email;

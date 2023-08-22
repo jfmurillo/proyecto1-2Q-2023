@@ -15,8 +15,8 @@
         <nav class="HeadNav">
             <div class="CompanyLogo">
                 <a href="../Perfil/PerfilAdministrador.html">
-                <img id="LogoEmpresa"  src="../assets/imagenDefault.png"
-                    alt="Logo de la empresa logeada"></a>
+                    <img id="LogoEmpresa" src="../assets/imagenDefault.png"
+                        alt="Logo de la empresa logeada"></a>
             </div>
             <ul class="ElementBox_Nav">
                 <li><a href="../Inicio/InicioAdministrador.html">Inicio</a></li>
@@ -39,10 +39,12 @@
                     <i class="fa-solid fa-bell"></i>
                 </div>
                 <ul class="ElementBox_Nav">
-                    <li><a href="../../Vista Principal/Inicio/Inicio.html">Cerrar sesión</a></li>
+                    <li><a href="../../Vista Principal/Inicio/Inicio.html">Cerrar
+                            sesión</a></li>
                 </ul>
                 <div class="UserLogo">
-                    <img id="AvatarUser" src="../assets/avatar.png" alt="Avatar del usuario">
+                    <img id="AvatarUser" src="../assets/avatar.png"
+                        alt="Avatar del usuario">
                 </div>
             </div>
         </nav>
@@ -92,28 +94,44 @@
                     <div class="FormText columna-3">
                         <label class="FormLabel" for="NombreEmpresa">Nombre de
                             la empresa</label>
-                        <input class="InputText" type="email"
+                        <input class="InputText" type="text"
                             placeholder="Nombre"
-                            name="NombreEmpresa" id="NombreEmpresa">
+                            name="NombreEmpresa" id="NombreEmpresa" required>
                     </div>
                     <div class="FormText columna-3">
                         <label class="FormLabel" for="EmailEmpresa">Correo</label>
                         <input class="InputText" type="email"
                             placeholder="Correo electronico"
-                            name="EmailEmpresa" id="EmailEmpresa">
+                            name="EmailEmpresa" id="EmailEmpresa" required>
                     </div>
                     <div class="FormText columna-3">
                         <label class="FormLabel" for="InfoEmpresa">Información
                             de la empresa</label>
-                        <input class="InputText" type="email"
+                        <input class="InputText" type="text"
                             placeholder="Información"
-                            name="InfoEmpresa" id="InfoEmpresa">
+                            name="InfoEmpresa" id="InfoEmpresa" required>
+                    </div>
+
+                    <div class="FormText columna-3">
+                        <label class="FormLabel" for="NombreAdmin">Nombre del
+                            administrador</label>
+                        <input class="InputText" type="text"
+                            placeholder="Nombre administrador"
+                            name="NombreAdmin" id="NombreAdmin" required>
                     </div>
                     <div class="FormText columna-3">
-                        <label class="FormLabel" for="ContraseñaEmpresa">Contraseña</label>
+                        <label class="FormLabel" for="Emailadmin">Correo del
+                            administrador</label>
+                        <input class="InputText" type="email"
+                            placeholder="Correo electronico administrador"
+                            name="Emailadmin" id="Emailadmin" required>
+                    </div>
+                    <div class="FormText columna-3">
+                        <label class="FormLabel" for="contraadmin">Contraseña
+                            administrador</label>
                         <input class="InputText" type="text"
-                            name="ContraseñaEmpresa"
-                            id="ContraseñaEmpresa"></input>
+                            placeholder="Contraseña administrador"
+                            name="contraadmin" id="contraadmin" required>
                     </div>
                     <div class="FormSelect" style="width: 40%;">
                         <label class="FormLabel" for="EstadoEmpresa">Estado</label>
@@ -124,14 +142,15 @@
                         </select>
 
                     </div>
-                </form>
-                <div class="FooterModal">
-                    <div class="Botonera">
-                        <button class="modal-Back ButtonDesign">Cancelar</button>
-                        <button class="ButtonDesign"
-                        id="UpdatePerfil">Modificar</button>
+                    <div class="FooterModal">
+                        <div class="Botonera">
+                            <button class="modal-Back ButtonDesign">Cancelar</button>
+                            <button class="ButtonDesign" type="submit" s
+                                id="UpdatePerfil">Modificar</button>
+                        </div>
                     </div>
-                </div>
+                </form>
+
             </div>
         </div>
     </body>
