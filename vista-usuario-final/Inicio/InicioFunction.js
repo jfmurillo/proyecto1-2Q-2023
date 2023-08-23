@@ -1,47 +1,71 @@
-let ListPuestos = [
-  {
-    Fecha: "7/7/2023",
-    Titulo: "Nombre del empleo",
-    Imagen: "../assets/imagenDefault.png",
-    Empresa: "Nombre de la empresa",
-    Descripcion: "Descripción",
-  },
-  {
-    Fecha: "7/7/2023",
-    Titulo: "Nombre del empleo",
-    Imagen: "../assets/imagenDefault.png",
-    Empresa: "Nombre de la empresa",
-    Descripcion: "Descripción",
-  },
-];
+let ListPuestos = [];
 
-function RenderApplications(ListApplications) {
-  let mainbox = document.getElementById("Publicaciones");
+window.onload = async function () {
+    if (!localStorage.getItem('iduser')) {
+        window.location.href = '../../Login/login.html';
+    }
 
-  for (let application of ListApplications) {
-    let container = document.createElement("div");
-    container.classList.add("Puesto");
+    loadPuestosFromAPI();
+    document.getElementById("CompanyName").innerHTML = localStorage.getItem("CompanyName");
+    document.getElementById("LogoEmpresa").setAttribute("src", "../../NodeServer/" + localStorage.getItem("CompanyLogo"));
+    document.getElementById("PerfilEmpresa").setAttribute("src", "../../NodeServer/" + localStorage.getItem("CompanyLogo"));
+    document.getElementById("AvatarUser").setAttribute("src", "../../NodeServer/" + localStorage.getItem("Avatar"));
+};
 
-    let FechaApplication = document.createElement("small");
-    let TituloApplication = document.createElement("h3");
-    let ImagenApplication = document.createElement("img");
-    let EmpresaApplication = document.createElement("p");
-    let DescripcionApplication = document.createElement("p");
+async function loadPuestosFromAPI() {
+    const RepuestaPuestos = await fetch("http://localhost:5000/puesto/");
+    const Puestos = await RepuestaPuestos.json();
+    console.log(Puestos);
 
-    FechaApplication.textContent = application.Fecha;
-    TituloApplication.textContent = application.Titulo;
-    EmpresaApplication.textContent = application.Empresa;
-    DescripcionApplication.textContent = application.Descripcion;
-    ImagenApplication.src = application.Imagen;
+    let contador = 0;
 
-    container.appendChild(FechaApplication);
-    container.appendChild(TituloApplication);
-    container.appendChild(ImagenApplication);
-    container.appendChild(EmpresaApplication);
-    container.appendChild(DescripcionApplication);
+    Puestos.forEach(function (puesto) {
+        if (contador < 4) {
+            let puestoOrder = {
+                Imagen: "../assets/imagenDefault.png",
+                Descripcion: puesto.DescripcionPuesto,
+                Titulo: puesto.nombrePuesto,
+            };
 
-    mainbox.appendChild(container);
-  }
+            const fecha = new Date(puesto.updatedAt);
+
+            const dia = fecha.getDate().toString().padStart(2, '0'); // Agregar ceros a la izquierda si es necesario
+            const mes = (fecha.getMonth() + 1).toString().padStart(2, '0'); // Los meses en JavaScript son indexados desde 0, por lo que sumamos 1
+            const anio = fecha.getFullYear();
+
+            puestoOrder.Fecha = `${dia}/${mes}/${anio}`;
+
+            ListPuestos.push(puestoOrder);
+            contador++;
+        }
+    });
+
+    RenderApplications(ListPuestos);
 }
 
-RenderApplications(ListPuestos);
+function RenderApplications(ListApplications) {
+    let mainbox = document.getElementById("Publicaciones");
+    mainbox.innerHTML = "";
+
+    for (let application of ListApplications) {
+        let container = document.createElement("div");
+        container.classList.add("Puesto");
+
+        let FechaApplication = document.createElement("small");
+        let TituloApplication = document.createElement("h3");
+        let ImagenApplication = document.createElement("img");
+        let DescripcionApplication = document.createElement("p");
+
+        FechaApplication.textContent = application.Fecha;
+        TituloApplication.textContent = application.Titulo;
+        DescripcionApplication.textContent = application.Descripcion;
+        ImagenApplication.src = application.Imagen;
+
+        container.appendChild(FechaApplication);
+        container.appendChild(TituloApplication);
+        container.appendChild(ImagenApplication);
+        container.appendChild(DescripcionApplication);
+
+        mainbox.appendChild(container);
+    }
+}

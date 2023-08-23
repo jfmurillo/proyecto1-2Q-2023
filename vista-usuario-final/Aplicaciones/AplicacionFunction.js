@@ -1,39 +1,46 @@
-var app = app || {};
-let ListPuestos = [
-  {
-    Fecha: "7/7/2023",
-    Titulo: "Nombre del empleo 1",
-    Rango: "Rango 1",
-    Requisitos: "Requesitos 1",
-    Atributos: "Atributos 1",
-    Tipo: 0,
-    Imagen: "../assets/imagenDefault.png",
-    Empresa: "Nombre de la empresa",
-    Descripcion: "Descripción ",
-  },
-  {
-    Fecha: "7/7/2023",
-    Titulo: "Nombre del empleo 2",
-    Rango: "Rango 2",
-    Requisitos: "Requesitos 2",
-    Atributos: "Atributos 2",
-    Tipo: 1,
-    Imagen: "../assets/imagenDefault.png",
-    Empresa: "Nombre de la empresa",
-    Descripcion: "Descripción",
-  },
-  {
-    Fecha: "7/7/2023",
-    Titulo: "Nombre del empleo 3",
-    Rango: "Rango 3",
-    Requisitos: "Requesitos 3",
-    Atributos: "Atributos 3",
-    Tipo: 0,
-    Imagen: "../assets/imagenDefault.png",
-    Empresa: "Nombre de la empresa",
-    Descripcion: "Descripción",
-  },
-];
+let ListPuestos = [];
+
+window.onload = async function () {
+    if (!localStorage.getItem('iduser')) {
+        window.location.href = '../../Login/login.html';
+    }
+
+    loadPuestosFromAPI();
+    document.getElementById("CompanyName").innerHTML = localStorage.getItem("CompanyName");
+    document.getElementById("LogoEmpresa").setAttribute("src", "../../NodeServer/" + localStorage.getItem("CompanyLogo"));
+    document.getElementById("PerfilEmpresa").setAttribute("src", "../../NodeServer/" + localStorage.getItem("CompanyLogo"));
+    document.getElementById("AvatarUser").setAttribute("src", "../../NodeServer/" + localStorage.getItem("Avatar"));
+};
+
+async function loadPuestosFromAPI() {
+    const RepuestaPuestos = await fetch("http://localhost:5000/puesto/");
+    const Puestos = await RepuestaPuestos.json();
+    console.log(Puestos);
+
+    let contador = 0;
+
+    Puestos.forEach(function (puesto) {
+        if (contador < 10) {
+            let puestoOrder = {
+                Imagen: "../assets/imagenDefault.png",
+                Descripcion: puesto.DescripcionPuesto,
+                Titulo: puesto.nombrePuesto,
+            };
+
+            const fecha = new Date(puesto.updatedAt);
+
+            const dia = fecha.getDate().toString().padStart(2, '0'); // Agregar ceros a la izquierda si es necesario
+            const mes = (fecha.getMonth() + 1).toString().padStart(2, '0'); // Los meses en JavaScript son indexados desde 0, por lo que sumamos 1
+            const anio = fecha.getFullYear();
+
+            puestoOrder.Fecha = `${dia}/${mes}/${anio}`;
+
+            ListPuestos.push(puestoOrder);
+            contador++;
+        }
+    });
+    RenderApplications(ListPuestos);
+  }
 
 function RenderApplications(ListApplications) {
   let mainbox = document.getElementById("Aplicaciones");
@@ -91,9 +98,39 @@ applyButtons.forEach((button) => {
   });
 });
 
-function applyForJob(id) {
-  // Aquí puedes escribir la lógica para que el usuario aplique a un empleo
-  console.log(`El usuario está aplicando para el empleo con id ${id}`);
+async function applyForJob(id) {
+  try {
+    const selectedPuesto = ListPuestos[id];
+
+    // Aquí podrías construir los datos que deseas enviar al servidor, como el ID del puesto y otros detalles relevantes
+    const data = {
+      puestoId: selectedPuesto.ID, // Supongo que tu objeto tiene una propiedad "ID" para el ID del puesto
+      userId: localStorage.getItem('iduser'), // Supongo que obtienes el ID del usuario de algún lugar, como el almacenamiento local
+      // ... otros datos relevantes para la aplicación
+    };
+
+    // Realizar una solicitud POST al servidor para enviar la solicitud de aplicación
+    const response = await fetch('http://localhost:5000/aplicar', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
+
+    if (!response.ok) {
+      throw new Error('Error al aplicar al puesto.');
+    }
+
+    // Aquí podemos manejar la respuesta del servidor si es necesario
+
+    // Mostrar una alerta al usuario para indicar que se ha aplicado correctamente
+    window.alert(`Se ha aplicado al puesto "${selectedPuesto.Titulo}"`);
+  } catch (error) {
+    console.error(error);
+    // Mostrar una alerta de error al usuario si la aplicación falla
+    window.alert('Ha ocurrido un error al aplicar al puesto. Por favor, intenta nuevamente.');
+  }
 }
 
 const modalTriggerButtons = document.querySelectorAll("[data-modal-target]");
@@ -187,4 +224,4 @@ function toggleModal(modalId, button) {
     modal.style.display = "flex";
     modal.classList.add("modal-show");
   }
-}
+};
