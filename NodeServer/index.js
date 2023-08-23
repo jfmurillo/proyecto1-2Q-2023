@@ -36,8 +36,8 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
-const username = "jmurillocr3";
-const password = "Murillo2023";
+const username = 'vmorat';
+const password = 'Mora2023';
 
 const connectionURI = `mongodb+srv://${username}:${password}@cluster0.h03de4d.mongodb.net/CodeWarrior?retryWrites=true&w=majority`;
 
@@ -557,6 +557,54 @@ app.get("/registroUserFinal", async function (req, res) {
     res.status(200).send(usuarios);
   } catch (error) {
     res.status(500).send("Error al obtener los usuarios");
+  }
+});
+
+app.get("/registroUserFinal/:id", async function (req, res) {
+  const id = req.params.id;
+  
+  try {
+      const usuario = await UsuarioFinal.findById(id);
+      
+      if (!usuario) {
+          return res.status(404).send("Usuario no encontrado");
+      }
+
+      res.status(200).send(usuario);
+  }
+  catch (error) {
+      res.status(500).send("Error al obtener el usuario");
+  }
+});
+
+//put para actualizar información de los estudiantes
+app.put("/registroUserFinal", async function (req, response) {
+  console.log("Atendiendo solicitud PUT a /registroUserFinal");
+
+  if (!req.body) {
+    console.log("No se recibó el usuario");
+    return response.status(400).send("No se recibió el usuario");
+  }
+
+  try {
+    console.log("Guardando usuario en la base de datos");
+    const resultado = await UsuarioFinal.findByIdAndUpdate(req.body.id, {
+      foto: req.body.foto,
+      cv: req.body.cv,
+      nombre: req.body.nombre,
+      apellido: req.body.apellido,
+      email: req.body.email,
+      contrasena: req.body.contrasena,
+      genero: req.body.genero,
+      experiencia: req.body.experiencia,
+      estudios: req.body.estudios,
+    });
+    console.log("Usuario guardado:", resultado);
+
+    response.status(201).send(resultado);
+  } catch (error) {
+    console.log("Error al guardar el usuario:", error);
+    response.status(500).send(error);
   }
 });
 

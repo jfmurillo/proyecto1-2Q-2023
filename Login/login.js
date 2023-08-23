@@ -32,7 +32,7 @@ document
           localStorage.setItem("iduser", Logeo._id);
           localStorage.setItem("idempresa", Logeo.Empresa);
           localStorage.setItem("Avatar", Logeo.avatar);
-          if (Logeo.Empresa) {
+          if (["admin", "manager", "reclutador"].includes(Logeo.role) && Logeo.Empresa) {
             const respuestaEmpresa = await fetch(
               "http://localhost:5000/empresas/" + Logeo.Empresa
             );
@@ -42,6 +42,16 @@ document
               localStorage.setItem("CompanyLogo", empresa.ImgEmpresa);
             } else {
               throw new Error("Error en la empresa");
+            }
+          }
+
+          if (Logeo.role === "finalUser" && Logeo.Empresa) {
+            const respuestaFinalUser = await fetch("http://localhost:5000/registroUserFinal/" + Logeo.Empresa);
+            if (respuestaFinalUser.ok) {
+                const finalUser = await respuestaFinalUser.json();
+                localStorage.setItem('Foto', finalUser.foto);
+            } else {
+                throw new Error("Error al obtener información del usuario final");
             }
           }
 
