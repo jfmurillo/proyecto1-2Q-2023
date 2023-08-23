@@ -578,6 +578,37 @@ app.get("/registroUserFinal/:id", async function (req, res) {
   }
 });
 
+//put para actualizar información de los estudiantes
+app.put("/registroUserFinal", async function (req, response) {
+  console.log("Atendiendo solicitud PUT a /registroUserFinal");
+
+  if (!req.body) {
+    console.log("No se recibó el usuario");
+    return response.status(400).send("No se recibió el usuario");
+  }
+
+  try {
+    console.log("Guardando usuario en la base de datos");
+    const resultado = await UsuarioFinal.findByIdAndUpdate(req.body.id, {
+      foto: req.body.foto,
+      cv: req.body.cv,
+      nombre: req.body.nombre,
+      apellido: req.body.apellido,
+      email: req.body.email,
+      contrasena: req.body.contrasena,
+      genero: req.body.genero,
+      experiencia: req.body.experiencia,
+      estudios: req.body.estudios,
+    });
+    console.log("Usuario guardado:", resultado);
+
+    response.status(201).send(resultado);
+  } catch (error) {
+    console.log("Error al guardar el usuario:", error);
+    response.status(500).send(error);
+  }
+});
+
 // REGISTRO RECLUTADOR
 app.post("/registroReclutador", async function (req, res) {
   if (!req.body || req.body == {}) {

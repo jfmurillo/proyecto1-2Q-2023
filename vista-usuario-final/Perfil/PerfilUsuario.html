@@ -60,7 +60,7 @@
 
           <div id="informacion-izquierda">
               <label>Curriculum/CV:</label>
-              <span id="nombre_cv_show" style="font-size: 14px; text-transform: lowercase;">Ningún archivo seleccionado</span>
+              <span id="nombre_cv_show" style="font-size: 14px;">Ningún archivo seleccionado</span>
           </div><br>
 
           <div id="informacion-izquierda">
@@ -102,68 +102,78 @@
           </div>
 
           <div class="separador" style="padding-top: 2px;">
-            <button class="boton1" onclick="editarPerfil()">Editar Perfil</button>
+            <button class="boton1" id="btn-editar" onclick="editarPerfil()">Editar Perfil</button>
           </div><br><br>
         </div>
 
        <!-- Sección de Editar Perfil -->
         <div id="editarPerfil" style="display: none;">
-          <h1 class="titulo">Editar Perfil</h1>
+          <h1 class="titulo" id="informacion-centro">Editar Perfil</h1>
 
           <form id="EdicionUsuario">
-            <div id="user-photo-container-edit" class="photo-container">
-                <img id="user-photo-edit" src="../assets/avatar.png" alt="Foto de usuario">
+            <div id="informacion-centro">
+              <div id="user-photo-container-edit" class="photo-container">
+                  <img id="user-photo-edit" src="../assets/avatar.png" alt="Foto de usuario">
+              </div>
+              <br>
+              <button type="button" id="fotoEdit"> Cambiar foto </button><br><br>
             </div>
-            <br>
-            <button type="button" id="fotoEdit"> Cambiar foto </button><br><br>
-
-            <div>
+            
+            <div id="informacion-izquierda-edit">
                 <label for="cvEdit">Curriculum/CV</label>
                 <button type="button" id="subir_cv_edit"> Cambiar CV </button>
                 <span id="nombre_cv_edit" style="font-size: 14px;">Ningún archivo seleccionado</span><br><br>
                 <input type="hidden" id="cv_url_edit" name="cv_url_edit">
             </div>
+            
+            <div id="informacion-izquierda-edit">
+              <label for="nombreEdit">Nombre:</label>
+              <input type="text" id="nombreEdit" name="nombre" placeholder="John">
+            </div>
+            
 
-            <label for="nombreEdit">Nombre:</label>
-            <input type="text" id="nombreEdit" name="nombre" placeholder="John">
-
-            <label for="apellidoEdit">Apellido:</label>
-            <input type="text" id="apellidoEdit" name="apellido" placeholder="Doe">
-
-            <label for="emailEdit">Email:</label>
-            <input type="email" id="emailEdit" name="email" placeholder="ejemplo@patito.com">
-
-            <label for="contrasenaEdit">Contraseña:</label>
-            <input type="password" id="contrasenaEdit" name="contrasena">
-
-            <label for="confirmar_contrasenaEdit">Confirmar Contraseña:</label>
-            <input type="password" id="confirmar_contrasenaEdit" name="confirmar_contrasena">
-
-            <label for="generoEdit">Género:</label>
-            <select id="generoEdit">
-                <option value="" disabled selected hidden>
-                    Seleccione una opción
-                </option>
-                <option value="masculino">Masculino</option>
-                <option value="femenino">Femenino</option>
-                <option value="otro">Prefiero no especificar</option>
-            </select><br><br>
-
-            <div class="border-div">
-                <label class="labels-general" for="experienciaEdit">Experiencia Laboral</label><br>
-                <div class="experiencia-container">
-                    <label for="nombre_empresaEdit">Nombre de la Empresa:</label>
-                    <input type="text" id="nombre_empresaEdit" name="nombre_empresa"><br>
-                    <label for="descripcion_puestoEdit">Descripción del Puesto:</label>
-                    <textarea id="descripcion_puestoEdit" name="descripcion_puesto" rows="4" cols="50"></textarea><br><br>
-                </div>
-                <i alt="anadir-icono" class="fa-solid fa-plus anadir-iconos"></i>
-                <i alt="quitar-icono" class="fa-solid fa-minus quitar-iconos"></i>
+            <div id="informacion-izquierda-edit">
+              <label for="apellidoEdit">Apellido:</label>
+              <input type="text" id="apellidoEdit" name="apellido" placeholder="Doe">
+            </div>
+            
+            <div id="informacion-izquierda-edit">
+              <label for="emailEdit">Email:</label>
+               <input type="email" id="emailEdit" name="email" placeholder="ejemplo@patito.com">
+            </div>
+            
+            <div id="informacion-izquierda-edit">
+              <label for="contrasenaEdit">Contraseña:</label>
+              <input type="password" id="contrasenaEdit" name="contrasena">
+            </div>
+            
+            <div id="informacion-izquierda-edit">
+              <label for="generoEdit">Género:</label>
+              <select id="generoEdit">
+                  <option value="" disabled selected hidden>
+                      Seleccione una opción
+                  </option>
+                  <option value="masculino">Masculino</option>
+                  <option value="femenino">Femenino</option>
+                  <option value="otro">Prefiero no especificar</option>
+              </select><br><br>
             </div>
 
             <div class="border-div">
+              <label class="labels-general" for="experienciaEdit">Experiencia Laboral</label><br>
+              <div class="experiencia-container" id="experienciaEdit">
+                  <label for="nombre_empresaEdit">Nombre de la Empresa:</label>
+                  <input type="text" id="nombre_empresaEdit" name="nombre_empresa"><br>
+                  <label for="descripcion_puestoEdit">Descripción del Puesto:</label>
+                  <textarea id="descripcion_puestoEdit" name="descripcion_puesto" rows="4" cols="50"></textarea><br><br>
+              </div>
+              <i alt="anadir-icono" class="fa-solid fa-plus anadir-iconos"></i>
+              <i alt="quitar-icono" class="fa-solid fa-minus quitar-iconos"></i>
+            </div>
+            
+            <div class="border-div">
                 <label class="labels-general" for="estudiosEdit">Estudios</label><br>
-                <div class="estudios-container">
+                <div class="estudios-container" id="estudiosEdit">
                     <label for="nombre_institucionEdit">Institución:</label>
                     <input type="text" id="institucionEdit" name="nombre_institucion"><br>
                     <label for="nombre_carreraEdit">Nombre de carrera:</label>
@@ -175,7 +185,7 @@
 
             <div class="separador" style="padding-top: 2px;">
                 <button class="boton1" onclick="cancelarEdicion()">Cancelar</button>
-                <button class="boton1" type="submit">Guardar Cambios</button>
+                <button class="boton1" id = "btn-guardar" type="submit">Guardar Cambios</button>
             </div><br><br>
           </form>
         </div>
@@ -206,7 +216,10 @@
     </div>
   </footer>
 
+  <script src="https://widget.cloudinary.com/v2.0/global/all.js" type="text/javascript"></script>
   <script src="PerfilUsuarioFunction.js"></script>
+  <script src="servicio-imagen.js"></script>
+  <script src="servicio-cv.js"></script>
   <script>
     function editarPerfil() {
         document.getElementById("mostrarPerfil").style.display = "none";

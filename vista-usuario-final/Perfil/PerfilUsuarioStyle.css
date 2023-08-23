@@ -267,6 +267,13 @@ label {
   display: block;        /* Mostrar la imagen */
 }
 
+#user-photo-edit {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;   /* Ajustar el contenido dentro del contenedor */
+  display: block;        /* Mostrar la imagen */
+}
+
 /* Sección de Mostrar Perfil */
 #mostrarPerfil {
   display: row;
@@ -280,7 +287,7 @@ label {
   display: flex;
   flex-direction: column;
   text-align: left; /* Alinear el texto a la izquierda */
-  margin-left: 100px; /* Ajustar el margen izquierdo */
+  margin-left:50px; /* Ajustar el margen izquierdo */
 }
 
 #informacion-izquierda2 {
@@ -289,6 +296,10 @@ label {
   text-align: left; /* Alinear el texto a la izquierda */
 }
 
+#informacion-izquierda-edit {
+  text-align: left; /* Alinear el texto a la izquierda */
+  margin-left:50px; /* Ajustar el margen izquierdo */
+}
 
 #informacion-centro {
   display: flex;
