@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const reclutadorSchema = new mongoose.Schema(
+const managerSchema = new mongoose.Schema(
   {
     foto: {
       type: String,
@@ -34,6 +34,6 @@ const reclutadorSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-const Reclutador = mongoose.model("Reclutador", reclutadorSchema);
+const Manager = mongoose.model("Manager", managerSchema);
 
-module.exports = Reclutador;
+module.exports = Manager;
