@@ -34,8 +34,8 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
-const username = "jmurillocr3";
-const password = "Murillo2023";
+const username = 'vmorat';
+const password = 'Mora2023';
 
 const connectionURI = `mongodb+srv://${username}:${password}@cluster0.h03de4d.mongodb.net/CodeWarrior?retryWrites=true&w=majority`;
 
@@ -558,6 +558,23 @@ app.get("/registroUserFinal", async function (req, res) {
     res.status(200).send(usuarios);
   } catch (error) {
     res.status(500).send("Error al obtener los usuarios");
+  }
+});
+
+app.get("/registroUserFinal/:id", async function (req, res) {
+  const id = req.params.id;
+  
+  try {
+      const usuario = await UsuarioFinal.findById(id);
+      
+      if (!usuario) {
+          return res.status(404).send("Usuario no encontrado");
+      }
+
+      res.status(200).send(usuario);
+  }
+  catch (error) {
+      res.status(500).send("Error al obtener el usuario");
   }
 });
 

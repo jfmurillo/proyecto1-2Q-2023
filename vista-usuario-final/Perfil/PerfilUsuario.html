@@ -7,110 +7,180 @@
   <title>Perfil de Usuario</title>
   <link rel="stylesheet" href="PerfilUsuarioStyle.css">
   <link rel="stylesheet" href="../assets/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap" rel="stylesheet">
   <script src="https://kit.fontawesome.com/52cdc0a8a5.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
   <header>
-    <nav class="HeadNav">
-      <div class="CompanyLogo">
-        <a href="../Perfil/PerfilUsuario.html"><img src="../assets/imagenDefault.png"
-            alt="Logo de la empresa logeada"></a>
-      </div>
-      <ul class="ElementBox_Nav" style="list-style-type: none;">
+    <nav class="HeadNav" style="text-transform: none;">
+      <ul class="ElementBox_Nav">
         <li><a href="../Inicio/InicioUsuario.html">Inicio</a></li>
         <li><a href="../Aplicaciones/AplicacionUsuario.html">Aplicaciones</a></li>
         <li><a href="../reportes/reportesUsuario.html">Reportes</a></li>
       </ul>
-
+    
       <div class="search">
         <label class="search-btn" for="Buscador">
           <i class="fas fa-search"></i>
         </label>
-        <input class="search-txt" name="Buscador" id="Buscador" type="text" name
-          placeholder="Buscar">
+        <input class="search-txt" name="Buscador" id="Buscador" type="text" name placeholder="Buscar">
       </div>
       <div id="searchResult"></div>
       <div class="UserZone">
         <div class="Notifications">
           <i class="fa-solid fa-bell"></i>
         </div>
-        <ul class="ElementBox_Nav" style="list-style-type: none;">
+        <ul class="ElementBox_Nav">
           <li><a href="../../Vista Principal/Inicio/Inicio.html">Cerrar sesión</a></li>
-      </ul>
+        </ul>
         <div class="UserLogo">
-          <a href="../Perfil/PerfilUsuario.html"><img src="../assets/avatar.png"
-              alt="Avatar del usuario"></a>
+          <a href="../Perfil/PerfilUsuario.html"><img src="../assets/avatar.png" alt="Avatar del usuario"></a>
         </div>
       </div>
     </nav>
   </header>      
 
   <main>
-    <section class="profile-section">
-      <div class="avatar-section">
-        <div class="avatar">
-          <img src="../assets/avatar.png" alt="Avatar del usuario">
+    <section class="fondo-registro">
+      <div class="contenedor-titulo">
+        <!-- Sección de Mostrar Perfil -->
+        <div id="mostrarPerfil">
+          <h1 class="titulo">Perfil de Usuario</h1>
+
+          <div id="informacion-centro">
+            <div id="user-photo-container-show" class="photo-container">
+              <img id="user-photo-show" src="../assets/avatar.png" alt="Foto de usuario">
+            </div>
+         </div>
+          <br>
+
+          <div id="informacion-izquierda">
+              <label>Curriculum/CV:</label>
+              <span id="nombre_cv_show" style="font-size: 14px; text-transform: lowercase;">Ningún archivo seleccionado</span>
+          </div><br>
+
+          <div id="informacion-izquierda">
+              <label>Nombre:</label>
+              <span id="nombreShow">John</span>
+          </div><br>
+
+          <div id="informacion-izquierda">
+              <label>Apellido:</label>
+              <span id="apellidoShow">Doe</span>
+          </div><br>
+
+          <div id="informacion-izquierda">
+              <label>Email:</label>
+              <span id="emailShow" style="text-transform: none;">ejemplo@patito.com</span>
+          </div><br>
+
+          <div id="informacion-izquierda">
+            <label>Género:</label>
+            <span id="generoShow">Masculino</span>
+          </div><br>
+
+          <div id="informacion-centro">
+            <div class="border-div">
+              <div id="informacion-izquierda2">
+                <label class="labels-general" >Experiencia Laboral</label><br>
+                <div class="experiencia-container" id="experienciaShow" style="text-transform: none;"></div>
+              </div>
+            </div>
+          </div>
+            
+          <div id="informacion-centro">
+            <div class="border-div">
+              <div id="informacion-izquierda2">
+                <label class="labels-general" >Estudios</label><br>
+                <div class="estudios-container" id="estudiosShow" style="text-transform: none;"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="separador" style="padding-top: 2px;">
+            <button class="boton1" onclick="editarPerfil()">Editar Perfil</button>
+          </div><br><br>
         </div>
-        <button class="edit-avatar-btn">Editar</button>
-      </div>
-      <div class="user-info-section">
-        <h2>Nombre del reclutador</h2>
-        <p>Información de la empresa</p>
-        <button class="edit-profile-btn">Editar perfil</button>
-      </div>
-    </section>
 
-    <section class="experience-section">
-      <h2>Experiencia de trabajo</h2>
-      <div class="experience-block">
-        <div class="experience-item">
-          <input type="text" placeholder="Título del puesto">
-          <input type="text" placeholder="Empresa">
-          <textarea placeholder="Descripción"></textarea>
-          <button class="delete-experience-btn">Eliminar</button>
+       <!-- Sección de Editar Perfil -->
+        <div id="editarPerfil" style="display: none;">
+          <h1 class="titulo">Editar Perfil</h1>
+
+          <form id="EdicionUsuario">
+            <div id="user-photo-container-edit" class="photo-container">
+                <img id="user-photo-edit" src="../assets/avatar.png" alt="Foto de usuario">
+            </div>
+            <br>
+            <button type="button" id="fotoEdit"> Cambiar foto </button><br><br>
+
+            <div>
+                <label for="cvEdit">Curriculum/CV</label>
+                <button type="button" id="subir_cv_edit"> Cambiar CV </button>
+                <span id="nombre_cv_edit" style="font-size: 14px;">Ningún archivo seleccionado</span><br><br>
+                <input type="hidden" id="cv_url_edit" name="cv_url_edit">
+            </div>
+
+            <label for="nombreEdit">Nombre:</label>
+            <input type="text" id="nombreEdit" name="nombre" placeholder="John">
+
+            <label for="apellidoEdit">Apellido:</label>
+            <input type="text" id="apellidoEdit" name="apellido" placeholder="Doe">
+
+            <label for="emailEdit">Email:</label>
+            <input type="email" id="emailEdit" name="email" placeholder="ejemplo@patito.com">
+
+            <label for="contrasenaEdit">Contraseña:</label>
+            <input type="password" id="contrasenaEdit" name="contrasena">
+
+            <label for="confirmar_contrasenaEdit">Confirmar Contraseña:</label>
+            <input type="password" id="confirmar_contrasenaEdit" name="confirmar_contrasena">
+
+            <label for="generoEdit">Género:</label>
+            <select id="generoEdit">
+                <option value="" disabled selected hidden>
+                    Seleccione una opción
+                </option>
+                <option value="masculino">Masculino</option>
+                <option value="femenino">Femenino</option>
+                <option value="otro">Prefiero no especificar</option>
+            </select><br><br>
+
+            <div class="border-div">
+                <label class="labels-general" for="experienciaEdit">Experiencia Laboral</label><br>
+                <div class="experiencia-container">
+                    <label for="nombre_empresaEdit">Nombre de la Empresa:</label>
+                    <input type="text" id="nombre_empresaEdit" name="nombre_empresa"><br>
+                    <label for="descripcion_puestoEdit">Descripción del Puesto:</label>
+                    <textarea id="descripcion_puestoEdit" name="descripcion_puesto" rows="4" cols="50"></textarea><br><br>
+                </div>
+                <i alt="anadir-icono" class="fa-solid fa-plus anadir-iconos"></i>
+                <i alt="quitar-icono" class="fa-solid fa-minus quitar-iconos"></i>
+            </div>
+
+            <div class="border-div">
+                <label class="labels-general" for="estudiosEdit">Estudios</label><br>
+                <div class="estudios-container">
+                    <label for="nombre_institucionEdit">Institución:</label>
+                    <input type="text" id="institucionEdit" name="nombre_institucion"><br>
+                    <label for="nombre_carreraEdit">Nombre de carrera:</label>
+                    <input type="text" id="nombre_carreraEdit" name="nombre_carrera"><br><br>
+                </div>
+                <i alt="anadir-icono" class="fa-solid fa-plus anadir-iconos"></i>
+                <i alt="quitar-icono" class="fa-solid fa-minus quitar-iconos"></i>
+            </div>
+
+            <div class="separador" style="padding-top: 2px;">
+                <button class="boton1" onclick="cancelarEdicion()">Cancelar</button>
+                <button class="boton1" type="submit">Guardar Cambios</button>
+            </div><br><br>
+          </form>
         </div>
-        <button class="add-experience-btn">Agregar Experiencia</button>
       </div>
     </section>
-
-    <section class="education-section">
-      <h2>Educación</h2>
-      <div class="education-block">
-        <div class="education-item">
-          <input type="text" placeholder="Grado">
-          <input type="text" placeholder="Institución">
-          <textarea placeholder="Descripción"></textarea>
-          <button class="delete-education-btn">Eliminar</button>
-        </div>
-        <button class="add-education-btn">Agregar Educación</button>
-      </div>
-    </section>
-
-    <section class="resume-section">
-      <h2>Subir currículum</h2>
-      <input type="file">
-    </section>
-
-    <aside>
-      <div class="form-section">
-        <h2>Formulario Experiencia</h2>
-        <input type="text" placeholder="Título del puesto">
-        <input type="text" placeholder="Empresa">
-        <textarea placeholder="Descripción"></textarea>
-        <button class="submit-experience-btn">Guardar</button>
-        <button class="cancel-experience-btn">Cancelar</button>
-      </div>
-
-      <div class="form-section">
-        <h2>Formulario Educación</h2>
-        <input type="text" placeholder="Grado">
-        <input type="text" placeholder="Institución">
-        <textarea placeholder="Descripción"></textarea>
-        <button class="submit-education-btn">Guardar</button>
-        <button class="cancel-education-btn">Cancelar</button>
-      </div>
-    </aside>
   </main>
 
   <footer>
@@ -137,6 +207,17 @@
   </footer>
 
   <script src="PerfilUsuarioFunction.js"></script>
+  <script>
+    function editarPerfil() {
+        document.getElementById("mostrarPerfil").style.display = "none";
+        document.getElementById("editarPerfil").style.display = "block";
+    }
+
+    function mostrarPerfil() {
+        document.getElementById("editarPerfil").style.display = "none";
+        document.getElementById("mostrarPerfil").style.display = "block";
+    }
+  </script>
 </body>
 
 </html>
