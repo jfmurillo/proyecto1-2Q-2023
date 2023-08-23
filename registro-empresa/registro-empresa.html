@@ -32,92 +32,100 @@
       </nav>
     </header>
     <main>
-      <section class="fondo-registro">
-        <div class="contenedor-titulo">
+      <section class="fondo-registro contenedor-titulo">
           <h1 class="titulo">Registro Empresa</h1>
-          <form id="RegistroEmpresa">
-            <div class="formulario letra-peq  ">
-              <label for="foto">Logo de la Empresa</label>
-              <input required type="file" name="foto" id="foto" />
-            </div><br />
-            <div class="formulario letra-peq  ">
-              <label for="fotoAdmin">Imagen administrador</label>
-              <input required type="file" name="fotoAdmin" id="fotoAdmin" />
-            </div><br />
-            <div>
-              <label for="nombre_empresa">Nombre de la Empresa:</label>
-              <input
-                type="text"
-                id="nombre_empresa"
-                name="nombre_empresa"
-                required />
-            </div><br />
-
-            <div>
-              <label for="nombre_admin">Nombre del administrador:</label>
-              <input
-                type="text"
-                id="nombre_admin"
-                name="nombre_admin"
-                required />
-            </div><br />
-
-            <div>
-              <label for="email">Email:</label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                required />
-            </div><br />
-
-            <div>
-              <div>
-                <label for="emailEmpre">Email empresa:</label>
+            <div class="formulario letra-peq" style="margin-left: 76px;">
+              <span>
+                <label for="foto">Logo de la Empresa</label>
+                <input required type="file" name="foto" id="foto" />
+              </span>
+              <span>
+                <label for="fotoAdmin">Imagen administrador</label>
+                <input required type="file" name="fotoAdmin" id="fotoAdmin" />
+              </span>
+            </div>
+            <form id="RegistroEmpresa" class="formulario"></form>
+            <div class="center-div" style="font-weight: 400;">
+              <span class="form-colum">
+                <label for="nombre_empresa">Nombre de la Empresa</label>
                 <input
-                  type="emailEmpre"
-                  id="emailEmpre"
-                  name="emailEmpre"
+                  type="text"
+                  id="nombre_empresa"
+                  name="nombre_empresa"
+                  placeholder="Patitos S.A."
                   required />
-              </div><br />
-
-              <div>
-                <label for="info_empresa">Información de la Empresa:</label>
-                <textarea id="info_empresa" name="info_empresa" required></textarea>
-              </div><br />
-
-              <div>
-                <label for="contrasena">Contraseña:</label>
-                <input type="password" id="contrasena" name="contrasena"
-                  required />
-              </div><br />
-
-              <div>
-                <label for="confirmar_contrasena">Confirmar Contraseña:</label>
+              </span>
+  
+              <span class="form-colum">
+                <label for="nombre_admin">Nombre del administrador</label>
                 <input
-                  type="password"
-                  id="confirmar_contrasena"
-                  name="confirmar_contrasena"
+                  type="text"
+                  id="nombre_admin"
+                  name="nombre_admin"
+                  placeholder="Juan Pérez"
                   required />
-              </div><br />
-
-              <div class="separador" style="padding-top: 25px;">
-                <button class="boton1">Cancelar</button>
-                <button class="boton1" type="submit">Crear Cuenta</button>
-              </div>
+              </span>
+  
+              <span class="form-colum">
+                <label for="email">Email Administrador</label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  placeholder="juanPerez@patitos.com"
+                  required />
+              </span>
+  
+                <span class="form-colum">
+                  <label for="emailEmpre">Email empresa</label>
+                  <input
+                    type="emailEmpre"
+                    id="emailEmpre"
+                    name="emailEmpre"
+                    placeholder="patitos@domain.com"
+                    required />
+                </span>
+  
+                <span class="form-colum">
+                  <label for="info_empresa">Información de la Empresa</label>
+                  <textarea id="info_empresa" name="info_empresa" required></textarea>
+                </span>
+  
+                <span class="form-colum">
+                  <label for="contrasena">Contraseña</label>
+                  <input type="password" id="contrasena" name="contrasena"
+                    required />
+                </span>
+  
+                <span class="form-colum">
+                  <label for="confirmar_contrasena">Confirmar Contraseña</label>
+                  <input
+                    type="password"
+                    id="confirmar_contrasena"
+                    name="confirmar_contrasena"
+                    required />
+                </span>
+            </div>
             </form>
-          </div>
+            
+              <article class="separador">
+                <div class="separador">
+                  <button class="boton1">Cancelar</button>
+                  <button id="crear-cuenta" class="boton1" type="submit">Crear Cuenta</button>
+                </div>
+              </article>
         </section>
 
         <section>
           <div class="contenedor-titulo">
             <h5 class="center-div">¿Ya tienes una cuenta?</h5>
             <div class="separador">
-              <button class="boton2" type="submit">Iniciar sesión</button>
+              <button href="/proyecto1-2Q-2023/Login/login.html" class="boton2" type="submit">Iniciar sesión</button>
             </div>
           </div>
         </section>
       </main>
+
       <footer>
         <div class="footer-container">
           <div class="contact-section">

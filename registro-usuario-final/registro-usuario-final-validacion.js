@@ -137,7 +137,7 @@ document.getElementById("RegistroUsuarioFinal").addEventListener("submit", async
           // La solicitud POST se completó con éxito (código de respuesta 200-299)
           const usuarioFinal = await usuarioFinalCreado.json();
     
-          usuario.UsuarioFinal = usuarioFinal._id;
+          usuario.Empresa = usuarioFinal._id;
     
           const finalUserCreado = await fetch("http://localhost:5000/users", {
             method: "POST",

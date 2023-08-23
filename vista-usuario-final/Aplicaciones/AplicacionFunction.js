@@ -43,7 +43,7 @@ async function loadPuestosFromAPI() {
   }
 
 function RenderApplications(ListApplications) {
-  let mainbox = document.getElementById("Aplicaciones")
+  let mainbox = document.getElementById("Aplicaciones");
 
   for (let application of ListApplications) {
     let container = document.createElement("div");
@@ -76,24 +76,23 @@ function RenderApplications(ListApplications) {
     let ApplyButton = document.createElement("button");
     ApplyButton.classList.add("apply-btn");
     ApplyButton.textContent = "Aplicar Puesto";
-    ApplyButton.addEventListener("click", function() {
+    ApplyButton.addEventListener("click", function () {
       window.alert("Se ha aplicado al puesto");
     });
 
-    container.appendChild(Puesto)
-    container.appendChild(ApplyButton)  // Append Apply Button to the container
+    container.appendChild(Puesto);
+    container.appendChild(ApplyButton); // Append Apply Button to the container
 
-    mainbox.appendChild(container)
+    mainbox.appendChild(container);
   }
-
 }
 
-RenderApplications(ListPuestos)
+RenderApplications(ListPuestos);
 
 // Escuchamos el evento click en los botones de Aplicar Puesto
 const applyButtons = document.querySelectorAll(".apply-btn");
-applyButtons.forEach(button => {
-  button.addEventListener("click", event => {
+applyButtons.forEach((button) => {
+  button.addEventListener("click", (event) => {
     const id = event.target.parentElement.getAttribute("data-id");
     applyForJob(id);
   });
@@ -134,70 +133,72 @@ async function applyForJob(id) {
   }
 }
 
-
-
 const modalTriggerButtons = document.querySelectorAll("[data-modal-target]");
 const modals = document.querySelectorAll(".modal");
 const modalCloseButtons = document.querySelectorAll(".modal-close");
 const ButtonBack = document.querySelectorAll(".modal-Back");
-modalTriggerButtons.forEach(elem => {
-  elem.addEventListener("click", event => toggleModal(event.currentTarget.getAttribute("data-modal-target"), event.target));
+modalTriggerButtons.forEach((elem) => {
+  elem.addEventListener("click", (event) =>
+    toggleModal(
+      event.currentTarget.getAttribute("data-modal-target"),
+      event.target
+    )
+  );
 });
-modalCloseButtons.forEach(elem => {
-  elem.addEventListener("click", event => toggleModal(event.currentTarget.closest(".modal").id));
+modalCloseButtons.forEach((elem) => {
+  elem.addEventListener("click", (event) =>
+    toggleModal(event.currentTarget.closest(".modal").id)
+  );
 });
 
-ButtonBack.forEach(elem => {
-  elem.addEventListener("click", event => toggleModal(event.currentTarget.closest(".modal").id));
+ButtonBack.forEach((elem) => {
+  elem.addEventListener("click", (event) =>
+    toggleModal(event.currentTarget.closest(".modal").id)
+  );
 });
-modals.forEach(elem => {
-  elem.addEventListener("click", event => {
-    if (event.currentTarget === event.target) toggleModal(event.currentTarget.id);
+modals.forEach((elem) => {
+  elem.addEventListener("click", (event) => {
+    if (event.currentTarget === event.target)
+      toggleModal(event.currentTarget.id);
   });
 });
 
 function toggleModal(modalId, button) {
-
   if (modalId == "ModifyEmpleoModal") {
     if (button != undefined) {
-      let id = button.dataset.id
+      let id = button.dataset.id;
       if (id == undefined) {
         let puesto = button.parentNode;
-        id = puesto.dataset.id
+        id = puesto.dataset.id;
       }
       let empleo = ListPuestos[id];
-      document.getElementById("NombreEmpleo").value = empleo.Titulo
-      document.getElementById("RangoEmpleo").value = empleo.Rango
-      document.getElementById("RequisitosEmpleo").value = empleo.Requisitos
-      document.getElementById("AtributosEmpleo").value = empleo.Atributos
-      document.getElementById("TipoEmpleo").selectedIndex = empleo.Tipo
+      document.getElementById("NombreEmpleo").value = empleo.Titulo;
+      document.getElementById("RangoEmpleo").value = empleo.Rango;
+      document.getElementById("RequisitosEmpleo").value = empleo.Requisitos;
+      document.getElementById("AtributosEmpleo").value = empleo.Atributos;
+      document.getElementById("TipoEmpleo").selectedIndex = empleo.Tipo;
     }
-
   }
 
   if (modalId == "InfoEmpleoModal") {
     if (button != undefined) {
-      let id = button.dataset.id
+      let id = button.dataset.id;
       if (id == undefined) {
         let puesto = button.parentNode;
-        id = puesto.dataset.id
+        id = puesto.dataset.id;
       }
 
       let empleo = ListPuestos[id];
-      document.getElementById("TitlePostulacion").innerText = empleo.Titulo
-      document.getElementById("RangoSalarialInfo").innerText = empleo.Rango
-      document.getElementById("RequesitoInfo").innerText = empleo.Requisitos
-      document.getElementById("AtributosInfo").innerText = empleo.Atributos
+      document.getElementById("TitlePostulacion").innerText = empleo.Titulo;
+      document.getElementById("RangoSalarialInfo").innerText = empleo.Rango;
+      document.getElementById("RequesitoInfo").innerText = empleo.Requisitos;
+      document.getElementById("AtributosInfo").innerText = empleo.Atributos;
       if (empleo.Tipo == 0) {
-        document.getElementById("TipoInfo").innerText = "Privado"
+        document.getElementById("TipoInfo").innerText = "Privado";
+      } else {
+        document.getElementById("TipoInfo").innerText = "Publico";
       }
-      else {
-        document.getElementById("TipoInfo").innerText = "Publico"
-      }
-
-      
     }
-
   }
 
   const modal = document.getElementById(modalId);
@@ -210,15 +211,14 @@ function toggleModal(modalId, button) {
       modal.classList.remove("modal-show", "modal-hide");
       modal.style.display = "none";
     }, 200);
-  }
-  else {
+  } else {
     app.ui.cleanDOM();
     if (modalId == "EmpleoModal") {
-      document.getElementById("NombreEmpleoAdd").value = ""
-      document.getElementById("RangoEmpleoAdd").value = ""
-      document.getElementById("RequisitosEmpleoAdd").value = ""
-      document.getElementById("AtributosEmpleoAdd").value = ""
-      document.getElementById("TipoEmpleoAdd").selectedIndex = 0
+      document.getElementById("NombreEmpleoAdd").value = "";
+      document.getElementById("RangoEmpleoAdd").value = "";
+      document.getElementById("RequisitosEmpleoAdd").value = "";
+      document.getElementById("AtributosEmpleoAdd").value = "";
+      document.getElementById("TipoEmpleoAdd").selectedIndex = 0;
     }
     document.body.style.overflow = "hidden";
     modal.style.display = "flex";

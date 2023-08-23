@@ -159,7 +159,9 @@ document.getElementById("AddEmployedForm").addEventListener(
   true
 );
 
-document.getElementById("ModifyEmployedForm").addEventListener("submit", async function (event) {
+document
+  .getElementById("ModifyEmployedForm")
+  .addEventListener("submit", async function (event) {
     event.preventDefault();
     app.ui.cleanDOM();
 
@@ -176,10 +178,14 @@ document.getElementById("ModifyEmployedForm").addEventListener("submit", async f
       alert("Usuario actualizado");
       let reporte = {
         Tipo: "Usuario actualizado",
-        Descripcion: "Se a actualizado al usuario " + usuario.nombre + "con el correo " + usuario.email,
+        Descripcion:
+          "Se a actualizado al usuario " +
+          usuario.nombre +
+          "con el correo " +
+          usuario.email,
         Titulo: "Actualización de usuario",
-        empresa: localStorage.getItem("idempresa")
-      }
+        empresa: localStorage.getItem("idempresa"),
+      };
 
       try {
         const reporteCreado = await fetch("http://localhost:5000/reporte", {
@@ -194,7 +200,6 @@ document.getElementById("ModifyEmployedForm").addEventListener("submit", async f
         } else {
           console.error("Error al crear el reporte");
         }
-
       } catch (error) {
         console.error(error);
       }
@@ -239,16 +244,20 @@ async function invitarUsuario() {
     const rolInv = document.getElementById("RolInvitacion").value;
     console.log(emailInv, rolInv);
 
-    const valoresHtml = await fetch("http://localhost:5000/invitarUsuario", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        email: emailInv,
-        rol: rolInv,
-      }),
-    });
+    const valoresHtml = await fetch(
+      "http://localhost:5000/invitarUsuario/" +
+        localStorage.getItem("idempresa"),
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: emailInv,
+          rol: rolInv,
+        }),
+      }
+    );
   } catch (error) {
     console.error(error);
   }
