@@ -55,6 +55,7 @@ formulario.addEventListener("submit", async function (event) {
   const nombre = document.getElementById("nombre").value;
   const apellido = document.getElementById("apellido").value;
   const email = document.getElementById("email").value;
+  const empresaid = document.getElementById("empresaid").value;
   const contrasena = document.getElementById("password").value;
   const genero = document.getElementById("genero").value;
 
@@ -63,6 +64,7 @@ formulario.addEventListener("submit", async function (event) {
     nombre: nombre,
     apellido: apellido,
     email: email,
+    empresaid: empresaid,
     password: contrasena,
     genero: genero,
     role: "reclutador",

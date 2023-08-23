@@ -535,6 +535,7 @@ app.post("/registro-reclutador", async function (req, res) {
     nombre: req.body.nombre,
     apellido: req.body.apellido,
     email: req.body.email,
+    empresaid: req.body.empresaid,
     contrasena: req.body.password,
     genero: req.body.genero,
   });
