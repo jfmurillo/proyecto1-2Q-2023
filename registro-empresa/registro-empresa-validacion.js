@@ -1,59 +1,62 @@
+window.onload = function () {
+  const boton = document.getElementById("subir-imagen");
+  const previstaImagen = document.getElementById("prevista-imagen");
+
+  let myWidget = cloudinary.createUploadWidget(
+    {
+      cloudName: "dk2x7l0kq",
+      uploadPreset: "m6fhzjcs",
+    },
+    (error, result) => {
+      if (!error && result && result.event === "success") {
+        console.log("Done! Here is the image info: ", result.info);
+        //                    result.url
+        previstaImagen.src = result.info.url;
+      }
+    }
+  );
+
+  boton.addEventListener(
+    "click",
+    function () {
+      myWidget.open();
+    },
+    false
+  );
+
+  const botonE = document.getElementById("subir-imagenE");
+  const previstaImagenE = document.getElementById("prevista-imagenE");
+
+  let myWidgetE = cloudinary.createUploadWidget(
+    {
+      cloudName: "dk2x7l0kq",
+      uploadPreset: "m6fhzjcs",
+    },
+    (error, result) => {
+      if (!error && result && result.event === "success") {
+        console.log("Done! Here is the image info: ", result.info);
+        //                    result.url
+        previstaImagenE.src = result.info.url;
+      }
+    }
+  );
+
+  botonE.addEventListener(
+    "click",
+    function () {
+      myWidgetE.open();
+    },
+    false
+  );
+};
+
+
 let formulario = document.getElementById("RegistroEmpresa");
-const fileInput = document.getElementById("foto");
-const fileavatar = document.getElementById("fotoAdmin");
+
 
 let empresa = {};
 let adminImage;
 
-fileInput.addEventListener("input", async function (event) {
-  event.preventDefault()
-  const formData = new FormData();
-  formData.append("image", fileInput.files[0]);
-
-  try {
-    const response = await fetch("http://localhost:5000/images", {
-      method: "POST",
-      body: formData,
-    });
-
-    if (response.ok) {
-      const data = await response.json();
-      console.log("Ruta de la imagen en el servidor:", data.path);
-      empresa.image = data.path;
-      // Aquí puedes hacer lo que desees con la respuesta del servidor, en este caso, data.path es la ruta de la imagen en el servidor
-    } else {
-      console.error("Error al subir la imagen:", response.status);
-    }
-  } catch (error) {
-    console.error("Error en la solicitud:", error);
-  }
-
-})
-
-fileavatar.addEventListener("input", async function (event) {
-  event.preventDefault()
-  const formData = new FormData();
-  formData.append("image", fileavatar.files[0]);
-
-  try {
-    const response = await fetch("http://localhost:5000/images", {
-      method: "POST",
-      body: formData,
-    });
-
-    if (response.ok) {
-      const data = await response.json();
-      console.log("Ruta de la imagen en el servidor:", data.path);
-      adminImage = data.path;
-      // Aquí puedes hacer lo que desees con la respuesta del servidor, en este caso, data.path es la ruta de la imagen en el servidor
-    } else {
-      console.error("Error al subir la imagen:", response.status);
-    }
-  } catch (error) {
-    console.error("Error en la solicitud:", error);
-  }
-
-})
 
 
 
@@ -99,12 +102,13 @@ document.getElementById("RegistroEmpresa").addEventListener("submit", async func
       email: email,
       role: "admin",
       password: password,
-      avatar: adminImage
+      avatar: document.getElementById("prevista-imagen").src
     };
 
     empresa.nombre = formulario.nombre_empresa.value
     empresa.email = formulario.emailEmpre.value
     empresa.informacion = formulario.info_empresa.value
+    empresa.image = document.getElementById("prevista-imagenE").src;
     try {
       const CheckUser = await fetch("http://localhost:5000/users/email/" + usuario.email);
       let UserFound;

@@ -1,5 +1,8 @@
 .TitlePerfil {
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .TitlePerfil>* {
@@ -26,9 +29,7 @@
 
 #PerfilMain {
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
     padding-top: 125px;
-    padding-bottom: 393px;
 }

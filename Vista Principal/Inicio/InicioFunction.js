@@ -4,10 +4,11 @@ window.onload = async function () {
 
     loadPuestosFromAPI();
     document.getElementById("CompanyName").innerHTML = localStorage.getItem("CompanyName");
-    document.getElementById("LogoEmpresa").setAttribute("src", "../../NodeServer/" + localStorage.getItem("CompanyLogo"));
-    document.getElementById("PerfilEmpresa").setAttribute("src", "../../NodeServer/" + localStorage.getItem("CompanyLogo"));
-    document.getElementById("AvatarUser").setAttribute("src", "../../NodeServer/" + localStorage.getItem("Avatar"));
+    document.getElementById("LogoEmpresa").setAttribute("src", localStorage.getItem("CompanyLogo"));
+    document.getElementById("PerfilEmpresa").setAttribute("src", localStorage.getItem("CompanyLogo"));
+    document.getElementById("AvatarUser").setAttribute("src", localStorage.getItem("Avatar"));
 };
+
 
 async function loadPuestosFromAPI() {
     const RepuestaPuestos = await fetch("http://localhost:5000/puesto/");
@@ -66,3 +67,4 @@ function RenderApplications(ListApplications) {
         mainbox.appendChild(container);
     }
 }
+

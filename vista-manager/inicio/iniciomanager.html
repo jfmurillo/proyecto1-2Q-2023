@@ -4,22 +4,26 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Document</title>
-        <link rel="stylesheet" href="inicio-manager-style.css">
-        <link rel="stylesheet" href="/proyecto1-2Q-2023/vista-manager/assets/style.css">
+        <link rel="stylesheet" href="iniciomanagerstyle.css">
+        <link rel="stylesheet"
+            href="../assets/style.css">
         <script src="https://kit.fontawesome.com/52cdc0a8a5.js"
             crossorigin="anonymous"></script>
     </head>
     <body>
         <nav class="HeadNav">
             <div class="CompanyLogo">
-                <img src="/proyecto1-2Q-2023/vista-manager/assets/imagenDefault.png"
-                    alt="Logo de la empresa logeada">
+                <a href="../Perfil/PerfilAdministrador.html">
+                    <img id="LogoEmpresa" src="../assets/imagenDefault.png"
+                        alt="Logo de la empresa logeada"></a>
             </div>
             <ul class="ElementBox_Nav">
-                <li><a href="/proyecto1-2Q-2023/vista-manager/inicio/inicio-manager.html">Inicio</a></li>
-                <li><a href="/proyecto1-2Q-2023/vista-manager/equipo/equipo-manager.html">Equipo</a></li>
-                <li><a href="/proyecto1-2Q-2023/vista-manager/applicaciones/app-manager.html">Aplicaciones</a></li>
-                <li><a href="/proyecto1-2Q-2023/vista-manager/reportes/reportes-manager.html">Reportes</a></li>
+                <li><a href="../inicio/iniciomanager.html">Inicio</a></li>
+                <li><a href="../equipo/equipo-manager.html">Equipo</a></li>
+                <li><a href="../applicaciones/app-manager.html">Aplicaciones</a></li>
+                <li><a href="../reportes/reportes-manager.html">Reportes</a></li>
+                <li><a
+                        href="../../Vista Reclutador/Perfil/PerfilReclutador.html">Perfil</a></li>
             </ul>
 
             <div class="search">
@@ -27,8 +31,7 @@
                     <i class="fas fa-search"></i>
                 </label>
                 <input class="search-txt" name="Buscador" id="Buscador"
-                    type="text" name
-                    placeholder="Buscar">
+                    type="text" name placeholder="Buscar">
             </div>
             <div id="searchResult">
             </div>
@@ -37,18 +40,19 @@
                     <i class="fa-solid fa-bell"></i>
                 </div>
                 <ul class="ElementBox_Nav">
-                    <li><a href="../../Vista Principal/Inicio/Inicio.html">Cerrar sesión</a></li>
+                    <li><a href="../../Vista Principal/Inicio/Inicio.html">Cerrar
+                            sesión</a></li>
                 </ul>
                 <div class="UserLogo">
-                    <img src="/proyecto1-2Q-2023/vista-manager/assets/avatar.png"
+                    <img id="AvatarUser" src="../assets/avatar.png"
                         alt="Avatar del usuario">
                 </div>
             </div>
         </nav>
         <main>
             <header class="CompanyInfo">
-                <h1 class="CompanyTitle">Nombre de la empresa</h1>
-                <img src="/proyecto1-2Q-2023/vista-manager/assets/imagenDefault.png"
+                <h1 class="CompanyTitle" id="CompanyName">Nombre de la empresa</h1>
+                <img id="PerfilEmpresa" src="../assets/imagenDefault.png"
                     alt="Logo de la empresa logeada">
             </header>
             <section>
@@ -82,6 +86,7 @@
             </div>
         </footer>
     </body>
-    <script src="/proyecto1-2Q-2023/vista-manager/inicio/inicio-manager-function.js"></script>
-    <script src="/proyecto1-2Q-2023/vista-manager/assets/core.js"></script>
+    <script
+        src="iniciomanagerfunction.js"></script>
+    <script src="../../Vista Administrador/assets/core.js"></script>
 </html>

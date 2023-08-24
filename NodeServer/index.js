@@ -37,8 +37,8 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
-const username = 'vmorat';
-const password = 'Mora2023';
+const username = "vmorat";
+const password = "Mora2023";
 
 const connectionURI = `mongodb+srv://${username}:${password}@cluster0.h03de4d.mongodb.net/CodeWarrior?retryWrites=true&w=majority`;
 
@@ -128,7 +128,7 @@ app.post("/users/update", async function (req, res) {
   const usuariofind = await Users.findOne({ email: req.body.email });
   const usuarioActualizar = await Users.findOne({ _id: req.body.id });
 
-  if (usuariofind == undefined) {
+  if (req.body.password) {
     try {
       const usuario = await Users.updateOne(
         { _id: req.body.id },
@@ -136,7 +136,7 @@ app.post("/users/update", async function (req, res) {
           $set: {
             nombre: req.body.nombre,
             email: req.body.email,
-            role: req.body.role,
+            password: req.body.password
           },
         }
       );
@@ -145,10 +145,9 @@ app.post("/users/update", async function (req, res) {
       console.log("Error al obtener el usuario");
       res.status(500).send("Error al obtener el usuario");
     }
-  } else {
-    console.log(usuariofind._id);
-    console.log(usuarioActualizar._id);
-    if (usuariofind._id.toString() == usuarioActualizar._id.toString()) {
+  }
+  else {
+    if (usuariofind == undefined) {
       try {
         const usuario = await Users.updateOne(
           { _id: req.body.id },
@@ -166,8 +165,47 @@ app.post("/users/update", async function (req, res) {
         res.status(500).send("Error al obtener el usuario");
       }
     } else {
-      res.status(400).send("Correo ya utilizado");
+      console.log(usuariofind._id);
+      console.log(usuarioActualizar._id);
+      if (usuariofind._id.toString() == usuarioActualizar._id.toString()) {
+        try {
+          const usuario = await Users.updateOne(
+            { _id: req.body.id },
+            {
+              $set: {
+                nombre: req.body.nombre,
+                email: req.body.email,
+                role: req.body.role,
+              },
+            }
+          );
+          res.status(200).send(usuario);
+        } catch (error) {
+          console.log("Error al obtener el usuario");
+          res.status(500).send("Error al obtener el usuario");
+        }
+      } else {
+        res.status(400).send("Correo ya utilizado");
+      }
     }
+  }
+
+});
+app.post("/users/update/Logo", async function (req, res) {
+  try {
+    console.log(req.body)
+    const usuario = await Users.updateOne(
+      { _id: req.body.id },
+      {
+        $set: {
+          avatar: req.body.img,
+        },
+      }
+    );
+    res.status(200).send(usuario);
+  } catch (error) {
+    console.log("Error al actualizar el usuario");
+    res.status(500).send("Error al actualizar el usuario");
   }
 });
 
@@ -297,7 +335,7 @@ app.post("/puesto/delete/:id", async function (req, res) {
 });
 
 app.post("/empresa", async function (req, res) {
-  console.log("AAAAAAAAAAAAA");
+
   if (!req.body || req.body == {}) {
     res.status(400).send("No hay body en la peticion");
   }
@@ -329,36 +367,56 @@ app.get("/empresa", async function (req, res) {
 });
 
 app.post("/empresa/update", async function (req, res) {
-    try {
-        const empresa = await Empresa.updateOne(
-            { _id: req.body.id },
-            {
-                $set: {
-                    nombreEmpresa: req.body.nombre,
-                    email: req.body.email,
-                    InfoEmpresa: req.body.info,
-                },
-            }
-        );
+  try {
+    const empresa = await Empresa.updateOne(
+      { _id: req.body.id },
+      {
+        $set: {
+          nombreEmpresa: req.body.nombre,
+          email: req.body.email,
+          InfoEmpresa: req.body.info,
+        },
+      }
+    );
+
+    const empresapassword = await Users.updateOne(
+      { _id: req.body.iduser },
+      {
+        $set: {
+          password: req.body.password,
+          email: req.body.emailuser,
+          nombre: req.body.usuario,
+        },
+      }
+    );
+
+    console.log(empresapassword)
+    res.status(200).send(empresa);
+  } catch (error) {
+    console.log("Error al actualizar la empresa");
+    res.status(500).send("Error al actualizar la empresa");
+  }
+});
 
 
-        const empresapassword = await Users.updateOne(
-            { _id: req.body.iduser },
-            {
-                $set: {
-                    password: req.body.password,
-                    email: req.body.emailuser,
-                    nombre: req.body.usuario,
-                },
-            }
-        );
+app.post("/empresa/update/Logo", async function (req, res) {
+  try {
+    console.log(req.body)
+    const empresa = await Empresa.updateOne(
+      { _id: req.body.id },
+      {
+        $set: {
+          ImgEmpresa: req.body.img,
 
-        console.log(empresapassword)
-        res.status(200).send(empresa);
-    } catch (error) {
-        console.log("Error al actualizar la empresa");
-        res.status(500).send("Error al actualizar la empresa");
-    }
+        },
+      }
+    );
+    console.log(empresapassword);
+    res.status(200).send(empresa);
+  } catch (error) {
+    console.log("Error al actualizar la empresa");
+    res.status(500).send("Error al actualizar la empresa");
+  }
 });
 
 app.get("/empresas/:id", async function (req, res) {
@@ -370,8 +428,6 @@ app.get("/empresas/:id", async function (req, res) {
     res.status(500).send("Error al obtener la empresa");
   }
 });
-
-
 
 app.get("/empresas/email/:email", async function (req, res) {
   const email = req.params.email;
@@ -470,11 +526,10 @@ async function sendEmail(datosCorreo) {
           <p>Antes de la entrevista, necesitamos recopilar más información sobre ti a través de un formulario en línea.  </p>
           <p>Por favor, complete el formulario en el siguiente enlace:</p>
           <p>ID de la empresa: ${datosCorreo.empresa_id}</p></p>
-          <p><strong>${
-            rol === "1"
-              ? "http://localhost:5500/proyecto1-2Q-2023/registro-reclutador/registro-reclutador.html"
-              : "http://localhost:5500/proyecto1-2Q-2023/registro-manager/registro-manager.html"
-          }</strong></p>
+          <p><strong>${rol === "reclutador"
+          ? "http://localhost:5500/proyecto1-2Q-2023/registro-reclutador/registro-reclutador.html"
+          : "http://localhost:5500/proyecto1-2Q-2023/registro-manager/registro-manager.html"
+        }</strong></p>
         `,
     });
   } catch (error) {
@@ -497,7 +552,9 @@ async function emailPuestoTrabajo(datosCorreo) {
           <p>Nos complace informarte que has sido seleccionado/a para participar en la siguiente etapa del proceso de selección. 
           Estamos impresionados/as por tu perfil y creemos que podrías hacer una contribución valiosa a nuestro equipo.</p>
           <p>Antes de la entrevista, necesitamos recopilar más información sobre ti a través de un formulario en línea.  </p>
-          <p>ID de la empresa: ${datosCorreo.empresa_id}</p>
+          <p>ID de la empresa: ${(datosCorreo.empresa_id, datosCorreo.role === "finalUser")
+        }</p>
+
           <p>Por favor, complete el formulario en el siguiente enlace:</p>
           <p><strong>
           http://localhost:5500/proyecto1-2Q-2023/registro-usuario-final/registro-usuario-final.html
@@ -588,18 +645,18 @@ app.get("/registroUserFinal", async function (req, res) {
 
 app.get("/registroUserFinal/:id", async function (req, res) {
   const id = req.params.id;
-  
-  try {
-      const usuario = await UsuarioFinal.findById(id);
-      
-      if (!usuario) {
-          return res.status(404).send("Usuario no encontrado");
-      }
 
-      res.status(200).send(usuario);
-  }
-  catch (error) {
-      res.status(500).send("Error al obtener el usuario");
+  try {
+    const usuario = await UsuarioFinal.findById(id);
+
+    if (!usuario) {
+      return res.status(404).send("Usuario no encontrado");
+    }
+
+    res.status(200).send(usuario);
+  } catch (error) {
+
+    res.status(500).send("Error al obtener el usuario");
   }
 });
 

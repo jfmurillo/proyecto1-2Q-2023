@@ -8,63 +8,131 @@
     <link rel="stylesheet" href="../assets/style.css" />
     <script
       src="https://kit.fontawesome.com/52cdc0a8a5.js"
-      crossorigin="anonymous"
-    ></script>
+      crossorigin="anonymous"></script>
   </head>
 
   <body>
     <header>
-        <nav class="HeadNav" style="list-style-type: none;">
-            <div class="CompanyLogo">
-              <a href="../Perfil/PerfilReclutador.html"
-                ><img
-                  src="../assets/imagenDefault.png"
-                  alt="Logo de la empresa logeada"
-              /></a>
-            </div>
-            <ul class="ElementBox_Nav" style="list-style-type: none;">
-              <li><a href="../Inicio/InicioReclutador.html">Inicio</a></li>
-              <li>
-                <a href="../Aplicaciones/AplicacionReclutador.html">Aplicaciones</a>
-              </li>
-              <li><a href="../Perfil/PerfilReclutador.html">Perfil</a></li>
-            </ul>
-      
-            <div class="search">
-              <label class="search-btn" for="Buscador">
-                <i class="fas fa-search"></i>
-              </label>
-              <input
-                class="search-txt"
-                name="Buscador"
-                id="Buscador"
-                type="text"
-                name
-                placeholder="Buscar"
-              />
-            </div>
-            <div id="searchResult"></div>
-            <div class="UserZone">
-              <div class="Notifications">
-                <i class="fa-solid fa-bell"></i>
-              </div>
-              <ul class="ElementBox_Nav" style="list-style-type: none;">
-                <li><a href="../../Vista Principal/Inicio/Inicio.html">Cerrar sesión</a></li>
-            </ul>
-              <div class="UserLogo">
-                <a href="../Perfil/PerfilReclutador.html">
-                  <img src="../assets/avatar.png" alt="Avatar del usuario"
-                /></a>
-              </div>
-            </div>
-          </nav>
+      <nav class="HeadNav">
+        <div class="CompanyLogo">
+          <img
+            id="LogoEmpresa"
+            src="../assets/imagenDefault.png"
+            alt="Logo de la empresa logeada">
+        </div>
+        <ul class="ElementBox_Nav">
+          <li><a href="../Inicio/InicioReclutador.html">Inicio</a></li>
+          <li><a href="../Aplicaciones/AplicacionReclutador.html">Aplicaciones</a></li>
+          <li><a href="../Perfil/PerfilReclutador.html">Perfil</a></li>
+        </ul>
+
+        <div class="search">
+          <label class="search-btn" for="Buscador">
+            <i class="fas fa-search"></i>
+          </label>
+          <input class="search-txt" name="Buscador" id="Buscador"
+            type="text" name
+            placeholder="Buscar">
+        </div>
+        <div id="searchResult">
+        </div>
+        <div class="UserZone">
+          <div class="Notifications">
+            <i class="fa-solid fa-bell"></i>
+          </div>
+          <ul class="ElementBox_Nav">
+            <li><a href="../../Vista Principal/Inicio/Inicio.html">Cerrar
+                sesión</a></li>
+          </ul>
+          <div class="UserLogo">
+            <img id="AvatarUser" src="../assets/avatar.png"
+              alt="Avatar del usuario">
+          </div>
+        </div>
+      </nav>
     </header>
-    
+
     <main>
-      <section >
+      <section>
         <div class="AplicacionesTrabajos">
           <h2 class="TitlePublicaciones">Ofertas de trabajo publicadas</h2>
-          <div id="Aplicaciones" class="margen-main"></div>
+          <div id="Aplicaciones">
+          </div>
+          <div class="modal" id="ModifyEmpleoModal">
+            <div class="modal-content">
+              <div class="TitleModal">
+                <span class="modal-close">&times;</span>
+                <h2>Modificar puesto de trabajo</h2>
+              </div>
+              <img src="../assets/imagenDefault.png"
+                alt="Logo de la empresa">
+
+              <form class="FlexForm" id="ModifyEmpleoForm">
+
+                <div class="FormText columna-3">
+                  <label class="FormLabel" for="NombreEmpleo">Nombre
+                    del puesto</label>
+                  <input class="InputText" type="text"
+                    required
+                    name="NombreEmpleo" id="NombreEmpleo">
+                </div>
+                <div class="FormText columna-3">
+                  <label class="FormLabel" for="RangoEmpleo">Ragon
+                    Salarial</label>
+                  <input class="InputText" type="text"
+                    required
+                    name="RangoEmpleo" id="RangoEmpleo">
+                </div>
+                <div class="FormText columna-3">
+                  <label class="FormLabel"
+                    for="RequisitosEmpleo">Requisitos
+                    mínimos</label>
+                  <input class="InputText" type="text"
+                    required
+                    name="RequisitosEmpleo"
+                    id="RequisitosEmpleo">
+                </div>
+                <div class="FormText columna-3">
+                  <label class="FormLabel"
+                    for="AtributosEmpleo">Atributos
+                    deseables</label>
+                  <input class="InputText" type="text"
+                    required
+                    name="AtributosEmpleo"
+                    id="AtributosEmpleo">
+                </div>
+                <div class="FormText columna-3">
+                  <label class="FormLabel"
+                    for="DescripEmpleo">Descripcion</label>
+                  <textarea class="InputText" type="text"
+                    required
+                    name="DescripEmpleo"
+                    id="DescripEmpleo"></textarea>
+                </div>
+                <div class="FormSelect columna-3">
+                  <label class="FormLabel" for="TipoEmpleo">Tipo
+                    de puesto</label>
+                  <select class="InputSelect"
+                    name="TipoEmpleo" style="padding: 15px;"
+                    id="TipoEmpleo">
+                    <option value="1">Privado</option>
+                    <option value="2">Publico</option>
+                  </select>
+                </div>
+                <div class="FooterModal">
+                  <div class="Botonera">
+                    <button class="modal-Back ButtonDesign"
+                      type="reset">Regresar</button>
+                    <button class="ButtonDesign"
+                      type="reset" id="deletePuesto">Eliminar</button>
+                    <button class="ButtonDesign"
+                      type="submit"
+                      id="UpdatePuesto">Modificar puesto</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
 
           <div class="modal" id="InfoEmpleoModal">
             <div class="modal-content">
@@ -86,45 +154,47 @@
                   </thead>
                 </table>
                 <h4>Invitar usuario</h4>
-                <button class="AddButton" data-modal-target="AddAplicanteModal">
-                  <i class="fa-solid fa-plus"></i>
-                </button>
+                <div id="AplicationButton">
+                  <button class="AddButton"
+                    data-modal-target="AddAplicanteModal"><i
+                      class="fa-solid fa-plus"></i></button>
+                </div>
                 <div class="modal" id="AddAplicanteModal">
                   <div class="modal-content">
                     <div class="TitleModal">
                       <span class="modal-close">&times;</span>
-                      <h2 id="TitlePostulacion">Invitar a usuario a puesto</h2>
+                      <h2 id="TitlePostulacion">Invitar a
+                        usuario a puesto</h2>
                     </div>
                     <form id="InvitarAplicanteForm">
                       <div class="FormText">
-                        <label class="FormLabel" for="InviteAplicCorreo"
-                          >Correo</label
-                        >
-                        <input
-                          class="InputText"
-                          type="text"
+                        <label class="FormLabel"
+                          for="InviteAplicCorreo">Correo</label>
+                        <input class="InputText"
+                          type="email" required
                           name="InviteAplicCorreo"
-                          id="InviteAplicCorreo"
-                        />
+                          id="InviteAplicCorreo">
+                      </div>
+                      <div class="FooterModal">
+                        <div class="Botonera">
+                          <button
+                            class="modal-Back ButtonDesign"
+                            type="reset">Regresar</button>
+                          <button class="ButtonDesign"
+                            type="submit"
+                            id="SendInviteAplic">Enviar</button>
+                        </div>
                       </div>
                     </form>
-                    <div class="FooterModal">
-                      <div class="Botonera">
-                        <button class="modal-Back ButtonDesign">
-                          Regresar
-                        </button>
-                        <button class="ButtonDesign" id="SendInviteAplic" type="button"> 
-                          Enviar
-                        </button>
-                      </div>
-                    </div>
+
                   </div>
                 </div>
               </div>
+
             </div>
           </div>
         </div>
-    </section>
+      </section>
     </main>
 
     <footer>

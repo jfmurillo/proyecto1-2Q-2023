@@ -6,15 +6,9 @@ window.onload = async function () {
   }
   loadpuestos().then((list) => RenderApplications(list));
 
-  document
-    .getElementById("LogoEmpresa")
-    .setAttribute(
-      "src",
-      "../../NodeServer/" + localStorage.getItem("CompanyLogo")
-    );
-  document
-    .getElementById("AvatarUser")
-    .setAttribute("src", "../../NodeServer/" + localStorage.getItem("Avatar"));
+  document.getElementById("LogoEmpresa").setAttribute("src", localStorage.getItem("CompanyLogo"))
+  document.getElementById("AvatarUser").setAttribute("src", localStorage.getItem("Avatar"))
+
 };
 
 var app = app || {};
@@ -26,7 +20,14 @@ async function loadpuestos() {
     "http://localhost:5000/puesto/" + localStorage.getItem("idempresa")
   );
   const Puestos = await RepuestaPuestos.json();
+
+  const RepuestaEmpresa = await fetch("http://localhost:5000/empresas/" + Puestos[0].Empresa);
+  const Empresa = await RepuestaEmpresa.json();
+
+  console.log(Puestos)
+
   console.log(Puestos);
+
   Puestos.forEach(function (puesto) {
     let puestoOrder = {
       id: puesto._id,
@@ -35,7 +36,7 @@ async function loadpuestos() {
       Requisitos: puesto.RequisitosPuesto,
       Atributos: puesto.AtributosPuesto,
       Tipo: puesto.TipoPuesto,
-      Imagen: "../assets/imagenDefault.png",
+      Imagen: Empresa.ImgEmpresa,
       Descripcion: puesto.DescripcionPuesto,
       Postulantes: puesto.AplicantesPuesto,
     };
@@ -471,7 +472,7 @@ async function invitarUsuario() {
 
     const valoresHtml = await fetch(
       "http://localhost:5000/invitarUsuario/" +
-        localStorage.getItem("idempresa"),
+      localStorage.getItem("idempresa"),
       {
         method: "POST",
         headers: {
