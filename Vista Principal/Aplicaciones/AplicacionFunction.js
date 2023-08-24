@@ -1,39 +1,43 @@
-var app = app || {};
-let ListPuestos = [
-  {
-    Fecha: "7/7/2023",
-    Titulo: "Nombre del empleo 1",
-    Rango: "Rango 1",
-    Requisitos: "Requesitos 1",
-    Atributos: "Atributos 1",
-    Tipo: 0,
-    Imagen: "../assets/imagenDefault.png",
-    Empresa: "Nombre de la empresa",
-    Descripcion: "Descripción",
-  },
-  {
-    Fecha: "7/7/2023",
-    Titulo: "Nombre del empleo 2",
-    Rango: "Rango 2",
-    Requisitos: "Requesitos 2",
-    Atributos: "Atributos 2",
-    Tipo: 1,
-    Imagen: "../assets/imagenDefault.png",
-    Empresa: "Nombre de la empresa",
-    Descripcion: "Descripción",
-  },
-  {
-    Fecha: "7/7/2023",
-    Titulo: "Nombre del empleo 3",
-    Rango: "Rango 3",
-    Requisitos: "Requesitos 3",
-    Atributos: "Atributos 3",
-    Tipo: 0,
-    Imagen: "../assets/imagenDefault.png",
-    Empresa: "Nombre de la empresa",
-    Descripcion: "Descripción",
-  },
-];
+let ListPuestos = [];
+
+window.onload = async function () {
+    
+    loadPuestosFromAPI();
+    document.getElementById("CompanyName").innerHTML = localStorage.getItem("CompanyName");
+    document.getElementById("LogoEmpresa").setAttribute("src", "../../NodeServer/" + localStorage.getItem("CompanyLogo"));
+    document.getElementById("PerfilEmpresa").setAttribute("src", "../../NodeServer/" + localStorage.getItem("CompanyLogo"));
+    document.getElementById("AvatarUser").setAttribute("src", "../../NodeServer/" + localStorage.getItem("Avatar"));
+};
+
+async function loadPuestosFromAPI() {
+    const RepuestaPuestos = await fetch("http://localhost:5000/puesto/");
+    const Puestos = await RepuestaPuestos.json();
+    console.log(Puestos);
+
+    let contador = 0;
+
+    Puestos.forEach(function (puesto) {
+        if (contador < 10) {
+            let puestoOrder = {
+                Imagen: "../assets/imagenDefault.png",
+                Descripcion: puesto.DescripcionPuesto,
+                Titulo: puesto.nombrePuesto,
+            };
+
+            const fecha = new Date(puesto.updatedAt);
+
+            const dia = fecha.getDate().toString().padStart(2, '0'); // Agregar ceros a la izquierda si es necesario
+            const mes = (fecha.getMonth() + 1).toString().padStart(2, '0'); // Los meses en JavaScript son indexados desde 0, por lo que sumamos 1
+            const anio = fecha.getFullYear();
+
+            puestoOrder.Fecha = `${dia}/${mes}/${anio}`;
+
+            ListPuestos.push(puestoOrder);
+            contador++;
+        }
+    });
+    RenderApplications(ListPuestos);
+  }
 
 function RenderApplications(ListApplications) {
   let mainbox = document.getElementById("Aplicaciones");
@@ -72,6 +76,7 @@ function RenderApplications(ListApplications) {
 }
 
 RenderApplications(ListPuestos);
+
 
 const modalTriggerButtons = document.querySelectorAll("[data-modal-target]");
 const modals = document.querySelectorAll(".modal");
@@ -164,4 +169,4 @@ function toggleModal(modalId, button) {
     modal.style.display = "flex";
     modal.classList.add("modal-show");
   }
-}
+};

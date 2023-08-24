@@ -245,16 +245,20 @@ async function invitarUsuario() {
     const rolInv = document.getElementById("RolInvitacion").value;
     console.log(emailInv, rolInv);
 
-    const valoresHtml = await fetch("http://localhost:5000/invitarUsuario", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        email: emailInv,
-        rol: rolInv,
-      }),
-    });
+    const valoresHtml = await fetch(
+      "http://localhost:5000/invitarUsuario/" +
+        localStorage.getItem("idempresa"),
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          email: emailInv,
+          rol: rolInv,
+        }),
+      }
+    );
   } catch (error) {
     console.error(error);
   }

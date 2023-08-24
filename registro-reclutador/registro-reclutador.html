@@ -26,7 +26,7 @@
       <section class="fondo-registro">
         <div class="contenedor-titulo">
           <h1 class="titulo">Registro reclutador</h1>
-            <form>
+            <form id="RegistroReclutador">
               <div class="formulario">
                 <label for="cedula">Foto</label>
                 <input required type="file" name="foto" id="foto" />
@@ -45,6 +45,11 @@
               <div class="formulario">
                 <label for="email">Email</label>
                 <input type="email" name="email"  id="email"  placeholder="correo.ejemplo@patito.com" required/>
+              </div>
+
+              <div class="formulario">
+                <label for="email">Empresa ID</label>
+                <input type="text" name="empresaid"  id="empresaid" required/>
               </div>
 
               <div class="formulario">
@@ -69,7 +74,7 @@
 
               <div class="separador" style="padding-top: 25px;">
                 <button class="boton1" type="submit">Cancelar</button>
-                <button class="boton1" type="onclick">Crear Cuenta</button>
+                <button id="login-button" class="boton1" type="submit">Crear Cuenta</button>
               </div>
             </form>
         </div>
@@ -107,4 +112,5 @@
       </div>
   </footer>
   </body>
+  <script src="/proyecto1-2Q-2023/registro-reclutador/reclutador.js"></script>
 </html>

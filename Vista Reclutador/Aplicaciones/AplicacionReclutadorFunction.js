@@ -1,4 +1,6 @@
 
+
+let ListPuestos = [];
 let idEmpleoSelect;
 window.onload = async function () {
   if (!localStorage.getItem('iduser')) {

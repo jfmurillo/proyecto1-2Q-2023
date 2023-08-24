@@ -82,6 +82,7 @@ nav.HeadNav {
     object-fit: cover;
     margin-right: 15px;
     border-radius: 100%;
+    background-color: white;
 }
 
 .ElementBox_Nav {

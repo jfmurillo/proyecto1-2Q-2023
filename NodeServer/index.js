@@ -3,7 +3,9 @@ const mongoose = require("mongoose");
 const Users = require("./models/UserModel");
 const Puestos = require("./models/PuestosModel");
 const Empresa = require("./models/EmpresaModel");
-const UsuarioFinal = require("./models/UsuarioFinalModel"); //Usuario Final
+const UsuarioFinal = require("./models/UsuarioFinalModel");
+const Reclutador = require("./models/ReclutadorModel");
+const Manager = require("./models/ManagerModel");
 const cors = require("cors");
 const reportes = require("./models/Reportes");
 
@@ -34,8 +36,8 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
-const username = "jmurillocr3";
-const password = "Murillo2023";
+const username = 'vmorat';
+const password = 'Mora2023';
 
 const connectionURI = `mongodb+srv://${username}:${password}@cluster0.h03de4d.mongodb.net/CodeWarrior?retryWrites=true&w=majority`;
 
@@ -457,7 +459,6 @@ app.post("/invitarUsuario/:id_empresa", async (req, res) => {
 
 app.post("/invitarPuesto", async (req, res) => {
   const { email } = req.body;
-  const id_empresa = req.params.id_empresa;
 
   try {
     console.log("Enviando correo de invitacion de puesto a: ", email);
@@ -488,7 +489,7 @@ async function sendEmail(datosCorreo) {
   console.log("Enviando invitacion de equipo", datosCorreo);
   const transporter = nodemailer.createTransport({ ...smtpOptions });
   const { correo, rol } = datosCorreo;
-
+  console.log(rol);
   try {
     await transporter.sendMail({
       from: correoOrigen,
@@ -617,36 +618,93 @@ app.get("/registroUserFinal", async function (req, res) {
   }
 });
 
+app.get("/registroUserFinal/:id", async function (req, res) {
+  const id = req.params.id;
+
+  try {
+    const usuario = await UsuarioFinal.findById(id);
+
+    if (!usuario) {
+      return res.status(404).send("Usuario no encontrado");
+    }
+
+    res.status(200).send(usuario);
+  }
+  catch (error) {
+    res.status(500).send("Error al obtener el usuario");
+  }
+});
+
+//put para actualizar información de los estudiantes
+app.put("/registroUserFinal", async function (req, response) {
+  console.log("Atendiendo solicitud PUT a /registroUserFinal");
+
+  if (!req.body) {
+    console.log("No se recibó el usuario");
+    return response.status(400).send("No se recibió el usuario");
+  }
+
+  try {
+    console.log("Guardando usuario en la base de datos");
+    const resultado = await UsuarioFinal.findByIdAndUpdate(req.body.id, {
+      foto: req.body.foto,
+      cv: req.body.cv,
+      nombre: req.body.nombre,
+      apellido: req.body.apellido,
+      email: req.body.email,
+      contrasena: req.body.contrasena,
+      genero: req.body.genero,
+      experiencia: req.body.experiencia,
+      estudios: req.body.estudios,
+    });
+    console.log("Usuario guardado:", resultado);
+
+    response.status(201).send(resultado);
+  } catch (error) {
+    console.log("Error al guardar el usuario:", error);
+    response.status(500).send(error);
+  }
+});
+
 // REGISTRO RECLUTADOR
-app.post("/registroReclutador", async function (req, res) {
+app.post("/registro-reclutador", async function (req, res) {
   if (!req.body || req.body == {}) {
     res.status(400).send("No hay body en la peticion");
   }
 
-  const newUser = new Reclutador({
+  const newRec = new Reclutador({
     foto: req.body.foto,
     nombre: req.body.nombre,
     apellido: req.body.apellido,
     email: req.body.email,
-    contrasena: req.body.contrasena,
+    empresaid: req.body.empresaid,
+    contrasena: req.body.password,
     genero: req.body.genero,
-    empresa: req.body.empresa,
+  });
+
+  const usuario = new Users({
+    nombre: req.body.nombre,
+    email: req.body.email,
+    role: "reclutador",
+    password: req.body.password,
+    avatar: req.body.foto,
   });
 
   try {
-    const usuarioGuardado = await newUser.save();
-    res.status(201).send(usuarioGuardado);
+    const reclutadorGuardado = await newRec.save();
+    const usuarioGuardado = await usuario.save();
+    res.status(201).send({ reclutadorGuardado, usuarioGuardado });
   } catch (error) {
     if (error.code === 11000) {
       res.status(400).send("El email ya existe.");
     } else {
       console.log(error);
-      res.status(500).send("Error creando el usuario final.");
+      res.status(500).send("Error creando el reclutador.");
     }
   }
 });
 
-app.get("/registroReclutador", async function (req, res) {
+app.get("/registro-reclutador", async function (req, res) {
   try {
     const usuarios = await Reclutador.find({});
     res.status(200).send(usuarios);
@@ -656,35 +714,44 @@ app.get("/registroReclutador", async function (req, res) {
 });
 
 // REGISTRO MANAGER
-app.post("/registroManager", async function (req, res) {
+app.post("/registro-manager", async function (req, res) {
   if (!req.body || req.body == {}) {
     res.status(400).send("No hay body en la peticion");
   }
 
-  const newUser = new Manager({
+  const newManager = new Manager({
     foto: req.body.foto,
     nombre: req.body.nombre,
     apellido: req.body.apellido,
     email: req.body.email,
-    contrasena: req.body.contrasena,
+    empresaid: req.body.empresaid,
+    contrasena: req.body.password,
     genero: req.body.genero,
-    empresa: req.body.empresa,
+  });
+
+  const usuario = new Users({
+    nombre: req.body.nombre,
+    email: req.body.email,
+    role: "manager",
+    password: req.body.password,
+    avatar: req.body.foto,
   });
 
   try {
-    const usuarioGuardado = await newUser.save();
-    res.status(201).send(usuarioGuardado);
+    const managerGuardado = await newManager.save();
+    const usuarioGuardado = await usuario.save();
+    res.status(201).send({ managerGuardado, usuarioGuardado });
   } catch (error) {
     if (error.code === 11000) {
       res.status(400).send("El email ya existe.");
     } else {
       console.log(error);
-      res.status(500).send("Error creando el usuario final.");
+      res.status(500).send("Error creando el manager.");
     }
   }
 });
 
-app.get("/registroManager", async function (req, res) {
+app.get("/registro-manager", async function (req, res) {
   try {
     const usuarios = await Manager.find({});
     res.status(200).send(usuarios);
@@ -692,6 +759,29 @@ app.get("/registroManager", async function (req, res) {
     res.status(500).send("Error al obtener los usuarios");
   }
 });
+
+// app.post("/registro", async function (request, response) {
+//   if (!request.body) {
+//     // manejar el error
+//     response.status(400).json({
+//       error: "No hay body en la petición",
+//     });
+//   }
+
+//   try {
+//     const usuario = await Usuario.create({
+//       // campos usuario
+//     });
+
+//     const reclutador = await Reclutador.create({
+//       // Campos reclutador
+//     });
+
+//     response.status(200).json(usuario);
+//   } catch (error) {
+//     response.status(500).json(error);
+//   }
+// });
 
 const port = 5000;
 
