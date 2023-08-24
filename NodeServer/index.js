@@ -36,8 +36,8 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
-const username = 'vmorat';
-const password = 'Mora2023';
+const username = "vmorat";
+const password = "Mora2023";
 
 const connectionURI = `mongodb+srv://${username}:${password}@cluster0.h03de4d.mongodb.net/CodeWarrior?retryWrites=true&w=majority`;
 
@@ -353,7 +353,6 @@ app.post("/empresa/update", async function (req, res) {
       }
     );
 
-
     const empresapassword = await Users.updateOne(
       { _id: req.body.iduser },
       {
@@ -386,6 +385,7 @@ app.post("/empresa/update/Logo", async function (req, res) {
         },
       }
     );
+    console.log(empresapassword);
     res.status(200).send(empresa);
   } catch (error) {
     console.log("Error al actualizar la empresa");
@@ -402,8 +402,6 @@ app.get("/empresas/:id", async function (req, res) {
     res.status(500).send("Error al obtener la empresa");
   }
 });
-
-
 
 app.get("/empresas/email/:email", async function (req, res) {
   const email = req.params.email;
@@ -530,6 +528,7 @@ async function emailPuestoTrabajo(datosCorreo) {
           <p>Antes de la entrevista, necesitamos recopilar más información sobre ti a través de un formulario en línea.  </p>
           <p>ID de la empresa: ${(datosCorreo.empresa_id, datosCorreo.role === "finalUser")
         }</p>
+
           <p>Por favor, complete el formulario en el siguiente enlace:</p>
           <p><strong>
           http://localhost:5500/proyecto1-2Q-2023/registro-usuario-final/registro-usuario-final.html
@@ -629,8 +628,8 @@ app.get("/registroUserFinal/:id", async function (req, res) {
     }
 
     res.status(200).send(usuario);
-  }
-  catch (error) {
+  } catch (error) {
+
     res.status(500).send("Error al obtener el usuario");
   }
 });
