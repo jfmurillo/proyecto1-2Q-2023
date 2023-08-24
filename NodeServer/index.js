@@ -8,6 +8,7 @@ const Reclutador = require("./models/ReclutadorModel");
 const Manager = require("./models/ManagerModel");
 const cors = require("cors");
 const reportes = require("./models/Reportes");
+const Aplicaciones = require('./models/AplicacionesModel'); 
 
 const multer = require("multer");
 const path = require("path");
@@ -257,6 +258,31 @@ app.get("/puesto/:id", async function (req, res) {
     res.status(200).send(puesto);
   } catch (error) {
     res.status(500).send("Error al obtener el puesto");
+  }
+});
+
+app.get("/puestos", async function (req, res) {
+  try {
+    const puestos = await Puestos.find({});
+    res.status(200).send(puestos);
+  } catch (error) {
+    res.status(500).send("Error al obtener los puestos");
+  }
+});
+app.get("/puestos/:id", async function (req, res) {
+  const id = req.params.id;
+  
+  try {
+      const puesto = await Puestos.findById(id);
+      
+      if (!puesto) {
+          return res.status(404).send("Puesto no encontrado");
+      }
+
+      res.status(200).send(puesto);
+  }
+  catch (error) {
+      res.status(500).send("Error al obtener el puesto");
   }
 });
 
@@ -702,28 +728,61 @@ app.get("/registro-manager", async function (req, res) {
   }
 });
 
-// app.post("/registro", async function (request, response) {
-//   if (!request.body) {
-//     // manejar el error
-//     response.status(400).json({
-//       error: "No hay body en la petición",
-//     });
-//   }
+app.post("/aplicar", async function (req, res) {
+  if (!req.body || req.body == {}) {
+    res.status(400).send("No hay body en la peticion");
+  }
+  console.log(req.body);
+  const userId = req.body.userId;
+  const application = new Aplicaciones({
+      companyName: req.body.companyName,
+      puestoDescription: req.body.puestoDescription,
+      puestoStatus: req.body.puestoStatus,
+      dateApplied: req.body.dateApplied || Date.now(),
+      userId: userId  // Agregar el ID del usuario
+  });
 
-//   try {
-//     const usuario = await Usuario.create({
-//       // campos usuario
-//     });
+  try {
+    await application.save();
 
-//     const reclutador = await Reclutador.create({
-//       // Campos reclutador
-//     });
+    res.status(200).send({ message: "Aplicación guardada con éxito" });
+  } catch (error) {
+    console.error("Error al guardar la aplicación", error);
+    res.status(500).send("Error al guardar la aplicación");
+  }
+});
 
-//     response.status(200).json(usuario);
-//   } catch (error) {
-//     response.status(500).json(error);
-//   }
-// });
+app.get("/aplicar", async function (req, res) {
+  try {
+    const application = await Aplicaciones.find({});
+    res.status(200).send(application);
+  } catch (error) {
+    res.status(500).send("Error al obtener las aplicaciones");
+  }
+});
+
+app.get("/aplicar/:id", async function (req, res) {
+  const id = req.params.id;
+  try {
+    const application = await Aplicaciones.find({ Empresa: id }).sort({ createdAt: -1 });
+    res.status(200).send(application);
+  } catch (error) {
+    res.status(500).send("Error al obtener la aplicación");
+  }
+});
+
+app.get("/aplicaciones/usuario/:userId", async function (req, res) {
+  const userId = req.params.userId;
+  try {
+    const userApplications = await Aplicaciones.find({ Usuario: userId }).sort({ createdAt: -1 });
+    if (!userApplications.length) {
+      return res.status(404).send("No se encontraron aplicaciones para este usuario.");
+    }
+    res.status(200).send(userApplications);
+  } catch (error) {
+    res.status(500).send("Error al obtener las aplicaciones del usuario.");
+  }
+});
 
 const port = 5000;
 
