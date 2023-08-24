@@ -7,6 +7,7 @@
     flex-direction: column;
     align-items: center;
     padding-top: 125px;
+    margin-bottom: 200px;
 }
 
 .CompanyInfo img {
@@ -17,7 +18,7 @@
 
 .TitlePublicaciones {
     text-align: center;
-    margin: 20px;
+    margin: 150px;
 }
 
 .Puesto {
