@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Document</title>
         <link rel="stylesheet" href="app-manager-style.css">
-        <link rel="stylesheet" href="/proyecto1-2Q-2023/vista-manager/assets/style.css">
+        <link rel="stylesheet" href="../assets/style.css">
         <script src="https://kit.fontawesome.com/52cdc0a8a5.js"
             crossorigin="anonymous"></script>
     </head>
@@ -14,14 +14,17 @@
     <body>
         <nav class="HeadNav">
             <div class="CompanyLogo">
-                <img src="/proyecto1-2Q-2023/vista-manager/assets/imagenDefault.png"
+
+                <img id="LogoEmpresa" src="../assets/imagenDefault.png"
                     alt="Logo de la empresa logeada">
             </div>
             <ul class="ElementBox_Nav">
-                <li><a href="/proyecto1-2Q-2023/vista-manager/inicio/inicio-manager.html" >Inicio</a></li>
-                <li><a href="/proyecto1-2Q-2023/vista-manager/equipo/equipo-manager.html">Equipo</a></li>
-                <li><a href="/proyecto1-2Q-2023/vista-manager/applicaciones/app-manager.html">Aplicaciones</a></li>
-                <li><a href="/proyecto1-2Q-2023/vista-manager/reportes/reportes-manager.html">Reportes</a></li>
+                <li><a href="../inicio/iniciomanager.html">Inicio</a></li>
+                <li><a href="../equipo/equipo-manager.html">Equipo</a></li>
+                <li><a href="../applicaciones/app-manager.html">Aplicaciones</a></li>
+                <li><a href="../reportes/reportes-manager.html">Reportes</a></li>
+                <li><a
+                        href="../../Vista Reclutador/Perfil/PerfilReclutador.html">Perfil</a></li>
             </ul>
 
             <div class="search">
@@ -38,10 +41,12 @@
                     <i class="fa-solid fa-bell"></i>
                 </div>
                 <ul class="ElementBox_Nav">
-                    <li><a href="../../Vista Principal/Inicio/Inicio.html">Cerrar sesión</a></li>
+                    <li><a href="../../Vista Principal/Inicio/Inicio.html">Cerrar
+                            sesión</a></li>
                 </ul>
                 <div class="UserLogo">
-                    <img src="/proyecto1-2Q-2023/vista-manager/assets/avatar.png" alt="Avatar del usuario">
+                    <img id="AvatarUser" src="../assets/avatar.png"
+                        alt="Avatar del usuario">
                 </div>
             </div>
         </nav>
@@ -57,43 +62,73 @@
                                 <span class="modal-close">&times;</span>
                                 <h2>Modificar puesto de trabajo</h2>
                             </div>
-                            <img src="/proyecto1-2Q-2023/vista-manager/assets/imagenDefault.png"
+                            <img src="../assets/imagenDefault.png"
                                 alt="Logo de la empresa">
 
                             <form class="FlexForm" id="ModifyEmpleoForm">
 
                                 <div class="FormText columna-3">
-                                    <label class="FormLabel" for="NombreEmpleo">Nombre del puesto</label>
-                                    <input class="InputText" type="text" name="NombreEmpleo" id="NombreEmpleo">
+                                    <label class="FormLabel" for="NombreEmpleo">Nombre
+                                        del puesto</label>
+                                    <input class="InputText" type="text"
+                                        required
+                                        name="NombreEmpleo" id="NombreEmpleo">
                                 </div>
                                 <div class="FormText columna-3">
-                                    <label class="FormLabel" for="RangoEmpleo">Ragon Salarial</label>
-                                    <input class="InputText" type="text" name="RangoEmpleo" id="RangoEmpleo">
+                                    <label class="FormLabel" for="RangoEmpleo">Ragon
+                                        Salarial</label>
+                                    <input class="InputText" type="text"
+                                        required
+                                        name="RangoEmpleo" id="RangoEmpleo">
                                 </div>
                                 <div class="FormText columna-3">
-                                    <label class="FormLabel" for="RequisitosEmpleo">Requisitos mínimos</label>
-                                    <input class="InputText" type="text" name="RequisitosEmpleo" id="RequisitosEmpleo">
+                                    <label class="FormLabel"
+                                        for="RequisitosEmpleo">Requisitos
+                                        mínimos</label>
+                                    <input class="InputText" type="text"
+                                        required
+                                        name="RequisitosEmpleo"
+                                        id="RequisitosEmpleo">
                                 </div>
                                 <div class="FormText columna-3">
-                                    <label class="FormLabel" for="AtributosEmpleo">Atributos deseables</label>
-                                    <input class="InputText" type="text" name="AtributosEmpleo" id="AtributosEmpleo">
+                                    <label class="FormLabel"
+                                        for="AtributosEmpleo">Atributos
+                                        deseables</label>
+                                    <input class="InputText" type="text"
+                                        required
+                                        name="AtributosEmpleo"
+                                        id="AtributosEmpleo">
+                                </div>
+                                <div class="FormText columna-3">
+                                    <label class="FormLabel"
+                                        for="DescripEmpleo">Descripcion</label>
+                                    <textarea class="InputText" type="text"
+                                        required
+                                        name="DescripEmpleo"
+                                        id="DescripEmpleo"></textarea>
                                 </div>
                                 <div class="FormSelect columna-3">
                                     <label class="FormLabel" for="TipoEmpleo">Tipo
                                         de puesto</label>
-                                    <select class="InputSelect" name="TipoEmpleo" style="padding: 15px;" id="TipoEmpleo">
+                                    <select class="InputSelect"
+                                        name="TipoEmpleo" style="padding: 15px;"
+                                        id="TipoEmpleo">
                                         <option value="1">Privado</option>
                                         <option value="2">Publico</option>
                                     </select>
                                 </div>
-                            </form>
-                            <div class="FooterModal">
-                                <div class="Botonera">
-                                    <button class="modal-Back ButtonDesign">Regresar</button>
-                                    <button class="modal-Back ButtonDesign">Eliminar</button>
-                                    <button class="ButtonDesign" id="UpdatePuesto">Modificar puesto</button>
+                                <div class="FooterModal">
+                                    <div class="Botonera">
+                                        <button class="modal-Back ButtonDesign"
+                                            type="reset">Regresar</button>
+                                        <button class="ButtonDesign"
+                                            type="reset" id="deletePuesto">Eliminar</button>
+                                        <button class="ButtonDesign"
+                                            type="submit"
+                                            id="UpdatePuesto">Modificar puesto</button>
+                                    </div>
                                 </div>
-                            </div>
+                            </form>
                         </div>
                     </div>
 
@@ -117,84 +152,112 @@
                                     </thead>
                                 </table>
                                 <h4>Invitar usuario</h4>
-                                <button class="AddButton"
-                                    data-modal-target="AddAplicanteModal"><i
-                                        class="fa-solid fa-plus"></i></button>
+                                <div id="AplicationButton">
+                                    <button class="AddButton"
+                                        data-modal-target="AddAplicanteModal"><i
+                                            class="fa-solid fa-plus"></i></button>
+                                </div>
                                 <div class="modal" id="AddAplicanteModal">
                                     <div class="modal-content">
                                         <div class="TitleModal">
                                             <span class="modal-close">&times;</span>
-                                            <h2 id="TitlePostulacion">Invitar a usuario a puesto</h2>
+                                            <h2 id="TitlePostulacion">Invitar a
+                                                usuario a puesto</h2>
                                         </div>
                                         <form id="InvitarAplicanteForm">
                                             <div class="FormText">
                                                 <label class="FormLabel"
                                                     for="InviteAplicCorreo">Correo</label>
                                                 <input class="InputText"
-                                                    type="text"
+                                                    type="email" required
                                                     name="InviteAplicCorreo"
                                                     id="InviteAplicCorreo">
                                             </div>
-                                        </form>
-                                        <div class="FooterModal">
-                                            <div class="Botonera">
-                                                <button class="modal-Back ButtonDesign">Regresar</button>
-                                                <button class="ButtonDesign" id="SendInviteAplic" 
-                                                type="button">Enviar</button>
+                                            <div class="FooterModal">
+                                                <div class="Botonera">
+                                                    <button
+                                                        class="modal-Back ButtonDesign"
+                                                        type="reset">Regresar</button>
+                                                    <button class="ButtonDesign"
+                                                        type="submit"
+                                                        id="SendInviteAplic">Enviar</button>
+                                                </div>
                                             </div>
-                                        </div>
+                                        </form>
+
                                     </div>
                                 </div>
                             </div>
+
                         </div>
                     </div>
                 </div>
             </section>
             <section class="AddAplication">
                 <h2>Agregar empleo</h2>
-                <button id="AddEmployed" class="AddButton"
-                    data-modal-target="EmpleoModal"><i
-                        class="fa-solid fa-plus"></i></button>
+                <div id="AddEmployed">
+                    <button class="AddButton" data-modal-target="EmpleoModal"><i
+                            class="fa-solid fa-plus"></i></button>
+                </div>
+
                 <div class="modal" id="EmpleoModal">
                     <div class="modal-content">
                         <div class="TitleModal">
                             <span class="modal-close">&times;</span>
                             <h2>Crear puesto de trabajo</h2>
                         </div>
-                        <img src="/proyecto1-2Q-2023/vista-manager/assets/imagenDefault.png" alt="Logo de la empresa">
+                        <img src="../assets/imagenDefault.png"
+                            alt="Logo de la empresa">
 
                         <form class="FlexForm" id="AddEmpleoForm">
+
                             <div class="FormText columna-3">
-                                <label class="FormLabel" for="NombreEmpleoAdd">Nombre del puesto</label>
-                                <input class="InputText" type="text" name="NombreEmpleoAdd" id="NombreEmpleoAdd">
+                                <label class="FormLabel" for="NombreEmpleoAdd">Nombre
+                                    del puesto</label>
+                                <input class="InputText" type="text" required
+                                    name="NombreEmpleoAdd" id="NombreEmpleoAdd">
                             </div>
                             <div class="FormText columna-3">
-                                <label class="FormLabel" for="RangoEmpleoAdd">Rango Salarial</label>
-                                <input class="InputText" type="text" name="RangoEmpleoAdd" id="RangoEmpleoAdd">
+                                <label class="FormLabel" for="RangoEmpleoAdd">Ragon
+                                    Salarial</label>
+                                <input class="InputText" type="text" required
+                                    name="RangoEmpleoAdd" id="RangoEmpleoAdd">
                             </div>
                             <div class="FormText columna-3">
                                 <label class="FormLabel"
-                                    for="RequisitosEmpleoAdd">Requisitos mínimos</label>
-                                <input class="InputText" type="text" name="RequisitosEmpleoAdd" id="RequisitosEmpleoAdd">
+                                    for="RequisitosEmpleoAdd">Requisitos
+                                    mínimos</label>
+                                <input class="InputText" type="text" required
+                                    name="RequisitosEmpleoAdd"
+                                    id="RequisitosEmpleoAdd">
                             </div>
                             <div class="FormText columna-3">
-                                <label class="FormLabel" for="AtributosEmpleoAdd">Atributos deseables</label>
-                                <input class="InputText" type="text" name="AtributosEmpleoAdd" id="AtributosEmpleoAdd">
+                                <label class="FormLabel"
+                                    for="AtributosEmpleoAdd">Atributos
+                                    deseables</label>
+                                <input class="InputText" type="text" required
+                                    name="AtributosEmpleoAdd"
+                                    id="AtributosEmpleoAdd">
                             </div>
                             <div class="FormSelect columna-3">
-                                <label class="FormLabel" for="TipoEmpleoAdd">Tipo de puesto</label>
-                                <select class="InputSelect" name="TipoEmpleoAdd" style="padding: 15px;" id="TipoEmpleoAdd">
+                                <label class="FormLabel" for="TipoEmpleoAdd">Tipo
+                                    de puesto</label>
+                                <select class="InputSelect" name="TipoEmpleoAdd"
+                                    style="padding: 15px;" id="TipoEmpleoAdd">
                                     <option value="1">Privado</option>
                                     <option value="2">Publico</option>
                                 </select>
                             </div>
-                        </form>
-                        <div class="FooterModal">
-                            <div class="Botonera">
-                                <button class="modal-Back ButtonDesign">Regresar</button>
-                                <button class="ButtonDesign" id="CreatePuesto">Crear puesto</button>
+                            <div class="FooterModal" id="BotonAddmodal">
+                                <div class="Botonera">
+                                    <button class="modal-Back ButtonDesign">Regresar</button>
+                                    <button class="ButtonDesign" type="submit"
+                                        id="CreatePuesto">Crear
+                                        puesto</button>
+                                </div>
                             </div>
-                        </div>
+                        </form>
+
                     </div>
                 </div>
             </section>
@@ -222,7 +285,7 @@
             </div>
         </footer>
     </body>
-    <script src="/proyecto1-2Q-2023/vista-manager/assets/core.js"></script>
+    <script src="../../Vista Administrador/assets/core.js"></script>
     <script src="app-manager-function.js"></script>
 
 </html>

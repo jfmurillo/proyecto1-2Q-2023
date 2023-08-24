@@ -327,7 +327,9 @@ tfoot td {
     border-radius: 5px;
     margin-bottom: 18px;
     font-size: 16px;
+    margin: 10px;
 }
+
 
 input.error {
     border: solid #ff41415e 4px;

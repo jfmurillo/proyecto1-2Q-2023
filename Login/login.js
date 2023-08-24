@@ -50,7 +50,7 @@ document
               "../Vista Administrador/Inicio/InicioAdministrador.html";
           } else if (Logeo.role == "manager") {
             window.location.href =
-              "../vista-manager/inicio/inicio-manager.html";
+              "../vista-manager/inicio/iniciomanager.html";
           } else if (Logeo.role == "reclutador") {
             window.location.href =
               "../Vista Reclutador/Inicio/InicioReclutador.html";

@@ -19,7 +19,7 @@ async function loadSearch() {
         let usuario = {
             Nombre: element.nombre,
             Titulo: "",
-            Imagen: "../../NodeServer/" + element.avatar,
+            Imagen: element.avatar,
             Empresa: false
         }
 
@@ -30,7 +30,7 @@ async function loadSearch() {
         let empresa = {
             Nombre: element.nombreEmpresa,
             Titulo: element.InfoEmpresa,
-            Imagen: "../../NodeServer/" + element.ImgEmpresa,
+            Imagen: element.ImgEmpresa,
             Empresa: true
         }
         searchInfo.push(empresa)

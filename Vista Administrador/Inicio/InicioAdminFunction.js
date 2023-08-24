@@ -7,6 +7,9 @@ window.onload = async function () {
 
     const RepuestaPuestos = await fetch("http://localhost:5000/puesto/" + localStorage.getItem('idempresa'));
     const Puestos = await RepuestaPuestos.json();
+
+    const RepuestaEmpresa = await fetch("http://localhost:5000/empresas/" + Puestos[0].Empresa);
+    const Empresa = await RepuestaEmpresa.json();
     console.log(Puestos)
 
     let contador = 0;
@@ -14,7 +17,7 @@ window.onload = async function () {
     Puestos.forEach(function (puesto) {
         if (contador < 4) {
             let puestoOrder = {
-                Imagen: "../assets/imagenDefault.png",
+                Imagen: Empresa.ImgEmpresa,
                 Descripcion: puesto.DescripcionPuesto,
                 Titulo: puesto.nombrePuesto,
             };
@@ -35,9 +38,9 @@ window.onload = async function () {
     RenderApplications(ListPuestos)
 
     document.getElementById("CompanyName").innerHTML = localStorage.getItem("CompanyName")
-    document.getElementById("LogoEmpresa").setAttribute("src", "../../NodeServer/" + localStorage.getItem("CompanyLogo"))
-    document.getElementById("PerfilEmpresa").setAttribute("src", "../../NodeServer/" + localStorage.getItem("CompanyLogo"))
-    document.getElementById("AvatarUser").setAttribute("src", "../../NodeServer/" + localStorage.getItem("Avatar"))
+    document.getElementById("LogoEmpresa").setAttribute("src", localStorage.getItem("CompanyLogo"))
+    document.getElementById("PerfilEmpresa").setAttribute("src", localStorage.getItem("CompanyLogo"))
+    document.getElementById("AvatarUser").setAttribute("src", localStorage.getItem("Avatar"))
 };
 
 

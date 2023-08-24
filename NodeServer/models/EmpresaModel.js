@@ -15,6 +15,10 @@ const EmpresaSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    ImgEmpresa: {
+        type: String,
+        required: true,
+    },
 }, { timestamps: true });
 
 // Crear el modelo de usuarios a partir del esquema

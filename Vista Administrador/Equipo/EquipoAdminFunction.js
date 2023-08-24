@@ -42,11 +42,11 @@ window.onload = async function () {
     .getElementById("LogoEmpresa")
     .setAttribute(
       "src",
-      "../../NodeServer/" + localStorage.getItem("CompanyLogo")
+      localStorage.getItem("CompanyLogo")
     );
   document
     .getElementById("AvatarUser")
-    .setAttribute("src", "../../NodeServer/" + localStorage.getItem("Avatar"));
+    .setAttribute("src", localStorage.getItem("Avatar"));
 };
 
 let listErrors = [];
@@ -144,8 +144,9 @@ function toggleModal(modalId, button) {
 
 document
   .getElementById("AddEmployedForm")
-  .addEventListener("submit", function (event) {
+  .addEventListener("submit", async function (event) {
     event.preventDefault();
+    await invitarUsuario()
     toggleModal("InviteModal");
   });
 
