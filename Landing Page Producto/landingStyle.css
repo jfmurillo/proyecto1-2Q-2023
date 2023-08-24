@@ -1,0 +1,509 @@
+@font-face {
+    font-family: 'Roboto';
+    src: url('assets/Tipografias/Roboto-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+* {
+    margin: 0;
+    font-family: "Roboto", sans-serif;
+}
+
+ul {
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+img {
+    width: 450px;
+    height: auto;
+}
+
+svg {
+    width: auto;
+    height: 25px;
+}
+
+html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 70px;
+}
+
+:root {
+    --primaryColor: #485665;
+    --secondaryColor: #5a6c7e;
+    --tertiaryColor: #9095A0FF;
+}
+
+.navLanding {
+    display: flex;
+    background-color: var(--primaryColor);
+    align-items: center;
+    height: 70px;
+    position: fixed;
+    width: 100%;
+    z-index: 2
+}
+
+.LogoTeam {
+    display: flex;
+    align-items: center;
+    width: 10%;
+    position: absolute;
+}
+
+.LogoImg {
+    width: auto;
+    height: 55px;
+}
+
+.LogoTeam p {
+    color: white;
+    margin-left: 5px;
+}
+
+.ElementBox_Nav {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    height: 20px;
+}
+
+
+.ElementBox_Nav a {
+    color: white;
+    margin: 10px;
+}
+
+.ElementBox_Nav a:hover {
+    font-weight: 600;
+    border-bottom: 2px solid white;
+}
+
+.TitleTeam {
+    width: 50%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 140px;
+}
+
+.TitleTeam h1 {
+    font-size: 55px;
+    margin-bottom: 15px;
+}
+
+.TitleTeam p {
+    text-align: center;
+    color: var(--tertiaryColor);
+    line-height: 1.5;
+    margin-bottom: 15px;
+}
+
+
+.TeamBox {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.TeamBox img {
+    width: auto;
+    height: 330px;
+}
+
+.about {
+    background-color: var(--secondaryColor);
+    padding: 25px;
+    padding-bottom: 55px;
+}
+
+.TitleWhite {
+    text-align: center;
+    color: white;
+    font-size: 30px;
+    margin-bottom: 20px;
+}
+
+.text-white {
+    color: white !important;
+}
+
+.aboutcontent {
+    display: flex;
+}
+
+.aboutcontent img {
+    height: 400px;
+    width: auto;
+    border-radius: 10px;
+}
+
+.aboutinfo {
+    margin-right: 50px;
+}
+
+.aboutinfo p {
+    margin: 0 100px;
+    color: white;
+    line-height: 1.5;
+    text-align: justify;
+}
+
+.aboutinfo::before {
+    background-color: white;
+    clip-path: polygon(0 0, 100% 0, 100% 15%, 15% 15%, 15% 100%, 0 100%);
+    display: block;
+    height: 100px;
+    width: 100px;
+    content: " ";
+    transform: translateY(35px);
+}
+
+.aboutinfo::after {
+    background-color: white;
+    clip-path: polygon(85% 85%, 85% 0, 100% 0, 100% 100%, 0 100%, 0 85%);
+    display: block;
+    height: 100px;
+    width: 100px;
+    content: " ";
+    position: relative;
+    float: right;
+    transform: translateY(-35px);
+}
+
+.TeamMV {
+    padding: 40px 120px;
+}
+
+.MisionBox {
+    display: flex;
+    margin-bottom: 30px;
+}
+
+.ImgEdit .ImgFondo {
+    position: absolute;
+    z-index: 1;
+    width: auto;
+    height: 220px;
+    transform: translateY(50px);
+}
+
+.ImgEdit .ImgPrin {
+    position: relative;
+    z-index: 1;
+    transform: translateX(40px);
+}
+
+.VisionBox {
+    display: flex;
+    margin-bottom: 15px;
+}
+
+.InfoBox {
+    width: 65%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.InfoContent {
+    margin-left: 20px;
+    width: 50%;
+}
+
+.InfoContent h2 {
+    margin-bottom: 20px;
+    font-size: 30px;
+}
+
+.InfoContent p {
+    color: var(--tertiaryColor);
+    line-height: 1.5;
+    text-align: justify;
+}
+
+.Team {
+    background-color: var(--secondaryColor);
+    padding-top: 30px;
+}
+
+.TeamPersons {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.Person {
+    width: 50%;
+    display: flex;
+    box-sizing: border-box;
+    margin-bottom: 25px;
+}
+
+.ImgPerson {
+    margin-left: 25px;
+    width: 50%;
+}
+
+.ImgPerson img {
+    border-radius: 100%;
+    height: 300px;
+    width: 300px;
+    object-fit: cover;
+}
+
+.ContentPerson {
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 20px;
+    width: 50%;
+}
+
+.ContentPerson p {
+    margin-bottom: 30px
+}
+
+.ContentPerson h3 {
+    margin-bottom: 20px;
+    font-size: 25px
+}
+
+.FootTeam {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 10px;
+}
+
+.Icons svg {
+    margin: 0 10px;
+}
+
+.Icons svg:hover>path {
+    fill: #617c85;
+}
+
+.buttonMenu {
+    position: absolute;
+    width: 2rem;
+    height: 2rem;
+    margin-left: 0.5rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: white;
+    display: none;
+    left: 0;
+}
+
+.CloseMenu {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    width: 2rem;
+    height: 2rem;
+    margin-left: 0.5rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: white;
+}
+
+.secondMenu {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 101;
+    background: var(--primaryColor);
+    width: 180px;
+    height: 100vh;
+    overflow: hidden;
+    color: white;
+    transform: translateX(-100%);
+    transition: transform 0.2s ease;
+}
+
+.showNav {
+    transform: translateX(0);
+}
+
+.secondMenu ul {
+    width: 100%;
+    height: 100%;
+    list-style: none;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    padding: 0;
+    padding-top: 8rem;
+}
+
+.secondMenu ul li a {
+    display: block;
+    color: white;
+    padding-bottom: 10px;
+    margin-top: 1rem;
+    border-bottom: 2px solid var(--primaryColor);
+    text-decoration: none;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 1.2rem;
+}
+
+.secondMenu li {
+    margin: 10px;
+}
+
+.secondMenu ul li a:hover,
+.secondMenu ul li a:focus {
+    border-bottom: 2px solid white;
+}
+
+.blackScreen {
+    position: fixed;
+    display: none;
+    z-index: 100;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.3);
+    width: 100%;
+    height: 100vh;
+}
+
+.showblackScreen {
+    display: block;
+}
+
+
+@media (max-width: 1275px) {
+
+    .aboutcontent {
+        width: 80%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .about {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .aboutinfo {
+        margin: 0;
+        margin-bottom: 30px
+    }
+
+
+    .MisionBox {
+        display: block
+    }
+
+    .VisionBox {
+        display: flex;
+        flex-direction: column-reverse;
+        align-items: center;
+    }
+
+    .ContentPerson {
+        width: 90%;
+        text-align: center;
+    }
+
+    .InfoBox {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        margin: 20px;
+    }
+
+    .ImgEdit {
+        display: flex;
+        justify-content: center
+    }
+
+    .ImgFondo {
+        transform: translate(-115px, 50px) !important;
+    }
+
+    .InfoContent {
+        width: 100%;
+        text-align: center;
+        margin: 0;
+        margin-bottom: 30px;
+    }
+
+
+    .TeamPersons {
+        flex-direction: column;
+    }
+
+    .Person {
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .ImgPerson {
+        margin-left: 0;
+        width: 310px;
+    }
+
+    .text-white {
+        color: white;
+    }
+
+
+}
+
+@media (max-width: 850px) {
+
+    .aboutinfo p {
+        margin: 0 30px;
+        color: white;
+        line-height: 1.5;
+        text-align: justify;
+    }
+
+    .aboutcontent img {
+        height: 300px
+    }
+
+    .ElementBox_Nav {
+        display: none
+    }
+
+    .navLanding {
+        justify-content: center;
+    }
+
+    .TeamMV {
+        padding: 40px 80px;
+    }
+
+    .ImgEdit .ImgPrin {
+        transform: translateX(0);
+    }
+
+    .buttonMenu {
+        display: block;
+    }
+
+    .TeamName {
+        display: none;
+    }
+
+    .text-white {
+        color: white;
+    }
+}
+

@@ -1,0 +1,33 @@
+.TitlePerfil {
+    text-align: center;
+}
+
+.TitlePerfil>* {
+    margin-bottom: 25px;
+}
+
+.InfoPerfil {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.InfoPerfil>* {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.InfoPerfil>p {
+    margin-bottom: 20px;
+    width: 450px;
+    text-align: center;
+}
+
+
+#PerfilMain {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 165px;
+}

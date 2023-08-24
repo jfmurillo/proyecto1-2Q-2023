@@ -1,0 +1,41 @@
+.CompanyTitle {
+    margin: 20px 0px;
+}
+
+.CompanyInfo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 125px;
+    margin-bottom: 200px;
+}
+
+.CompanyInfo img {
+    width: 400px;
+    height: auto;
+}
+
+
+.TitlePublicaciones {
+    text-align: center;
+    margin: 150px;
+}
+
+.Puesto {
+    margin: 20px;
+    width: 300px;
+}
+
+.Puesto img {
+    width: 300px;
+}
+
+.TitlePuesto {
+    margin: 20 10px;
+}
+
+#Publicaciones {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="AplicacionStyle.css" />
+    <link rel="stylesheet" href="../assets/style.css" />
+    <script
+      src="https://kit.fontawesome.com/52cdc0a8a5.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+
+  <body>
+    <header>
+      <nav class="HeadNav">
+        <ul class="ElementBox_Nav" style="list-style-type: none;">
+          <li><a href="../Inicio/InicioUsuario.html">Inicio</a></li>
+          <li><a href="../Aplicaciones/AplicacionUsuario.html">Aplicaciones</a></li>
+          <li><a href="../reportes/reportesUsuario.html">Reportes</a></li>
+        </ul>
+  
+        <div class="search">
+          <label class="search-btn" for="Buscador">
+            <i class="fas fa-search"></i>
+          </label>
+          <input class="search-txt" name="Buscador" id="Buscador" type="text" name
+            placeholder="Buscar">
+        </div>
+        <div id="searchResult"></div>
+        <div class="UserZone">
+          <div class="Notifications">
+            <i class="fa-solid fa-bell"></i>
+          </div>
+          <ul class="ElementBox_Nav" style="list-style-type: none;">
+            <li><a href="../../Vista Principal/Inicio/Inicio.html">Cerrar sesión</a></li>
+        </ul>
+          <div class="UserLogo">
+            <a href="../Perfil/PerfilUsuario.html"><img src="../assets/avatar.png"
+                alt="Avatar del usuario"></a>
+          </div>
+        </div>
+      </nav>
+    </header>
+  
+    
+    <main>
+      <section >
+        <div class="AplicacionesTrabajos">
+          <h2 class="TitlePublicaciones">Ofertas de trabajo publicadas</h2>
+          <div id="Aplicaciones" class="margen-main"></div>
+
+          <div class="modal" id="InfoEmpleoModal">
+            <div class="modal-content">
+              <div class="TitleModal">
+                <span class="modal-close">&times;</span>
+                <h2 id="TitlePostulacion">Info</h2>
+              </div>
+
+              <p id="RangoSalarialInfo"></p>
+              <p id="RequesitoInfo"></p>
+              <p id="AtributosInfo"></p>
+              <p id="TipoInfo"></p>
+              <div class="aplicantesBox">
+               
+              </div>
+            </div>
+          </div>
+        </div>
+    </section>
+    </main>
+
+    <footer>
+      <div class="footer-container">
+        <div class="contact-section">
+          <span>Contáctenos</span>
+          <ul class="info-footer">
+            <li>+506 8355-2567</li>
+            <li>CareerWarriors@gmail.com</li>
+            <li>Sabana Sur, calle 58</li>
+          </ul>
+        </div>
+        <div class="social-media-section">
+          <span>Siguenos en nuestras redes sociales</span>
+          <div class="social-icons">
+            <i class="fa-brands fa-facebook-f"></i>
+            <i class="fa-brands fa-linkedin-in"></i>
+            <i class="fa-brands fa-instagram"></i>
+            <i class="fa-brands fa-whatsapp"></i>
+            <i class="fa-brands fa-twitter"></i>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </body>
+  <script src="../assets/core.js"></script>
+  <script src="AplicacionFunction.js"></script>
+</html>

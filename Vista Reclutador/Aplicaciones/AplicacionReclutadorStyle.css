@@ -1,0 +1,50 @@
+.AplicacionesTrabajos {
+    padding-top: 115px;
+}
+
+.TitlePublicaciones {
+    text-align: center;
+    margin: 20px;
+}
+
+.Puesto {
+    margin: 20px;
+    width: 300px;
+    cursor: pointer;
+}
+
+.Puesto:hover {
+    background-color: #e2e2e230
+}
+
+.Puesto img {
+    width: 300px;
+}
+
+.TitlePuesto {
+    margin: 20 10px;
+}
+
+#Aplicaciones {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-bottom: 169px;
+}
+
+.AddAplication {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 31px;
+}
+
+.aplicantesBox {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.margen-main {
+    margin: 50px;
+}
