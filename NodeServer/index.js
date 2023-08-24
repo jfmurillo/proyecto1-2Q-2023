@@ -8,7 +8,7 @@ const Reclutador = require("./models/ReclutadorModel");
 const Manager = require("./models/ManagerModel");
 const cors = require("cors");
 const reportes = require("./models/Reportes");
-const Aplicaciones = require('./models/AplicacionesModel'); 
+const Aplicaciones = require("./models/AplicacionesModel");
 
 const multer = require("multer");
 const path = require("path");
@@ -136,7 +136,7 @@ app.post("/users/update", async function (req, res) {
           $set: {
             nombre: req.body.nombre,
             email: req.body.email,
-            password: req.body.password
+            password: req.body.password,
           },
         }
       );
@@ -145,8 +145,7 @@ app.post("/users/update", async function (req, res) {
       console.log("Error al obtener el usuario");
       res.status(500).send("Error al obtener el usuario");
     }
-  }
-  else {
+  } else {
     if (usuariofind == undefined) {
       try {
         const usuario = await Users.updateOne(
@@ -189,11 +188,10 @@ app.post("/users/update", async function (req, res) {
       }
     }
   }
-
 });
 app.post("/users/update/Logo", async function (req, res) {
   try {
-    console.log(req.body)
+    console.log(req.body);
     const usuario = await Users.updateOne(
       { _id: req.body.id },
       {
@@ -309,18 +307,17 @@ app.get("/puestos", async function (req, res) {
 });
 app.get("/puestos/:id", async function (req, res) {
   const id = req.params.id;
-  
-  try {
-      const puesto = await Puestos.findById(id);
-      
-      if (!puesto) {
-          return res.status(404).send("Puesto no encontrado");
-      }
 
-      res.status(200).send(puesto);
-  }
-  catch (error) {
-      res.status(500).send("Error al obtener el puesto");
+  try {
+    const puesto = await Puestos.findById(id);
+
+    if (!puesto) {
+      return res.status(404).send("Puesto no encontrado");
+    }
+
+    res.status(200).send(puesto);
+  } catch (error) {
+    res.status(500).send("Error al obtener el puesto");
   }
 });
 
@@ -335,7 +332,6 @@ app.post("/puesto/delete/:id", async function (req, res) {
 });
 
 app.post("/empresa", async function (req, res) {
-
   if (!req.body || req.body == {}) {
     res.status(400).send("No hay body en la peticion");
   }
@@ -390,7 +386,7 @@ app.post("/empresa/update", async function (req, res) {
       }
     );
 
-    console.log(empresapassword)
+    console.log(empresapassword);
     res.status(200).send(empresa);
   } catch (error) {
     console.log("Error al actualizar la empresa");
@@ -398,16 +394,14 @@ app.post("/empresa/update", async function (req, res) {
   }
 });
 
-
 app.post("/empresa/update/Logo", async function (req, res) {
   try {
-    console.log(req.body)
+    console.log(req.body);
     const empresa = await Empresa.updateOne(
       { _id: req.body.id },
       {
         $set: {
           ImgEmpresa: req.body.img,
-
         },
       }
     );
@@ -526,10 +520,11 @@ async function sendEmail(datosCorreo) {
           <p>Antes de la entrevista, necesitamos recopilar más información sobre ti a través de un formulario en línea.  </p>
           <p>Por favor, complete el formulario en el siguiente enlace:</p>
           <p>ID de la empresa: ${datosCorreo.empresa_id}</p></p>
-          <p><strong>${rol === "reclutador"
-          ? "http://localhost:5500/proyecto1-2Q-2023/registro-reclutador/registro-reclutador.html"
-          : "http://localhost:5500/proyecto1-2Q-2023/registro-manager/registro-manager.html"
-        }</strong></p>
+          <p><strong>${
+            rol === "1"
+              ? "http://localhost:5500/proyecto1-2Q-2023/registro-reclutador/registro-reclutador.html"
+              : "http://localhost:5500/proyecto1-2Q-2023/registro-manager/registro-manager.html"
+          }</strong></p>
         `,
     });
   } catch (error) {
@@ -552,8 +547,9 @@ async function emailPuestoTrabajo(datosCorreo) {
           <p>Nos complace informarte que has sido seleccionado/a para participar en la siguiente etapa del proceso de selección. 
           Estamos impresionados/as por tu perfil y creemos que podrías hacer una contribución valiosa a nuestro equipo.</p>
           <p>Antes de la entrevista, necesitamos recopilar más información sobre ti a través de un formulario en línea.  </p>
-          <p>ID de la empresa: ${(datosCorreo.empresa_id, datosCorreo.role === "finalUser")
-        }</p>
+          <p>ID de la empresa: ${
+            (datosCorreo.empresa_id, datosCorreo.role === "finalUser")
+          }</p>
 
           <p>Por favor, complete el formulario en el siguiente enlace:</p>
           <p><strong>
@@ -655,7 +651,6 @@ app.get("/registroUserFinal/:id", async function (req, res) {
 
     res.status(200).send(usuario);
   } catch (error) {
-
     res.status(500).send("Error al obtener el usuario");
   }
 });
@@ -703,6 +698,7 @@ app.post("/registro-reclutador", async function (req, res) {
     apellido: req.body.apellido,
     email: req.body.email,
     empresaid: req.body.empresaid,
+    Empresa: req.body.empresaid,
     contrasena: req.body.password,
     genero: req.body.genero,
   });
@@ -757,6 +753,7 @@ app.post("/registro-manager", async function (req, res) {
   const usuario = new Users({
     nombre: req.body.nombre,
     email: req.body.email,
+    Empresa: req.body.empresaid,
     role: "manager",
     password: req.body.password,
     avatar: req.body.foto,
@@ -792,11 +789,11 @@ app.post("/aplicar", async function (req, res) {
   console.log(req.body);
   const userId = req.body.userId;
   const application = new Aplicaciones({
-      companyName: req.body.companyName,
-      puestoDescription: req.body.puestoDescription,
-      puestoStatus: req.body.puestoStatus,
-      dateApplied: req.body.dateApplied || Date.now(),
-      userId: userId  // Agregar el ID del usuario
+    companyName: req.body.companyName,
+    puestoDescription: req.body.puestoDescription,
+    puestoStatus: req.body.puestoStatus,
+    dateApplied: req.body.dateApplied || Date.now(),
+    userId: userId, // Agregar el ID del usuario
   });
 
   try {
@@ -821,7 +818,9 @@ app.get("/aplicar", async function (req, res) {
 app.get("/aplicar/:id", async function (req, res) {
   const id = req.params.id;
   try {
-    const application = await Aplicaciones.find({ Empresa: id }).sort({ createdAt: -1 });
+    const application = await Aplicaciones.find({ Empresa: id }).sort({
+      createdAt: -1,
+    });
     res.status(200).send(application);
   } catch (error) {
     res.status(500).send("Error al obtener la aplicación");
@@ -831,9 +830,13 @@ app.get("/aplicar/:id", async function (req, res) {
 app.get("/aplicaciones/usuario/:userId", async function (req, res) {
   const userId = req.params.userId;
   try {
-    const userApplications = await Aplicaciones.find({ Usuario: userId }).sort({ createdAt: -1 });
+    const userApplications = await Aplicaciones.find({ Usuario: userId }).sort({
+      createdAt: -1,
+    });
     if (!userApplications.length) {
-      return res.status(404).send("No se encontraron aplicaciones para este usuario.");
+      return res
+        .status(404)
+        .send("No se encontraron aplicaciones para este usuario.");
     }
     res.status(200).send(userApplications);
   } catch (error) {

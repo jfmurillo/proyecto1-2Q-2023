@@ -1,32 +1,34 @@
-
-
 let ListPuestos = [];
 let idEmpleoSelect;
 window.onload = async function () {
-  if (!localStorage.getItem('iduser')) {
-    window.location.href = '../../Login/login.html';
+  if (!localStorage.getItem("iduser")) {
+    window.location.href = "../../Login/login.html";
   }
-  loadpuestos()
-    .then(list => RenderApplications(list))
+  loadpuestos().then((list) => RenderApplications(list));
 
-  document.getElementById("LogoEmpresa").setAttribute("src", localStorage.getItem("CompanyLogo"))
-  document.getElementById("AvatarUser").setAttribute("src", localStorage.getItem("Avatar"))
+  document
+    .getElementById("LogoEmpresa")
+    .setAttribute("src", localStorage.getItem("CompanyLogo"));
+  document
+    .getElementById("AvatarUser")
+    .setAttribute("src", localStorage.getItem("Avatar"));
 };
 
 var app = app || {};
-let listErrors = []
-
+let listErrors = [];
 
 async function loadpuestos() {
-
-  let list = []
-  const RepuestaPuestos = await fetch("http://localhost:5000/puesto/" + localStorage.getItem('idempresa'));
+  let list = [];
+  const RepuestaPuestos = await fetch(
+    "http://localhost:5000/puesto/" + localStorage.getItem("idempresa")
+  );
   const Puestos = await RepuestaPuestos.json();
-  const RepuestaEmpresa = await fetch("http://localhost:5000/empresas/" + Puestos[0].Empresa);
+  const RepuestaEmpresa = await fetch(
+    "http://localhost:5000/empresas/" + Puestos[0].Empresa
+  );
   const Empresa = await RepuestaEmpresa.json();
 
-
-  console.log(Puestos)
+  console.log(Puestos);
   Puestos.forEach(function (puesto) {
     let puestoOrder = {
       id: puesto._id,
@@ -42,26 +44,26 @@ async function loadpuestos() {
 
     const fecha = new Date(puesto.updatedAt);
 
-    const dia = fecha.getDate().toString().padStart(2, '0'); // Agregar ceros a la izquierda si es necesario
-    const mes = (fecha.getMonth() + 1).toString().padStart(2, '0'); // Los meses en JavaScript son indexados desde 0, por lo que sumamos 1
+    const dia = fecha.getDate().toString().padStart(2, "0"); // Agregar ceros a la izquierda si es necesario
+    const mes = (fecha.getMonth() + 1).toString().padStart(2, "0"); // Los meses en JavaScript son indexados desde 0, por lo que sumamos 1
     const anio = fecha.getFullYear();
 
     puestoOrder.Fecha = `${dia}/${mes}/${anio}`;
 
-    list.push(puestoOrder)
+    list.push(puestoOrder);
   });
 
-  return list
+  return list;
 }
 
 function RenderApplications(ListApplications) {
-  ListPuestos = ListApplications
-  let mainbox = document.getElementById("Aplicaciones")
+  ListPuestos = ListApplications;
+  let mainbox = document.getElementById("Aplicaciones");
   mainbox.innerHTML = "";
 
   document.getElementById("AplicationButton").innerHTML = " ";
-  document.getElementById("AplicationButton").innerHTML = '<button class="AddButton" data-modal-target="AddAplicanteModal"><i class="fa-solid fa-plus"></i></button>';
-
+  document.getElementById("AplicationButton").innerHTML =
+    '<button class="AddButton" data-modal-target="AddAplicanteModal"><i class="fa-solid fa-plus"></i></button>';
 
   for (let application of ListApplications) {
     let container = document.createElement("div");
@@ -71,7 +73,6 @@ function RenderApplications(ListApplications) {
     Puesto.classList.add("Puesto");
     Puesto.setAttribute("data-modal-target", "InfoEmpleoModal");
     Puesto.setAttribute("data-id", ListApplications.indexOf(application));
-
 
     let FechaApplication = document.createElement("small");
     let TituloApplication = document.createElement("h3");
@@ -83,36 +84,42 @@ function RenderApplications(ListApplications) {
     DescripcionApplication.textContent = application.Descripcion;
     ImagenApplication.src = application.Imagen;
 
-
     Puesto.appendChild(FechaApplication);
     Puesto.appendChild(TituloApplication);
     Puesto.appendChild(ImagenApplication);
     Puesto.appendChild(DescripcionApplication);
-    container.appendChild(Puesto)
+    container.appendChild(Puesto);
 
-    mainbox.appendChild(container)
+    mainbox.appendChild(container);
   }
   const modalTriggerButtons = document.querySelectorAll("[data-modal-target]");
   const modals = document.querySelectorAll(".modal");
   const modalCloseButtons = document.querySelectorAll(".modal-close");
   const ButtonBack = document.querySelectorAll(".modal-Back");
 
-  modalTriggerButtons.forEach(elem => {
-
-    elem.addEventListener("click", event => toggleModal(event.currentTarget.getAttribute("data-modal-target"), event.target));
-
+  modalTriggerButtons.forEach((elem) => {
+    elem.addEventListener("click", (event) =>
+      toggleModal(
+        event.currentTarget.getAttribute("data-modal-target"),
+        event.target
+      )
+    );
   });
-  modalCloseButtons.forEach(elem => {
-    elem.addEventListener("click", event => toggleModal(event.currentTarget.closest(".modal").id));
+  modalCloseButtons.forEach((elem) => {
+    elem.addEventListener("click", (event) =>
+      toggleModal(event.currentTarget.closest(".modal").id)
+    );
   });
 
-  ButtonBack.forEach(elem => {
-    elem.addEventListener("click", event => toggleModal(event.currentTarget.closest(".modal").id));
-
+  ButtonBack.forEach((elem) => {
+    elem.addEventListener("click", (event) =>
+      toggleModal(event.currentTarget.closest(".modal").id)
+    );
   });
-  modals.forEach(elem => {
-    elem.addEventListener("click", event => {
-      if (event.currentTarget === event.target) toggleModal(event.currentTarget.id);
+  modals.forEach((elem) => {
+    elem.addEventListener("click", (event) => {
+      if (event.currentTarget === event.target)
+        toggleModal(event.currentTarget.id);
     });
   });
 }
@@ -233,6 +240,7 @@ function toggleModal(modalId, button) {
 document
   .getElementById("SendInviteAplic")
   .addEventListener("click", function (event) {
+    document.addEventListener("click", invitarPuesto);
     event.preventDefault();
     toggleModal("AddAplicanteModal");
   });

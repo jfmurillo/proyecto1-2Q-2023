@@ -90,8 +90,8 @@ formulario.addEventListener("submit", async function (event) {
     if (managerCreado.ok) {
       const managerFinal = await managerCreado.json();
 
-      alert("reclutador registrado.");
-      window.location.href = "../vista-manager/inicio/inicio-manager.html";
+      alert("reclutador manager.");
+      window.location.href = "../vista-manager/inicio/iniciomanager.html";
     } else {
       console.error("Error al crear el manager");
       alert("Error al crear el manager");
