@@ -41,7 +41,6 @@ let ListPuestos = [
 window.onload = async function () {
   document
     .getElementById("SendInviteAplic")
-    .addEventListener("click", invitarUsuario)
     .addEventListener("click", invitarPuesto);
   if (!localStorage.getItem("iduser")) {
     window.location.href = "../../Login/login.html";
@@ -226,7 +225,7 @@ document
 async function invitarPuesto() {
   try {
     console.log("invitarPuesto");
-    const emailInv = document.getElementById("SendInviteAplic").value;
+    const emailInv = document.getElementById("InviteAplicCorreo").value;
     console.log(emailInv);
 
     const valoresHtml = await fetch("http://localhost:5000/invitarPuesto", {
