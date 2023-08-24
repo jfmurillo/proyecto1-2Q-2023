@@ -174,6 +174,13 @@ document
       email: formModify.CorreoEmployed.value,
       role: formModify.RolEmployed.value == 1 ? "reclutador" : "manager",
     };
+    const UpdateUser = await fetch(`http://localhost:5000/users/update`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(usuario)
+    })
 
     if (UpdateUser.ok) {
       alert("Usuario actualizado");
@@ -247,7 +254,7 @@ async function invitarUsuario() {
 
     const valoresHtml = await fetch(
       "http://localhost:5000/invitarUsuario/" +
-        localStorage.getItem("idempresa"),
+      localStorage.getItem("idempresa"),
       {
         method: "POST",
         headers: {
