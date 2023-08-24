@@ -5,29 +5,30 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Document</title>
         <link rel="stylesheet" href="perfil-manager-style.css">
-        <link rel="stylesheet" href="/proyecto1-2Q-2023/vista-manager/assets/style.css">
+        <link rel="stylesheet" href="../assets/style.css">
         <script src="https://kit.fontawesome.com/52cdc0a8a5.js"
             crossorigin="anonymous"></script>
     </head>
     <body>
         <nav class="HeadNav">
             <div class="CompanyLogo">
-                <a href="/proyecto1-2Q-2023/vista-manager/perfil/perfil-manager.html">
-                <img src="/proyecto1-2Q-2023/vista-manager/assets/imagenDefault.png"
-                    alt="Logo de la empresa logeada"></a>
+                    <img id="LogoEmpresa" src="../assets/imagenDefault.png"
+                        alt="Logo de la empresa logeada">
             </div>
             <ul class="ElementBox_Nav">
-                <li><a href="/proyecto1-2Q-2023/vista-manager/inicio/inicio-manager.html">Inicio</a></li>
-                <li><a href="/proyecto1-2Q-2023/vista-manager/equipo/equipo-manager.html">Equipo</a></li>
-                <li><a href="/proyecto1-2Q-2023/vista-manager/applicaciones/app-manager.html">Aplicaciones</a></li>
-                <li><a href="/proyecto1-2Q-2023/vista-manager/reportes/reportes-manager.html">Reportes</a></li>
+                <li><a href="../inicio/iniciomanager.html">Inicio</a></li>
+                <li><a href="../equipo/equipo-manager.html">Equipo</a></li>
+                <li><a href="../applicaciones/app-manager.html">Aplicaciones</a></li>
+                <li><a href="../reportes/reportes-manager.html">Reportes</a></li>
+                <li><a href="../perfil/perfil-manager.html">Perfil</a></li>
             </ul>
 
             <div class="search">
                 <label class="search-btn" for="Buscador">
                     <i class="fas fa-search"></i>
                 </label>
-                <input class="search-txt" name="Buscador" id="Buscador" type="text" name placeholder="Buscar">
+                <input class="search-txt" name="Buscador" id="Buscador"
+                    type="text" name placeholder="Buscar">
             </div>
             <div id="searchResult">
             </div>
@@ -36,24 +37,24 @@
                     <i class="fa-solid fa-bell"></i>
                 </div>
                 <ul class="ElementBox_Nav">
-                    <li><a href="../../Vista Principal/Inicio/Inicio.html">Cerrar sesión</a></li>
+                    <li><a href="../../Vista Principal/Inicio/Inicio.html">Cerrar
+                            sesión</a></li>
                 </ul>
                 <div class="UserLogo">
-                    <img src="/proyecto1-2Q-2023/vista-manager/assets/avatar.png" alt="Avatar del usuario">
+                    <img id="AvatarUser" src="../assets/avatar.png"
+                        alt="Avatar del usuario">
                 </div>
             </div>
         </nav>
         <main id="PerfilMain">
             <section class="TitlePerfil">
-                <h2>Nombre de la empresa</h2>
-                <img src="/proyecto1-2Q-2023/vista-manager/assets/imagenDefault.png" alt="Logo de la empresa">
+                <h2>Nombre del reclutador</h2>
             </section>
-            <section class="InfoPerfil">
-                <strong>empresa@gmail.com</strong>
+
+            <section class="InfoPerfil" class="margen-main">
+                <strong>reclutador@gmail.com</strong>
                 <p>Informacion de la empresa</p>
-                <button class="ButtonDesign" style="margin-bottom: 20px;"
-                    data-modal-target="ModifyPerfilModal">Editar
-                    perfil</button>
+
             </section>
         </main>
         <footer>
@@ -130,6 +131,9 @@
             </div>
         </div>
     </body>
-    <script src="/proyecto1-2Q-2023/vista-manager/assets/core.js"></script>
+    <script src="../assets/core.js"></script>
     <script src="perfil-manager-function.js"></script>
+    <script
+    src="https://widget.cloudinary.com/v2.0/global/all.js"
+    type="text/javascript"></script>
 </html>

@@ -1,30 +1,61 @@
-document.getElementById("Buscador").addEventListener("input", function (event) {
+let searchInfo = [
+
+]
+
+
+async function loadSearch() {
+    if (!localStorage.getItem('iduser')) {
+        window.location.href = '../../Login/login.html';
+    }
+
+    const EmpresasRequest = await fetch("http://localhost:5000/empresa");
+    const Empresas = await EmpresasRequest.json();
+
+
+    const UsuariosRequest = await fetch("http://localhost:5000/users");
+    const Usuarios = await UsuariosRequest.json();
+
+    Usuarios.forEach(element => {
+        let usuario = {
+            Nombre: element.nombre,
+            Titulo: "",
+            Imagen: element.avatar,
+            Empresa: false
+        }
+
+        searchInfo.push(usuario)
+    });
+
+    Empresas.forEach(element => {
+        let empresa = {
+            Nombre: element.nombreEmpresa,
+            Titulo: element.InfoEmpresa,
+            Imagen: element.ImgEmpresa,
+            Empresa: true
+        }
+        searchInfo.push(empresa)
+    });
+}
+
+loadSearch()
+
+document.getElementById("Buscador").addEventListener("input", async function (event) {
     event.preventDefault()
     let searchbox = document.getElementById("searchResult")
     if (event.target.value == "") {
         searchbox.classList.add("d-none")
     }
     else {
+
+        let busqueda = searchInfo.filter((obj) => obj.Nombre.includes(event.target.value));
+
         searchbox.classList.remove("d-none")
         searchbox.innerHTML = "";
 
 
-        let searchInfo = [
-            {
-                Nombre: "Usuario",
-                Titulo: "",
-                Imagen: "../assets/avatar.png",
-                Empresa: false
-            },
-            {
-                Nombre: "Empresa",
-                Titulo: "Descripcion",
-                Imagen: "../assets/imagenDefault.png",
-                Empresa: true
-            }
-        ]
 
-        for (let search of searchInfo) {
+
+        for (let search of busqueda) {
             let Resultado = document.createElement("div");
             Resultado.classList.add("ResultadoBusqueda");
             let NombreResult = document.createElement("h3");
@@ -55,7 +86,6 @@ document.getElementById("Buscador").addEventListener("input", function (event) {
     }
 
 })
-
 
 function cleanAlertErrors() {
     let errores = document.querySelectorAll(".danger.alert");

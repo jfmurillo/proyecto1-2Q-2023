@@ -53,6 +53,8 @@ window.onload = async function () {
 
 
     document.getElementById("TipReporte").innerHTML = innerSelect;
+    document.getElementById("LogoEmpresa").setAttribute("src", localStorage.getItem("CompanyLogo"))
+    document.getElementById("AvatarUser").setAttribute("src", localStorage.getItem("Avatar"))
     RenderReportes(Reportes, 0)
 };
 

@@ -10,52 +10,55 @@
             crossorigin="anonymous"></script>
     </head>
     <body>
-        <nav class="HeadNav" style="list-style-type: none;">
-            <div class="CompanyLogo">
-                <a href="../Perfil/PerfilReclutador.html"><img
+        <header>
+            <nav class="HeadNav">
+                <div class="CompanyLogo">
+                    <img
+                        id="LogoEmpresa"
                         src="../assets/imagenDefault.png"
-                        alt="Logo de la empresa logeada"></a>
-            </div>
-            <ul class="ElementBox_Nav" style="list-style-type: none;">
-                <li><a href="../Inicio/InicioReclutador.html">Inicio</a></li>
-                <li><a href="../Aplicaciones/AplicacionReclutador.html">Aplicaciones</a></li>
-                <li><a href="../Perfil/PerfilReclutador.html">Perfil</a></li>
-            </ul>
-
-            <div class="search">
-                <label class="search-btn" for="Buscador">
-                    <i class="fas fa-search"></i>
-                </label>
-                <input class="search-txt" name="Buscador" id="Buscador"
-                    type="text" name
-                    placeholder="Buscar">
-            </div>
-            <div id="searchResult">
-            </div>
-            <div class="UserZone">
-                <div class="Notifications">
-                    <i class="fa-solid fa-bell"></i>
+                        alt="Logo de la empresa logeada">
                 </div>
-                <ul class="ElementBox_Nav" style="list-style-type: none;">
-                    <li><a href="../../Vista Principal/Inicio/Inicio.html">Cerrar sesión</a></li>
+                <ul class="ElementBox_Nav">
+                    <li><a href="../Inicio/InicioReclutador.html">Inicio</a></li>
+                    <li><a href="../Aplicaciones/AplicacionReclutador.html">Aplicaciones</a></li>
+                    <li><a href="../Perfil/PerfilReclutador.html">Perfil</a></li>
                 </ul>
-                <div class="UserLogo">
-                    <a href="../Perfil/PerfilReclutador.html">
-                    <img src="../assets/avatar.png"
-                        alt="Avatar del usuario"></a>
+
+                <div class="search">
+                    <label class="search-btn" for="Buscador">
+                        <i class="fas fa-search"></i>
+                    </label>
+                    <input class="search-txt" name="Buscador" id="Buscador"
+                        type="text" name
+                        placeholder="Buscar">
                 </div>
-            </div>
-        </nav>
+                <div id="searchResult">
+                </div>
+                <div class="UserZone">
+                    <div class="Notifications">
+                        <i class="fa-solid fa-bell"></i>
+                    </div>
+                    <ul class="ElementBox_Nav">
+                        <li><a href="../../Vista Principal/Inicio/Inicio.html">Cerrar
+                                sesión</a></li>
+                    </ul>
+                    <div class="UserLogo">
+                        <img id="AvatarUser" src="../assets/avatar.png"
+                            alt="Avatar del usuario">
+                    </div>
+                </div>
+            </nav>
+        </header>
         <main>
             <header class="CompanyInfo">
-                <h1 class="CompanyTitle">Nombre de la empresa</h1>
-                <img src="../assets/imagenDefault.png"
+                <h1 class="CompanyTitle" id="CompanyName">Nombre de la empresa</h1>
+                <img id="PerfilEmpresa" src="../assets/imagenDefault.png"
                     alt="Logo de la empresa logeada">
             </header>
             <section>
-                <div class="PublicacionTrabajos" >
+                <div class="PublicacionTrabajos">
                     <h2 class="TitlePublicaciones">Ofertas de trabajo publicadas</h2>
-                    <div id="Publicaciones" class="margen-main">
+                    <div id="Publicaciones">
                     </div>
                 </div>
             </section>
