@@ -1,32 +1,72 @@
 let ListPuestos = [];
+let companyNamesCache = {};
 
 window.onload = async function () {
-    if (!localStorage.getItem('iduser')) {
-        window.location.href = '../../Login/login.html';
-    }
+  if (!localStorage.getItem('iduser')) {
+      window.location.href = '../../Login/login.html';
+  }
 
-    loadPuestosFromAPI();
-    document.getElementById("CompanyName").innerHTML = localStorage.getItem("CompanyName");
-    document.getElementById("LogoEmpresa").setAttribute("src", "../../NodeServer/" + localStorage.getItem("CompanyLogo"));
-    document.getElementById("PerfilEmpresa").setAttribute("src", "../../NodeServer/" + localStorage.getItem("CompanyLogo"));
-    document.getElementById("AvatarUser").setAttribute("src", "../../NodeServer/" + localStorage.getItem("Avatar"));
+  loadPuestosFromAPI();
+  let companyNameElem = document.getElementById("CompanyName");
+  if(companyNameElem) {
+      companyNameElem.innerHTML = localStorage.getItem("CompanyName");
+  }
+
+  let logoEmpresaElem = document.getElementById("LogoEmpresa");
+  if(logoEmpresaElem) {
+      logoEmpresaElem.setAttribute("src", "../../NodeServer/" + localStorage.getItem("CompanyLogo"));
+  }
+
+  let perfilEmpresaElem = document.getElementById("PerfilEmpresa");
+  if(perfilEmpresaElem) {
+      perfilEmpresaElem.setAttribute("src", "../../NodeServer/" + localStorage.getItem("CompanyLogo"));
+  }
+
+  let avatarUserElem = document.getElementById("AvatarUser");
+  if(avatarUserElem) {
+      avatarUserElem.setAttribute("src", "../../NodeServer/" + localStorage.getItem("Avatar"));
+  }
+  
 };
 
 async function loadPuestosFromAPI() {
-    const RepuestaPuestos = await fetch("http://localhost:5000/puesto/");
-    const Puestos = await RepuestaPuestos.json();
-    console.log(Puestos);
+  const RepuestaPuestos = await fetch("http://localhost:5000/puesto/");
+  const Puestos = await RepuestaPuestos.json();
+  console.log(Puestos);
 
-    let contador = 0;
+  let contador = 0;
 
-    Puestos.forEach(function (puesto) {
-        if (contador < 10) {
-            let puestoOrder = {
-                Imagen: "../assets/imagenDefault.png",
-                Descripcion: puesto.DescripcionPuesto,
-                Titulo: puesto.nombrePuesto,
-            };
+  for (let puesto of Puestos) {
+      if (contador < 10) {
+          let companyName = "";
 
+          // Si el nombre de la empresa ya está en caché, úsalo. De lo contrario, realiza la solicitud.
+          if(companyNamesCache[puesto.Empresa]) {
+              companyName = companyNamesCache[puesto.Empresa];
+          } else {
+
+            const empresaResponse = await fetch(`http://localhost:5000/empresas/${puesto.Empresa}`);
+            let contentType = empresaResponse.headers.get("Content-Type");
+          
+            const empresaData = await empresaResponse.text();
+            try {
+                const empresa = JSON.parse(empresaData);
+                companyName = empresa.nombreEmpresa;
+                companyNamesCache[puesto.Empresa] = companyName; // Guardar en caché
+            } catch (error) {
+                console.error("Error al parsear la respuesta:", empresaData);
+            }
+
+              
+          }
+
+          let puestoOrder = {
+            _id: puesto._id,
+            Imagen: "../assets/imagenDefault.png",
+            Descripcion: puesto.DescripcionPuesto,
+            Titulo: puesto.nombrePuesto,
+            Empresa: companyName // Usar el nombre de la empresa en lugar del ID
+          };
             const fecha = new Date(puesto.updatedAt);
 
             const dia = fecha.getDate().toString().padStart(2, '0'); // Agregar ceros a la izquierda si es necesario
@@ -38,7 +78,7 @@ async function loadPuestosFromAPI() {
             ListPuestos.push(puestoOrder);
             contador++;
         }
-    });
+    };
     RenderApplications(ListPuestos);
   }
 
@@ -72,67 +112,91 @@ function RenderApplications(ListApplications) {
     Puesto.appendChild(EmpresaApplication);
     Puesto.appendChild(DescripcionApplication);
 
-    // Create Apply Button
     let ApplyButton = document.createElement("button");
     ApplyButton.classList.add("apply-btn");
     ApplyButton.textContent = "Aplicar Puesto";
-    ApplyButton.addEventListener("click", function () {
-      window.alert("Se ha aplicado al puesto");
+    ApplyButton.setAttribute("data-puesto-id", application._id);
+
+    ApplyButton.addEventListener("click", async function() {
+      const puestoId = this.getAttribute("data-puesto-id"); 
+      console.log("puestoId:", puestoId); 
+      try {
+        const puestoResponse = await fetch(`http://localhost:5000/puestos/${puestoId}`);
+        if (!puestoResponse.ok) {
+          console.error("Error al obtener el puesto:", await puestoResponse.text());
+          return;
+        }
+        const puesto = await puestoResponse.json();
+        console.log("Datos del puesto:", puesto);
+
+        const empresaResponse = await fetch(`http://localhost:5000/empresas/${puesto.Empresa}`);
+        if (!empresaResponse.ok) {
+          console.error("Error al obtener la empresa:", await empresaResponse.text());
+          return;
+        }
+        const empresa = await empresaResponse.json();
+
+        const applicationData = {
+          companyName: empresa.nombreEmpresa,
+          puestoDescription: application.Descripcion,
+          puestoStatus: 'Enviada',
+          userId: localStorage.getItem("idempresa")
+        };
+
+        await applyForJob(applicationData);
+        
+      } catch (error) {
+        console.error("Error al aplicar para el puesto", error);
+      }
     });
 
     container.appendChild(Puesto);
-    container.appendChild(ApplyButton); // Append Apply Button to the container
-
+    container.appendChild(ApplyButton);
     mainbox.appendChild(container);
-  }
-}
+}}
 
 RenderApplications(ListPuestos);
 
-// Escuchamos el evento click en los botones de Aplicar Puesto
-const applyButtons = document.querySelectorAll(".apply-btn");
-applyButtons.forEach((button) => {
-  button.addEventListener("click", (event) => {
-    const id = event.target.parentElement.getAttribute("data-id");
-    applyForJob(id);
+if(document.querySelector('.apply-btn')) {
+  document.querySelector('.apply-btn').addEventListener('click', async function(e) {
+    const puestoId = e.target.getAttribute('data-puesto-id');
+    try {
+      const response = await fetch(`http://localhost:5000/puesto/${puestoId}`);
+      const puesto = await response.json();
+
+      const applicationData = {
+        companyName: localStorage.getItem("CompanyName"), // suponiendo que tienes el nombre de la empresa en localStorage
+        puestoDescription: puesto.DescripcionPuesto,
+        puestoStatus: 'Enviada' // ejemplo de estado, puedes adaptarlo según tus necesidades
+      };
+
+      applyForJob(applicationData);
+
+    } catch (error) {
+      console.error("Error al obtener el puesto", error);
+    }
   });
-});
+}
 
-async function applyForJob(id) {
+async function applyForJob(data) {
   try {
-    const selectedPuesto = ListPuestos[id];
-
-    // Aquí podrías construir los datos que deseas enviar al servidor, como el ID del puesto y otros detalles relevantes
-    const data = {
-      puestoId: selectedPuesto.ID, // Supongo que tu objeto tiene una propiedad "ID" para el ID del puesto
-      userId: localStorage.getItem('iduser'), // Supongo que obtienes el ID del usuario de algún lugar, como el almacenamiento local
-      // ... otros datos relevantes para la aplicación
-    };
-
-    // Realizar una solicitud POST al servidor para enviar la solicitud de aplicación
     const response = await fetch('http://localhost:5000/aplicar', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/json'
       },
-      body: JSON.stringify(data),
+      body: JSON.stringify(data)
     });
 
-    if (!response.ok) {
-      throw new Error('Error al aplicar al puesto.');
+    if (response.ok) {
+      console.log("Aplicación guardada");
+    } else {
+      console.error("Error al guardar la aplicación");
     }
-
-    // Aquí podemos manejar la respuesta del servidor si es necesario
-
-    // Mostrar una alerta al usuario para indicar que se ha aplicado correctamente
-    window.alert(`Se ha aplicado al puesto "${selectedPuesto.Titulo}"`);
   } catch (error) {
-    console.error(error);
-    // Mostrar una alerta de error al usuario si la aplicación falla
-    window.alert('Ha ocurrido un error al aplicar al puesto. Por favor, intenta nuevamente.');
+    console.error("Error al enviar la aplicación", error);
   }
 }
-
 const modalTriggerButtons = document.querySelectorAll("[data-modal-target]");
 const modals = document.querySelectorAll(".modal");
 const modalCloseButtons = document.querySelectorAll(".modal-close");
@@ -232,13 +296,6 @@ document.addEventListener("DOMContentLoaded", function() {
   fetch(`http://localhost:5000/registroUserFinal/${userId}`)
     .then(response => response.json())
     .then(data => {
-      // Actualizar el DOM con la información de data
-      setElementAttribute("user-photo-show", "src", data.foto); // Cambia el atributo src
-      setElementInnerHtml("nombre_cv_show", `<a href="${data.cv}" target="_blank">Ver CV</a>`);
-      setElementText("nombreShow", `${data.nombre}`);
-      setElementText("apellidoShow", `${data.apellido}`);
-      setElementText("emailShow", `${data.email}`);
-      setElementText("generoShow", `${data.genero}`);
 
       // Cambiar la imagen del avatar del usuario
       const avatarImg = document.querySelector(".UserLogo img");
@@ -247,64 +304,10 @@ document.addEventListener("DOMContentLoaded", function() {
         avatarImg.alt = "Avatar del usuario";
       }
 
-      // Para experiencia y estudios, suponiendo que son arrays
-      let experienciaHTML = "";
-      data.experiencia.forEach(exp => {
-        experienciaHTML += `
-          <label>Nombre de la Empresa:</label>
-          <span>${exp.nombre_empresa}</span><br>
-          <label>Descripción del Puesto:</label>
-          <span>${exp.descripcion_puesto}</span><br><br>`;
-      });
-      setElementHTML("experienciaShow", experienciaHTML);
-
-      let estudiosHTML = "";
-      data.estudios.forEach(est => {
-        estudiosHTML += `
-          <label>Institución:</label>
-          <span>${est.nombre_institucion}</span><br>
-          <label>Nombre de carrera:</label>
-          <span>${est.nombre_carrera}</span><br><br>`;
-      });
-      setElementHTML("estudiosShow", estudiosHTML);
     })
     .catch(error => {
       console.error("Hubo un error al obtener el perfil:", error);
     });
-
-  function setElementAttribute(id, attribute, value) {
-    const element = document.getElementById(id);
-    if (element) {
-      element.setAttribute(attribute, value);
-    } else {
-      console.error(`Elemento con ID '${id}' no encontrado`);
-    }
-  }
-
-  function setElementText(id, text) {
-    const element = document.getElementById(id);
-    if (element) {
-      element.innerText = text;
-    } else {
-      console.error(`Elemento con ID '${id}' no encontrado`);
-    }
-  }
-
-  function setElementHTML(id, html) {
-    const element = document.getElementById(id);
-    if (element) {
-      element.innerHTML = html;
-    } else {
-      console.error(`Elemento con ID '${id}' no encontrado`);
-    }
-  }
-
-  function setElementInnerHtml(id, html) {
-    const element = document.getElementById(id);
-    if (element) {
-        element.innerHTML = html;
-    } else {
-        console.error(`Elemento con ID '${id}' no encontrado`);
-    }
-  }
 });
+
+
